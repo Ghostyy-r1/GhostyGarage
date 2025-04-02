@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Send, Ghost, Check, Clock, HelpCircle } from 'lucide-react';
+import { MessageCircle, X, Send, Ghost, Check, Clock, HelpCircle, ArrowUpDown, ArrowLeftRight } from 'lucide-react';
 import { Bike } from 'lucide-react';
 import { Calendar } from 'lucide-react';
 import { ShoppingBag } from 'lucide-react';
@@ -7,6 +7,8 @@ import { User } from 'lucide-react';
 import { Wrench } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import Draggable from 'react-draggable';
+import { ResizableBox } from 'react-resizable';
+import 'react-resizable/css/styles.css';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,6 +24,7 @@ export function GhostyChatButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [seenMessages, setSeenMessages] = useState<Record<string, boolean>>({});
+  const [chatSize, setChatSize] = useState({ width: 380, height: 520 });
   const messagesEndRef = useRef<HTMLDivElement>(null);
   
   const {
@@ -116,12 +119,12 @@ export function GhostyChatButton() {
         </Tooltip>
       </TooltipProvider>
 
-      {/* Chat popup - draggable */}
+      {/* Chat popup - draggable and resizable */}
       <AnimatePresence>
         {isOpen && (
           <Draggable
             handle=".drag-handle"
-            defaultPosition={{x: window.innerWidth - 400, y: window.innerHeight - 650}}
+            defaultPosition={{x: window.innerWidth - 400, y: 100}}
             bounds="body"
           >
             <motion.div
@@ -129,143 +132,181 @@ export function GhostyChatButton() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.2 }}
-              className="fixed w-80 sm:w-96 z-50"
+              className="fixed z-50"
               style={{ position: 'absolute' }}
             >
-              <Card className="shadow-xl border-purple-300 dark:border-purple-800">
-                <CardHeader className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-t-lg p-4 flex flex-row items-center space-x-3 drag-handle cursor-move">
-                  <Avatar className="h-10 w-10 border-2 border-white/20">
-                    <AvatarImage src="https://i.imgur.com/2kGDzJO.png" alt="Ghosty" />
-                    <AvatarFallback className="bg-purple-800 text-white">GH</AvatarFallback>
-                  </Avatar>
-                  <div className="flex flex-col">
-                    <CardTitle className="text-lg font-bold">Ghosty</CardTitle>
-                    <div className="flex items-center text-xs text-white/80">
-                      <span className="h-2 w-2 rounded-full bg-green-500 mr-1.5 animate-pulse"></span>
-                      Active now
-                    </div>
+              <ResizableBox
+                width={chatSize.width}
+                height={chatSize.height}
+                minConstraints={[280, 400]}
+                maxConstraints={[600, 800]}
+                resizeHandles={['se']}
+                handle={
+                  <div className="absolute bottom-0 right-0 w-6 h-6 flex items-center justify-center cursor-se-resize text-purple-400 dark:text-purple-600 z-10">
+                    <svg width="10" height="10" viewBox="0 0 10 10">
+                      <path d="M0 10H2V8H4V6H6V4H8V2H10V0H0" fill="currentColor" />
+                    </svg>
                   </div>
-                  {connectionStatus !== 'open' && (
-                    <span className="text-xs px-2 py-1 bg-yellow-500 text-yellow-950 rounded-full ml-auto">
-                      Fallback Mode
-                    </span>
-                  )}
-                </CardHeader>
-                <CardContent className="p-0">
-                  <div className="h-80 overflow-y-auto p-4 flex flex-col space-y-4">
-                    {chatMessages.map((message, index) => (
-                      <ChatBubble 
-                        key={message.id} 
-                        message={message} 
-                        seen={seenMessages[message.id] || false}
-                        previousMessage={index > 0 ? chatMessages[index - 1] : undefined}
-                      />
-                    ))}
-                    
-                    {/* Show conversation starters if there are only welcome messages */}
-                    {chatMessages.length === 1 && chatMessages[0].id === 'welcome' && (
-                      <div className="self-center flex flex-wrap gap-2 justify-center mt-2 w-full">
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
-                          onClick={() => {
-                            setInputValue("Tell me about your merchandise");
-                            handleSend();
-                          }}
-                        >
-                          <ShoppingBag className="h-3 w-3 mr-1" />
-                          View Merch
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
-                          onClick={() => {
-                            setInputValue("Why do you go by the name Ghosty?");
-                            handleSend();
-                          }}
-                        >
-                          <User className="h-3 w-3 mr-1" />
-                          About You
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
-                          onClick={() => {
-                            setInputValue("What motorcycle do you ride?");
-                            handleSend();
-                          }}
-                        >
-                          <Bike className="h-3 w-3 mr-1" />
-                          Your Bike
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
-                          onClick={() => {
-                            setInputValue("Tell me about upcoming events");
-                            handleSend();
-                          }}
-                        >
-                          <Calendar className="h-3 w-3 mr-1" />
-                          Events
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
-                          onClick={() => {
-                            setInputValue("What maintenance tips do you have?");
-                            handleSend();
-                          }}
-                        >
-                          <Wrench className="h-3 w-3 mr-1" />
-                          Maintenance Tips
-                        </Button>
+                }
+                onResizeStop={(e, data) => {
+                  setChatSize({
+                    width: data.size.width,
+                    height: data.size.height,
+                  });
+                  
+                  // Scroll to bottom after resize
+                  if (messagesEndRef.current) {
+                    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                <Card 
+                  className="shadow-xl border-purple-300 dark:border-purple-800"
+                  style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}
+                >
+                  <CardHeader className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-t-lg p-4 flex flex-row items-center space-x-3 drag-handle cursor-move">
+                    <Avatar className="h-10 w-10 border-2 border-white/20 flex-shrink-0">
+                      <AvatarImage src="https://i.imgur.com/2kGDzJO.png" alt="Ghosty" />
+                      <AvatarFallback className="bg-purple-800 text-white">GH</AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col min-w-0">
+                      <CardTitle className="text-lg font-bold truncate">Ghosty</CardTitle>
+                      <div className="flex items-center text-xs text-white/80">
+                        <span className="h-2 w-2 rounded-full bg-green-500 mr-1.5 animate-pulse"></span>
+                        Active now
                       </div>
-                    )}
-                    
-                    {isLoading && (
-                      <div className="self-start flex items-center space-x-2 max-w-[85%]">
-                        <Avatar className="h-6 w-6">
-                          <AvatarImage src="https://i.imgur.com/2kGDzJO.png" alt="Ghosty" />
-                          <AvatarFallback className="bg-purple-800 text-white text-xs">GH</AvatarFallback>
-                        </Avatar>
-                        <div className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-lg p-3">
-                          <div className="flex space-x-1">
-                            <div className="animate-bounce h-2 w-2 bg-purple-600 dark:bg-purple-400 rounded-full"></div>
-                            <div className="animate-bounce h-2 w-2 bg-purple-600 dark:bg-purple-400 rounded-full" style={{ animationDelay: '0.2s' }}></div>
-                            <div className="animate-bounce h-2 w-2 bg-purple-600 dark:bg-purple-400 rounded-full" style={{ animationDelay: '0.4s' }}></div>
+                    </div>
+                    <div className="flex items-center ml-auto space-x-2">
+                      {connectionStatus !== 'open' && (
+                        <span className="text-xs px-2 py-1 bg-yellow-500 text-yellow-950 rounded-full">
+                          Fallback Mode
+                        </span>
+                      )}
+                      <div className="text-xs text-white/70 flex items-center">
+                        <ArrowLeftRight className="h-3 w-3 mr-1" />
+                        <ArrowUpDown className="h-3 w-3" />
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="p-0 flex-grow overflow-hidden">
+                    <div 
+                      className="p-4 flex flex-col space-y-4 overflow-y-auto" 
+                      style={{ height: `calc(100% - 0px)` }}
+                    >
+                      {chatMessages.map((message, index) => (
+                        <ChatBubble 
+                          key={message.id} 
+                          message={message} 
+                          seen={seenMessages[message.id] || false}
+                          previousMessage={index > 0 ? chatMessages[index - 1] : undefined}
+                        />
+                      ))}
+                      
+                      {/* Show conversation starters if there are only welcome messages */}
+                      {chatMessages.length === 1 && chatMessages[0].id === 'welcome' && (
+                        <div className="self-center flex flex-wrap gap-2 justify-center mt-2 w-full">
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
+                            onClick={() => {
+                              setInputValue("Tell me about your merchandise");
+                              handleSend();
+                            }}
+                          >
+                            <ShoppingBag className="h-3 w-3 mr-1" />
+                            View Merch
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
+                            onClick={() => {
+                              setInputValue("Why do you go by the name Ghosty?");
+                              handleSend();
+                            }}
+                          >
+                            <User className="h-3 w-3 mr-1" />
+                            About You
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
+                            onClick={() => {
+                              setInputValue("What motorcycle do you ride?");
+                              handleSend();
+                            }}
+                          >
+                            <Bike className="h-3 w-3 mr-1" />
+                            Your Bike
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
+                            onClick={() => {
+                              setInputValue("Tell me about upcoming events");
+                              handleSend();
+                            }}
+                          >
+                            <Calendar className="h-3 w-3 mr-1" />
+                            Events
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
+                            onClick={() => {
+                              setInputValue("What maintenance tips do you have?");
+                              handleSend();
+                            }}
+                          >
+                            <Wrench className="h-3 w-3 mr-1" />
+                            Maintenance Tips
+                          </Button>
+                        </div>
+                      )}
+                      
+                      {isLoading && (
+                        <div className="self-start flex items-center space-x-2 max-w-[85%]">
+                          <Avatar className="h-6 w-6">
+                            <AvatarImage src="https://i.imgur.com/2kGDzJO.png" alt="Ghosty" />
+                            <AvatarFallback className="bg-purple-800 text-white text-xs">GH</AvatarFallback>
+                          </Avatar>
+                          <div className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-lg p-3">
+                            <div className="flex space-x-1">
+                              <div className="animate-bounce h-2 w-2 bg-purple-600 dark:bg-purple-400 rounded-full"></div>
+                              <div className="animate-bounce h-2 w-2 bg-purple-600 dark:bg-purple-400 rounded-full" style={{ animationDelay: '0.2s' }}></div>
+                              <div className="animate-bounce h-2 w-2 bg-purple-600 dark:bg-purple-400 rounded-full" style={{ animationDelay: '0.4s' }}></div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    )}
-                    <div ref={messagesEndRef} />
-                  </div>
-                </CardContent>
-                <CardFooter className="p-3 border-t">
-                  <div className="flex w-full items-center space-x-2">
-                    <Input
-                      value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
-                      onKeyDown={handleKeyDown}
-                      placeholder="Ask Ghosty anything..."
-                      className="flex-1"
-                      disabled={isLoading}
-                    />
-                    <Button 
-                      size="icon" 
-                      onClick={handleSend} 
-                      disabled={inputValue.trim() === '' || isLoading}
-                    >
-                      <Send className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </CardFooter>
-              </Card>
+                      )}
+                      <div ref={messagesEndRef} />
+                    </div>
+                  </CardContent>
+                  <CardFooter className="p-3 border-t">
+                    <div className="flex w-full items-center space-x-2">
+                      <Input
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        placeholder="Ask Ghosty anything..."
+                        className="flex-1"
+                        disabled={isLoading}
+                      />
+                      <Button 
+                        size="icon" 
+                        onClick={handleSend} 
+                        disabled={inputValue.trim() === '' || isLoading}
+                      >
+                        <Send className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </CardFooter>
+                </Card>
+              </ResizableBox>
             </motion.div>
           </Draggable>
         )}
