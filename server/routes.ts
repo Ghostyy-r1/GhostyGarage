@@ -5,6 +5,7 @@ import { WebSocketServer, WebSocket } from "ws";
 import { insertUserSchema, insertMotorcycleSchema, insertEventSchema, insertRouteSchema, insertMaintenanceRecordSchema, insertGearReviewSchema, insertChatRoomSchema, insertChatMessageSchema, insertUserPreferencesSchema } from "@shared/schema";
 import { log } from "./vite";
 import { z } from "zod";
+import { getGhostyResponse, type ChatMessage } from "./ai-chat";
 
 // Middleware to handle API errors
 function errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
@@ -42,13 +43,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize WebSocket server for chat
   const wss = new WebSocketServer({ server: httpServer, path: '/ws' });
   
-  // Store connected clients with their user info
-  const clients = new Map<WebSocket, { userId?: number, username?: string }>();
+  // Store connected clients with their user info and conversation history
+  const clients = new Map<WebSocket, { 
+    userId?: number, 
+    username?: string,
+    aiConversation?: ChatMessage[] 
+  }>();
   
   // WebSocket connection handling
   wss.on('connection', (ws) => {
     // Add new client to map
-    clients.set(ws, {});
+    clients.set(ws, { aiConversation: [] });
     
     log('WebSocket client connected', 'ws-server');
     
@@ -63,7 +68,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
           case 'auth':
             // Authenticate the WebSocket connection
             if (message.userId && message.username) {
-              clients.set(ws, { userId: message.userId, username: message.username });
+              clients.set(ws, { 
+                ...clients.get(ws),
+                userId: message.userId, 
+                username: message.username 
+              });
               log(`WebSocket client authenticated: ${message.username}`, 'ws-server');
             }
             break;
@@ -97,6 +106,78 @@ export async function registerRoutes(app: Express): Promise<Server> {
                   client.send(JSON.stringify(broadcastMessage));
                 }
               });
+            }
+            break;
+            
+          case 'ai_chat':
+            // Process AI chat message with Ghosty
+            if (message.content) {
+              const client = clients.get(ws);
+              const userMessage = message.content;
+              
+              // Add user message to conversation history
+              const userMessageObj: ChatMessage = { 
+                role: 'user', 
+                content: userMessage 
+              };
+              
+              // Get current conversation history (limited to 10 messages for context)
+              const conversationHistory = client?.aiConversation || [];
+              if (conversationHistory.length > 10) {
+                conversationHistory.splice(0, conversationHistory.length - 10);
+              }
+              
+              // Add user message to history
+              conversationHistory.push(userMessageObj);
+              
+              // Update client conversation history
+              clients.set(ws, { 
+                ...client, 
+                aiConversation: conversationHistory 
+              });
+              
+              log(`AI chat request: "${userMessage.substring(0, 30)}${userMessage.length > 30 ? '...' : ''}"`, 'ws-server');
+              
+              try {
+                // Get response from AI
+                const aiResponse = await getGhostyResponse(userMessage, conversationHistory);
+                
+                // Add AI response to conversation history
+                const aiMessageObj: ChatMessage = { 
+                  role: 'assistant', 
+                  content: aiResponse 
+                };
+                conversationHistory.push(aiMessageObj);
+                
+                // Update client conversation history
+                clients.set(ws, { 
+                  ...client, 
+                  aiConversation: conversationHistory 
+                });
+                
+                // Send response back to client
+                const responseMessage = {
+                  type: 'ai_chat',
+                  messageId: Date.now(),
+                  content: aiResponse,
+                  timestamp: new Date().toISOString(),
+                };
+                
+                ws.send(JSON.stringify(responseMessage));
+              } catch (error) {
+                log(`Error getting AI response: ${error}`, 'ws-server');
+                
+                // Send error response
+                const errorResponse = {
+                  type: 'ai_chat',
+                  messageId: Date.now(),
+                  content: "Vroom vroom! Sorry about that, my engine stalled. Could you try again?",
+                  timestamp: new Date().toISOString(),
+                  error: true
+                };
+                
+                ws.send(JSON.stringify(errorResponse));
+              }
             }
             break;
             
@@ -447,6 +528,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const preferences = await storage.setUserPreferences(req.body);
       res.status(201).json(preferences);
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+  // AI Chat endpoint
+  app.post('/api/ai-chat', async (req, res, next) => {
+    try {
+      const { message, conversationHistory = [] } = req.body;
+      
+      if (!message) {
+        return res.status(400).json({ error: 'Message is required' });
+      }
+      
+      // Get AI response
+      const response = await getGhostyResponse(message, conversationHistory);
+      
+      res.json({
+        message: response,
+        timestamp: new Date().toISOString(),
+      });
     } catch (error) {
       next(error);
     }

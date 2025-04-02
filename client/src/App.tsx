@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import { AppSidebar } from "@/components/AppSidebar";
+import { GhostyChatButton } from "@/components/GhostyChatButton";
 
 function Router() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <AppSidebar>
         <Router />
       </AppSidebar>
+      <GhostyChatButton />
       <Toaster />
     </QueryClientProvider>
   );

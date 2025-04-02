@@ -25,163 +25,150 @@ export function useWebSocket(url: string, options: WebSocketOptions = {}) {
 
   const [status, setStatus] = useState<WebSocketStatus>('connecting');
   const [messages, setMessages] = useState<string[]>([]);
-  const socketRef = useRef<WebSocket | null>(null);
-  const reconnectCountRef = useRef(0);
-  const shouldReconnectRef = useRef(shouldReconnect);
+  const [reconnectCount, setReconnectCount] = useState(0);
 
-  // Update the ref when the prop changes
-  useEffect(() => {
-    shouldReconnectRef.current = shouldReconnect;
-  }, [shouldReconnect]);
+  const ws = useRef<WebSocket | null>(null);
+  const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const connectWebSocket = useCallback(() => {
-    // Close existing socket if it exists
-    if (socketRef.current) {
-      socketRef.current.close();
+  // Connect to WebSocket
+  const connect = useCallback(() => {
+    // Close existing connection if any
+    if (ws.current) {
+      ws.current.close();
     }
 
-    // Create the WebSocket connection
-    socketRef.current = new WebSocket(url);
+    // Determine full WebSocket URL
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const fullUrl = url.startsWith('ws') ? url : `${protocol}//${window.location.host}${url}`;
+
+    // Create new WebSocket connection
+    const socket = new WebSocket(fullUrl);
+    ws.current = socket;
     setStatus('connecting');
 
-    // Setup event handlers
-    socketRef.current.onopen = (event) => {
+    // Handle WebSocket events
+    socket.onopen = (event) => {
       setStatus('open');
-      reconnectCountRef.current = 0;
+      setReconnectCount(0);
       if (onOpen) onOpen(event);
     };
 
-    socketRef.current.onmessage = (event) => {
+    socket.onmessage = (event) => {
       setMessages((prev) => [...prev, event.data]);
       if (onMessage) onMessage(event);
     };
 
-    socketRef.current.onclose = (event) => {
+    socket.onclose = (event) => {
       setStatus('closed');
       if (onClose) onClose(event);
 
-      // Attempt to reconnect if enabled and not exceeding max attempts
-      if (
-        shouldReconnectRef.current &&
-        (reconnectAttempts === -1 || reconnectCountRef.current < reconnectAttempts)
-      ) {
-        reconnectCountRef.current++;
-        setTimeout(connectWebSocket, reconnectInterval);
+      // Attempt to reconnect if enabled
+      if (shouldReconnect && reconnectCount < reconnectAttempts) {
+        reconnectTimeoutRef.current = setTimeout(() => {
+          setReconnectCount((prev) => prev + 1);
+          connect();
+        }, reconnectInterval);
       }
     };
 
-    socketRef.current.onerror = (event) => {
+    socket.onerror = (event) => {
       if (onError) onError(event);
+      socket.close();
     };
-  }, [url, onOpen, onMessage, onClose, onError, reconnectInterval, reconnectAttempts]);
+  }, [
+    url,
+    onOpen,
+    onMessage,
+    onClose,
+    onError,
+    reconnectInterval,
+    reconnectAttempts,
+    shouldReconnect,
+    reconnectCount,
+  ]);
 
-  // Initial connection
+  // Initialize connection
   useEffect(() => {
-    connectWebSocket();
+    connect();
 
-    // Cleanup on unmount
+    // Cleanup function
     return () => {
-      if (socketRef.current) {
-        socketRef.current.close();
+      if (reconnectTimeoutRef.current) {
+        clearTimeout(reconnectTimeoutRef.current);
+      }
+      if (ws.current) {
+        ws.current.close();
       }
     };
-  }, [connectWebSocket]);
+  }, [connect]);
 
-  // Send a message through the WebSocket
-  const sendMessage = useCallback((data: string | ArrayBufferLike | Blob | ArrayBufferView) => {
-    if (socketRef.current && status === 'open') {
-      socketRef.current.send(data);
-      return true;
-    }
-    return false;
-  }, [status]);
+  // Send message function
+  const sendMessage = useCallback(
+    (message: string) => {
+      if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+        ws.current.send(message);
+        return true;
+      }
+      return false;
+    },
+    []
+  );
 
-  // Send a JSON message through the WebSocket
-  const sendJsonMessage = useCallback((data: any) => {
-    return sendMessage(JSON.stringify(data));
-  }, [sendMessage]);
-
-  // Close the connection
-  const closeConnection = useCallback(() => {
-    shouldReconnectRef.current = false;
-    if (socketRef.current) {
-      socketRef.current.close();
-    }
-  }, []);
-
-  // Reconnect
-  const reconnect = useCallback(() => {
-    shouldReconnectRef.current = true;
-    reconnectCountRef.current = 0;
-    connectWebSocket();
-  }, [connectWebSocket]);
+  // Send JSON message function
+  const sendJsonMessage = useCallback(
+    (data: any) => {
+      return sendMessage(JSON.stringify(data));
+    },
+    [sendMessage]
+  );
 
   return {
     status,
     messages,
     sendMessage,
     sendJsonMessage,
-    closeConnection,
-    reconnect,
+    reconnectCount,
   };
 }
 
+/**
+ * Hook specifically designed for chat functionality
+ */
 export function useChatWebSocket(userId?: number, username?: string) {
-  const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-  const wsUrl = `${protocol}//${window.location.host}/ws`;
-  
-  // Configure and connect to WebSocket
-  const { status, sendJsonMessage, messages } = useWebSocket(wsUrl, {
-    shouldReconnect: true,
-    reconnectInterval: 3000,
-    reconnectAttempts: -1, // Unlimited attempts
-  });
-  
-  // Store parsed chat messages
-  const [chatMessages, setChatMessages] = useState<any[]>([]);
-  
-  // Parse incoming messages
-  useEffect(() => {
-    if (messages.length > 0) {
-      const latestMessage = messages[messages.length - 1];
-      try {
-        const parsedMessage = JSON.parse(latestMessage);
-        if (parsedMessage.type === 'chat') {
-          setChatMessages((prev) => [...prev, parsedMessage]);
-        }
-      } catch (error) {
-        console.error('Error parsing chat message:', error);
+  const { 
+    status, 
+    messages, 
+    sendJsonMessage 
+  } = useWebSocket('/ws', {
+    onOpen: () => {
+      // Authenticate if user info is available
+      if (userId && username) {
+        sendJsonMessage({
+          type: 'auth',
+          userId,
+          username,
+        });
       }
-    }
-  }, [messages]);
-  
-  // Authenticate with WebSocket when connected and user info is available
-  useEffect(() => {
-    if (status === 'open' && userId && username) {
-      sendJsonMessage({
-        type: 'auth',
-        userId,
-        username,
-      });
-    }
-  }, [status, userId, username, sendJsonMessage]);
+    },
+  });
 
-  // Send a chat message
-  const sendChatMessage = useCallback((roomId: number, content: string) => {
-    if (status === 'open' && userId) {
-      return sendJsonMessage({
-        type: 'chat',
-        roomId,
-        content,
-      });
-    }
-    return false;
-  }, [status, userId, sendJsonMessage]);
+  const sendChatMessage = useCallback(
+    (roomId: number, content: string) => {
+      if (status === 'open') {
+        return sendJsonMessage({
+          type: 'chat',
+          roomId,
+          content,
+        });
+      }
+      return false;
+    },
+    [status, sendJsonMessage]
+  );
 
   return {
-    isConnected: status === 'open',
-    isAuthenticated: !!userId,
-    chatMessages,
+    status,
+    messages,
     sendChatMessage,
   };
 }
