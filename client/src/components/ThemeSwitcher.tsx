@@ -73,72 +73,137 @@ export function ThemeSwitcher() {
   // Find current theme object
   const currentTheme = themes.find(t => t.value === theme) || themes[0];
   
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button 
           variant="outline" 
           size="icon" 
-          className="h-9 w-9 border-gray-700 bg-black/20 hover:bg-black/30"
+          className="h-9 w-9 border-gray-700 bg-gray-900/80 hover:bg-gray-800 relative overflow-hidden"
         >
-          <motion.div
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.2 }}
-          >
-            {theme === 'dark' ? (
-              <Moon className="h-4 w-4 text-gray-200" />
-            ) : (
-              <Sun className="h-4 w-4 text-gray-200" />
+          <AnimatePresence mode="wait">
+            {theme === 'light' && (
+              <motion.div
+                key="light"
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                transition={{ duration: 0.3, type: "spring" }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <Sun className="h-4 w-4 text-amber-400" />
+              </motion.div>
             )}
-          </motion.div>
+            {theme === 'dark' && (
+              <motion.div
+                key="dark"
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                transition={{ duration: 0.3, type: "spring" }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <Moon className="h-4 w-4 text-purple-400" />
+              </motion.div>
+            )}
+            {theme === 'system' && (
+              <motion.div
+                key="system"
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                transition={{ duration: 0.3, type: "spring" }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <Laptop className="h-4 w-4 text-blue-400" />
+              </motion.div>
+            )}
+          </AnimatePresence>
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {themes.map((t) => (
-          <DropdownMenuItem
-            key={t.value}
-            onClick={() => setTheme(t.value as 'light' | 'dark' | 'system')}
-            className={theme === t.value ? "bg-accent" : ""}
-          >
-            {t.icon && <t.icon className="mr-2 h-4 w-4" />}
-            <span className={t.icon ? "" : "pl-6"}>{t.label}</span>
-            {theme === t.value && (
-              <span className="ml-auto text-xs font-semibold text-accent-foreground">
-                Active
-              </span>
-            )}
-          </DropdownMenuItem>
-        ))}
-        
-        <DropdownMenuSeparator />
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <Globe className="mr-2 h-4 w-4" />
-            <span>Language</span>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              {languages.map((lang) => (
-                <DropdownMenuItem
-                  key={lang.value}
-                  onClick={() => setLanguage(lang.value)}
-                  className={language === lang.value ? "bg-accent" : ""}
-                >
-                  <span>{lang.label}</span>
-                  {language === lang.value && (
-                    <span className="ml-auto text-xs font-semibold text-accent-foreground">
-                      Active
-                    </span>
-                  )}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
+      <DropdownMenuContent 
+        align="end" 
+        className="w-56 bg-gray-900 border border-gray-800"
+        forceMount
+      >
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <DropdownMenuLabel className="text-gray-300">Appearance</DropdownMenuLabel>
+          <DropdownMenuSeparator className="bg-gray-800" />
+          {themes.map((t, index) => (
+            <motion.div
+              key={t.value}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.05, duration: 0.2 }}
+            >
+              <DropdownMenuItem
+                onClick={() => setTheme(t.value as 'light' | 'dark' | 'system')}
+                className={`hover:bg-gray-800 text-gray-200 ${
+                  theme === t.value ? "bg-gray-800/50" : ""
+                }`}
+              >
+                {t.icon && <t.icon className={`mr-2 h-4 w-4 ${t.color}`} />}
+                <span>{t.label}</span>
+                {theme === t.value && (
+                  <motion.span 
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className="ml-auto text-xs font-semibold text-purple-400"
+                  >
+                    Active
+                  </motion.span>
+                )}
+              </DropdownMenuItem>
+            </motion.div>
+          ))}
+          
+          <DropdownMenuSeparator className="bg-gray-800" />
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger className="hover:bg-gray-800 text-gray-200">
+              <Globe className="mr-2 h-4 w-4 text-blue-400" />
+              <span>Language</span>
+            </DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent className="bg-gray-900 border border-gray-800">
+                {languages.map((lang, index) => (
+                  <motion.div
+                    key={lang.value}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05, duration: 0.2 }}
+                  >
+                    <DropdownMenuItem
+                      onClick={() => setLanguage(lang.value)}
+                      className={`hover:bg-gray-800 text-gray-200 ${
+                        language === lang.value ? "bg-gray-800/50" : ""
+                      }`}
+                    >
+                      <span>{lang.label}</span>
+                      {language === lang.value && (
+                        <motion.span 
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          className="ml-auto text-xs font-semibold text-blue-400"
+                        >
+                          Active
+                        </motion.span>
+                      )}
+                    </DropdownMenuItem>
+                  </motion.div>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+        </motion.div>
       </DropdownMenuContent>
     </DropdownMenu>
   );

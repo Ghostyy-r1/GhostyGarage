@@ -90,7 +90,7 @@ export function FeaturesSection() {
   ];
 
   return (
-    <section className="py-16 bg-[#1E1E1E]">
+    <section className="py-16 bg-[#1E1E1E] features-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="text-center mb-12"

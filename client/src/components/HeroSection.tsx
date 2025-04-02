@@ -199,9 +199,9 @@ export function HeroSection() {
         </div>
       </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div 
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center"
+      {/* Scroll indicator - now a clickable button */}
+      <motion.button 
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center cursor-pointer group"
         animate={{ 
           y: [0, 10, 0],
           opacity: [0.8, 0.5, 0.8] 
@@ -211,10 +211,26 @@ export function HeroSection() {
           duration: 2,
           ease: "easeInOut" 
         }}
+        onClick={() => {
+          // Get the next section (features or whatever comes after hero)
+          const nextSection = document.querySelector('.features-section, .community-highlights');
+          if (nextSection) {
+            nextSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
       >
-        <span className="text-gray-400 text-sm mb-2">Scroll to explore</span>
-        <ChevronDown className="h-6 w-6 text-gray-400" />
-      </motion.div>
+        <span className="text-gray-400 text-sm mb-2 group-hover:text-purple-400 transition-colors">Scroll to explore</span>
+        <motion.div 
+          className="bg-gray-800/50 rounded-full p-2 border border-gray-700 group-hover:border-purple-500 transition-all"
+          whileHover={{ 
+            boxShadow: "0 0 15px rgba(168, 85, 247, 0.4)",
+          }}
+        >
+          <ChevronDown className="h-6 w-6 text-gray-400 group-hover:text-purple-400 transition-colors" />
+        </motion.div>
+      </motion.button>
 
       {/* Layered bottom gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
