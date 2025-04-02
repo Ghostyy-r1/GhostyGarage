@@ -1,5 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { MessageCircle, X, Send, Ghost, Check, Clock } from 'lucide-react';
+import { Bike } from 'lucide-react';
+import { Calendar } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
+import { User } from 'lucide-react';
+import { Wrench } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -135,6 +141,73 @@ export function GhostyChatButton() {
                       previousMessage={index > 0 ? chatMessages[index - 1] : undefined}
                     />
                   ))}
+                  
+                  {/* Show conversation starters if there are only welcome messages */}
+                  {chatMessages.length === 1 && chatMessages[0].id === 'welcome' && (
+                    <div className="self-center flex flex-wrap gap-2 justify-center mt-2 w-full">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
+                        onClick={() => {
+                          setInputValue("Tell me about your merchandise");
+                          handleSend();
+                        }}
+                      >
+                        <ShoppingBag className="h-3 w-3 mr-1" />
+                        View Merch
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
+                        onClick={() => {
+                          setInputValue("Why do you go by the name Ghosty?");
+                          handleSend();
+                        }}
+                      >
+                        <User className="h-3 w-3 mr-1" />
+                        About You
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
+                        onClick={() => {
+                          setInputValue("What motorcycle do you ride?");
+                          handleSend();
+                        }}
+                      >
+                        <Bike className="h-3 w-3 mr-1" />
+                        Your Bike
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
+                        onClick={() => {
+                          setInputValue("Tell me about upcoming events");
+                          handleSend();
+                        }}
+                      >
+                        <Calendar className="h-3 w-3 mr-1" />
+                        Events
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/40 dark:hover:bg-purple-900/60 text-xs px-3 py-1 h-auto border-purple-200 dark:border-purple-700"
+                        onClick={() => {
+                          setInputValue("What maintenance tips do you have?");
+                          handleSend();
+                        }}
+                      >
+                        <Wrench className="h-3 w-3 mr-1" />
+                        Maintenance Tips
+                      </Button>
+                    </div>
+                  )}
+                  
                   {isLoading && (
                     <div className="self-start flex items-center space-x-2 max-w-[85%]">
                       <Avatar className="h-6 w-6">
@@ -222,7 +295,24 @@ function ChatBubble({ message, seen = false, previousMessage }: ChatBubbleProps)
             : "bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200"
         )}
       >
-        {message.content}
+        {isUser ? (
+          message.content
+        ) : (
+          <ReactMarkdown
+            components={{
+              a: ({ node, ...props }) => (
+                <a 
+                  {...props} 
+                  className="text-purple-600 dark:text-purple-400 font-medium underline hover:text-purple-800 dark:hover:text-purple-300"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                />
+              )
+            }}
+          >
+            {message.content}
+          </ReactMarkdown>
+        )}
       </div>
       
       <div className={cn(
