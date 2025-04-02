@@ -27,12 +27,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CartButton } from "@/components/CartButton";
 
 // Header Component (now inside the Sidebar context)
 function Header() {
   return (
     <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b border-gray-800 bg-background bg-gradient-to-r from-gray-900 to-black px-4 shadow-lg"
+      className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b border-gray-800 bg-background bg-gradient-to-r from-gray-900 to-black px-4 shadow-lg mt-auto"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
@@ -44,7 +45,7 @@ function Header() {
         </SidebarTrigger>
         <div className="mx-3 h-5 w-px bg-gray-700"></div>
         <Link href="/">
-          <a className="flex items-center gap-2">
+          <div className="flex items-center gap-2 cursor-pointer">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-md">
               <span className="text-md font-bold">G</span>
             </div>
@@ -52,7 +53,7 @@ function Header() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">Ghosty's</span>
               <span className="text-white"> Garage</span>
             </span>
-          </a>
+          </div>
         </Link>
       </div>
 
@@ -71,6 +72,9 @@ function Header() {
           <FaDiscord className="h-4 w-4" />
           <span className="hidden sm:inline">Discord</span>
         </Button>
+        <div className="flex-shrink-0">
+          <CartButton />
+        </div>
         <Button 
           size="sm"
           className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-md shadow-purple-900/20"

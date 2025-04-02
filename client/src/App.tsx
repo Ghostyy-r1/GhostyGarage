@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import { AppSidebar } from "@/components/AppSidebar";
 import { GhostyChatButton } from "@/components/GhostyChatButton";
 import { Navbar } from "@/components/Navbar";
+import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 
 function Router() {
   return (
@@ -18,16 +19,20 @@ function Router() {
 }
 
 function App() {
-  // For demonstration, we're showing the modern navbar
-  // In a real app, you could toggle between navbar styles
-  const useSidebar = false;
+  // Using the sidebar navigation as requested
+  const useSidebar = true;
 
   return (
     <QueryClientProvider client={queryClient}>
       {useSidebar ? (
-        <AppSidebar>
-          <Router />
-        </AppSidebar>
+        <>
+          <div className="fixed top-0 left-0 right-0 z-[100]">
+            <AnnouncementBanner />
+          </div>
+          <AppSidebar>
+            <Router />
+          </AppSidebar>
+        </>
       ) : (
         <>
           <Navbar />

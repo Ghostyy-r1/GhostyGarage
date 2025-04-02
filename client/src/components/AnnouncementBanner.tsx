@@ -74,7 +74,7 @@ export function AnnouncementBanner() {
     <AnimatePresence>
       {visible && (
         <motion.div 
-          className={`w-full ${colorVariants[announcement.color]} relative overflow-hidden`}
+          className={`w-full ${colorVariants[announcement.color]} relative overflow-hidden z-[100]`}
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: 'auto', opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
