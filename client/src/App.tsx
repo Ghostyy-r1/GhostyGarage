@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import { AppSidebar } from "@/components/AppSidebar";
 import { GhostyChatButton } from "@/components/GhostyChatButton";
+import { Navbar } from "@/components/Navbar";
 
 function Router() {
   return (
@@ -17,11 +18,24 @@ function Router() {
 }
 
 function App() {
+  // For demonstration, we're showing the modern navbar
+  // In a real app, you could toggle between navbar styles
+  const useSidebar = false;
+
   return (
     <QueryClientProvider client={queryClient}>
-      <AppSidebar>
-        <Router />
-      </AppSidebar>
+      {useSidebar ? (
+        <AppSidebar>
+          <Router />
+        </AppSidebar>
+      ) : (
+        <>
+          <Navbar />
+          <div className="pt-16"> {/* Add padding for fixed navbar */}
+            <Router />
+          </div>
+        </>
+      )}
       <GhostyChatButton />
       <Toaster />
     </QueryClientProvider>

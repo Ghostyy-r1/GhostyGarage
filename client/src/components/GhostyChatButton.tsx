@@ -105,7 +105,7 @@ export function GhostyChatButton() {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className="fixed bottom-4 right-4 z-40" style={{ marginRight: "20px", position: "relative" }}>
+            <div className="fixed bottom-6 right-6 z-40" style={{ position: "relative" }}>
               <Button
                 onClick={handleToggle}
                 className="rounded-full w-14 h-14 p-0 shadow-lg shadow-purple-900/20 bg-gradient-to-br from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 border-none"
@@ -154,7 +154,7 @@ export function GhostyChatButton() {
         {isOpen && (
           <Draggable
             handle=".drag-handle"
-            defaultPosition={{x: window.innerWidth - 420, y: window.innerHeight - 650}}
+            defaultPosition={{x: window.innerWidth - 440, y: window.innerHeight - 620}}
             bounds="body"
           >
             <motion.div

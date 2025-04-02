@@ -100,7 +100,7 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
           className={`group relative transition-all duration-300 ${
             isActive 
               ? 'bg-purple-900/20 text-purple-400 font-medium' 
-              : 'hover:bg-purple-900/10 hover:text-purple-400'
+              : 'hover:bg-purple-900/10'
           }`}
         >
           {/* Active indicator bar */}
@@ -108,27 +108,31 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
             isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-60'
           }`} />
           
-          {/* Icon with hover effect */}
-          <div 
-            className={`mr-3 transition-all duration-300 transform ${
-              isActive 
-                ? 'text-purple-400 scale-110' 
-                : 'text-gray-400 group-hover:text-purple-400 group-hover:scale-110'
-            }`}
-          >
-            {icon}
+          {/* Icon container - isolate hover effect */}
+          <div className="mr-3">
+            <div 
+              className={`transition-all duration-300 transform ${
+                isActive 
+                  ? 'text-purple-400 scale-110' 
+                  : 'text-gray-400 group-hover:text-purple-400 group-hover:scale-110'
+              }`}
+            >
+              {icon}
+            </div>
           </div>
           
-          {/* Label with hover effect */}
-          <span 
-            className={`transition-all duration-300 ${
-              isActive 
-                ? 'text-purple-300 translate-x-1' 
-                : 'text-gray-300 group-hover:text-purple-300 group-hover:translate-x-1'
-            }`}
-          >
-            {label}
-          </span>
+          {/* Label container - isolate hover effect */}
+          <div className="overflow-hidden">
+            <span 
+              className={`inline-block transition-transform duration-300 ${
+                isActive 
+                  ? 'text-purple-300 translate-x-1' 
+                  : 'text-gray-300 group-hover:text-purple-300 group-hover:translate-x-1'
+              }`}
+            >
+              {label}
+            </span>
+          </div>
         </SidebarMenuButton>
       </Link>
     </SidebarMenuItem>
