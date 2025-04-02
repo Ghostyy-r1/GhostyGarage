@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Moon, Sun, Globe } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { Moon, Sun, Globe, Laptop } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,9 +16,9 @@ import {
 import { Button } from '@/components/ui/button';
 
 const themes = [
-  { value: 'light', label: 'Light', icon: Sun },
-  { value: 'dark', label: 'Dark', icon: Moon },
-  { value: 'system', label: 'System', icon: null },
+  { value: 'light', label: 'Light', icon: Sun, color: 'text-amber-400' },
+  { value: 'dark', label: 'Dark', icon: Moon, color: 'text-purple-400' },
+  { value: 'system', label: 'System', icon: Laptop, color: 'text-blue-400' },
 ];
 
 const languages = [
@@ -30,18 +30,48 @@ const languages = [
 ];
 
 export function ThemeSwitcher() {
-  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('dark');
-  const [language, setLanguage] = useState('en');
+  // Initialize from localStorage or default to dark
+  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>(
+    () => (localStorage.getItem('theme') as 'light' | 'dark' | 'system') || 'dark'
+  );
+  const [language, setLanguage] = useState(localStorage.getItem('language') || 'en');
+  const [mounted, setMounted] = useState(false);
+  
+  // Once mounted, we can show the theme switcher
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  useEffect(() => {
+    const root = window.document.documentElement;
+    root.classList.remove('light', 'dark');
+    
+    if (theme === 'system') {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+      
+      root.classList.add(systemTheme);
+      return;
+    }
+    
+    root.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+  
+  useEffect(() => {
+    if (language) {
+      localStorage.setItem('language', language);
+      // In a real app, you would change the language here
+    }
+  }, [language]);
   
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-    
-    // This would be implemented with a proper theme system in a real app
-    // Just simulating the visual effect for now
-    document.documentElement.classList.toggle('dark');
   };
   
-  const currentThemeIcon = theme === 'dark' ? Moon : Sun;
+  // Find current theme object
+  const currentTheme = themes.find(t => t.value === theme) || themes[0];
   
   return (
     <DropdownMenu>

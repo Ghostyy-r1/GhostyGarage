@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface Announcement {
@@ -58,14 +58,6 @@ export function AnnouncementBanner() {
     return () => clearInterval(interval);
   }, [visible]);
   
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + announcements.length) % announcements.length);
-  };
-  
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % announcements.length);
-  };
-  
   if (isDismissed || announcements.length === 0) return null;
   
   const announcement = announcements[currentIndex];
@@ -82,17 +74,6 @@ export function AnnouncementBanner() {
         >
           <div className="container mx-auto py-2 px-4 relative">
             <div className="flex items-center justify-center">
-              {announcements.length > 1 && (
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  className="absolute left-2 h-6 w-6 text-white/70 hover:text-white hover:bg-white/10"
-                  onClick={handlePrev}
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-              )}
-              
               <motion.div 
                 key={announcement.id}
                 className="text-center flex items-center justify-center flex-wrap gap-x-3 gap-y-1 text-sm"
@@ -111,17 +92,6 @@ export function AnnouncementBanner() {
                   </a>
                 )}
               </motion.div>
-              
-              {announcements.length > 1 && (
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  className="absolute right-8 h-6 w-6 text-white/70 hover:text-white hover:bg-white/10"
-                  onClick={handleNext}
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              )}
             </div>
             
             <Button 

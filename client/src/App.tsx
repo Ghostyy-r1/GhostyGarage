@@ -26,12 +26,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       {useSidebar ? (
         <>
-          <div className="fixed top-0 left-0 right-0 z-[100]">
-            <AnnouncementBanner />
-          </div>
           <AppSidebar>
             <Router />
           </AppSidebar>
+          <div className="fixed top-0 left-0 right-0">
+            <AnnouncementBanner />
+          </div>
         </>
       ) : (
         <>
