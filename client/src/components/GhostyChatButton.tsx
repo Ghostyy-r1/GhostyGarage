@@ -104,8 +104,9 @@ export function GhostyChatButton() {
           <TooltipTrigger asChild>
             <Button
               onClick={handleToggle}
-              className="fixed bottom-4 right-4 rounded-full w-14 h-14 p-0 shadow-lg"
+              className="fixed bottom-4 right-4 rounded-full w-14 h-14 p-0 shadow-lg z-40"
               size="icon"
+              style={{ marginRight: "20px" }}
             >
               {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
             </Button>
@@ -124,7 +125,7 @@ export function GhostyChatButton() {
         {isOpen && (
           <Draggable
             handle=".drag-handle"
-            defaultPosition={{x: window.innerWidth - 400, y: 100}}
+            defaultPosition={{x: window.innerWidth - 420, y: window.innerHeight - 650}}
             bounds="body"
           >
             <motion.div
