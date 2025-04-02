@@ -1,51 +1,249 @@
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { ChevronRight, Bike, Users, Calendar, MapPin, Wrench, ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { useState, useRef, useEffect } from 'react';
+import { ThreeDCard } from '@/components/ui/3d-card';
+import { AnimatedReveal } from '@/components/ui/animated-reveal';
 
 export function HeroSection() {
+  const isMobile = useIsMobile();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+  
+  // Parallax effects based on scroll
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  
+  // Particles state
+  const [particles, setParticles] = useState<Array<{
+    id: number;
+    x: number;
+    y: number;
+    size: number;
+    speed: number;
+    color: string;
+  }>>([]);
+
+  // Generate particles on component mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const newParticles = Array.from({ length: 20 }).map((_, i) => ({
+        id: i,
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight * 0.8,
+        size: Math.random() * 3 + 1,
+        speed: Math.random() * 1 + 0.5,
+        color: `rgba(${Math.floor(Math.random() * 100 + 150)}, ${Math.floor(Math.random() * 50 + 50)}, ${Math.floor(Math.random() * 100 + 150)}, ${Math.random() * 0.3 + 0.1})`
+      }));
+      setParticles(newParticles);
+    }
+  }, []);
+  
   return (
-    <section className="relative overflow-hidden py-16 sm:py-24" id="hero-section">
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-background opacity-90"></div>
+    <div 
+      ref={containerRef}
+      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-gray-900 via-[#0c0920] to-black"
+    >
+      {/* Animated particles */}
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className="absolute rounded-full"
+          style={{
+            width: particle.size,
+            height: particle.size,
+            backgroundColor: particle.color,
+            x: particle.x,
+            y: particle.y,
+            boxShadow: `0 0 ${particle.size * 2}px ${particle.color}`
+          }}
+          animate={{
+            y: [particle.y, particle.y + 100, particle.y],
+            opacity: [0.7, 0.4, 0.7],
+          }}
+          transition={{
+            duration: 3 + particle.speed * 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      ))}
+
+      {/* Background gradient elements */}
+      <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
+        <motion.div 
+          style={{ y: useTransform(scrollYProgress, [0, 1], [0, -50]) }}
+          className="absolute -top-[30%] -left-[10%] w-[50%] h-[70%] rounded-full bg-gradient-to-r from-purple-800/30 to-indigo-900/30 blur-3xl"
+        />
+        <motion.div 
+          style={{ y: useTransform(scrollYProgress, [0, 1], [0, 50]) }}
+          className="absolute -bottom-[40%] -right-[10%] w-[60%] h-[80%] rounded-full bg-gradient-to-r from-purple-900/30 to-indigo-800/30 blur-3xl"
+        />
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          className="text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.h1 
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <span className="text-primary">Ghosty's</span> Garage
-          </motion.h1>
-          <motion.p 
-            className="mt-3 max-w-md mx-auto text-lg sm:text-xl lg:text-2xl text-gray-300 sm:max-w-xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            A community for motorcycle enthusiasts. Connect, learn, and ride with us!
-          </motion.p>
-          <motion.div 
-            className="mt-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <Button 
-              className="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-lg transition duration-300 transform hover:scale-105"
-              size="lg"
+      {/* Grid overlay */}
+      <div 
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(150, 120, 255, 0.1) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(150, 120, 255, 0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }}
+      />
+      
+      <motion.div 
+        style={{ y, opacity }}
+        className="container mx-auto px-4 md:px-6 relative z-10 py-20"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-8">
+            <AnimatedReveal variant="fade" direction="up" delay={0.2}>
+              <div className="inline-block bg-gradient-to-r from-purple-600/20 to-indigo-600/20 backdrop-blur-md border border-purple-500/30 px-4 py-1.5 rounded-full">
+                <span className="text-sm font-medium gradient-text">Welcome to Ghosty's Garage</span>
+              </div>
+            </AnimatedReveal>
+            
+            <AnimatedReveal variant="fade" direction="up" delay={0.3}>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+                <span className="text-white">The Ultimate</span>
+                <br />
+                <div className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500 inline-block relative">
+                  Motorcycle Community
+                  <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full"></span>
+                </div>
+              </h1>
+            </AnimatedReveal>
+            
+            <AnimatedReveal variant="fade" direction="up" delay={0.4}>
+              <p className="text-xl text-gray-300 max-w-lg">
+                Connect with fellow riders, discover new routes, show off your bike, and find the best gear. All in one place!
+              </p>
+            </AnimatedReveal>
+            
+            <AnimatedReveal variant="fade" direction="up" delay={0.5}>
+              <div className="flex flex-wrap gap-4">
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-lg px-6 py-6 shadow-lg shadow-purple-500/20"
+                >
+                  Join Community
+                  <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-purple-700 text-white hover:bg-purple-900/30 text-lg px-6 py-6"
+                >
+                  Explore Features
+                </Button>
+              </div>
+            </AnimatedReveal>
+          </div>
+          
+          <AnimatedReveal variant="fade" direction="up" delay={0.6} className="relative md:ml-auto">
+            <ThreeDCard 
+              glareEnabled={true} 
+              rotationIntensity={15}
+              glareColor="rgba(168, 85, 247, 0.5)"
+              className="bg-gradient-to-br from-purple-900/30 to-indigo-900/30 backdrop-blur-md border border-purple-500/30 rounded-3xl p-6 md:p-8 shadow-2xl"
             >
-              Join the Community
-            </Button>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
+              <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                <FeatureCard 
+                  icon={<Bike className="h-10 w-10 text-purple-400" />}
+                  title="Motorcycle Showcase"
+                  description="Show off your ride and discover others"
+                  delay={0.7}
+                />
+                <FeatureCard 
+                  icon={<MapPin className="h-10 w-10 text-purple-400" />}
+                  title="Route Planner"
+                  description="Find and share the best riding roads"
+                  delay={0.8}
+                />
+                <FeatureCard 
+                  icon={<Calendar className="h-10 w-10 text-purple-400" />}
+                  title="Events Calendar"
+                  description="Never miss a ride or meetup"
+                  delay={0.9}
+                />
+                <FeatureCard 
+                  icon={<Wrench className="h-10 w-10 text-purple-400" />}
+                  title="Maintenance Tracker"
+                  description="Keep your bike in top condition"
+                  delay={1.0}
+                />
+              </div>
+            </ThreeDCard>
+            
+            {/* Floating badge */}
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1, duration: 0.5 }}
+              className="absolute -top-6 -left-6 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full py-3 px-6 shadow-lg transform"
+              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+            >
+              <div className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-white" />
+                <span className="font-bold text-white">Join 10,000+ riders</span>
+              </div>
+            </motion.div>
+          </AnimatedReveal>
+        </div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div 
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center"
+        animate={{ 
+          y: [0, 10, 0],
+          opacity: [0.8, 0.5, 0.8] 
+        }}
+        transition={{ 
+          repeat: Infinity, 
+          duration: 2,
+          ease: "easeInOut" 
+        }}
+      >
+        <span className="text-gray-400 text-sm mb-2">Scroll to explore</span>
+        <ChevronDown className="h-6 w-6 text-gray-400" />
+      </motion.div>
+
+      {/* Layered bottom gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+    </div>
+  );
+}
+
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  delay: number;
+}
+
+function FeatureCard({ icon, title, description, delay }: FeatureCardProps) {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.5 }}
+      whileHover={{ 
+        y: -5,
+        boxShadow: "0 0 20px rgba(147, 51, 234, 0.3)",
+        transition: { duration: 0.2 }
+      }}
+      className="bg-gray-900/60 backdrop-blur-md rounded-xl p-5 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300"
+    >
+      <div className="mb-4">{icon}</div>
+      <h3 className="text-white font-bold text-lg mb-2">{title}</h3>
+      <p className="text-gray-300">{description}</p>
+    </motion.div>
   );
 }
