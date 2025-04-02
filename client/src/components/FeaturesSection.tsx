@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FaDiscord, FaShoppingCart, FaMotorcycle } from "react-icons/fa";
+import { FaDiscord, FaShoppingCart, FaMotorcycle, FaTools, FaCamera, FaTrophy, FaUsers } from "react-icons/fa";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface FeatureCardProps {
@@ -62,6 +62,30 @@ export function FeaturesSection() {
       linkText: "View Calendar",
       href: "#",
       delay: 0.3
+    },
+    {
+      icon: <FaTools />,
+      title: "Garage Space",
+      description: "Access our fully-equipped community garage with lifts, tools, and expert advice for your maintenance and customization projects.",
+      linkText: "Reserve Space",
+      href: "#",
+      delay: 0.4
+    },
+    {
+      icon: <FaCamera />,
+      title: "Photo Galleries",
+      description: "Browse and share stunning motorcycle photography from rides, events, and custom builds in our community galleries.",
+      linkText: "View Gallery",
+      href: "#",
+      delay: 0.5
+    },
+    {
+      icon: <FaTrophy />,
+      title: "Member Benefits",
+      description: "Enjoy exclusive discounts, early access to events, and special perks with our premium membership program.",
+      linkText: "Join Now",
+      href: "#",
+      delay: 0.6
     }
   ];
 

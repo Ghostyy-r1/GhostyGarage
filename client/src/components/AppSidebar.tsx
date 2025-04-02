@@ -83,7 +83,7 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
   
   return (
     <SidebarMenuItem>
-      <Link href={href}>
+      <Link href={href} className="w-full">
         <SidebarMenuButton 
           data-active={isActive}
           className={`group relative transition-all duration-300 ${
@@ -92,19 +92,30 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
               : 'hover:bg-primary/10 hover:text-primary'
           }`}
         >
+          {/* Active indicator bar */}
           <div className={`absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-r-md transition-all duration-300 ${
             isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-60'
           }`} />
           
-          <div className={`mr-3 transition-all duration-300 ${
-            isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
-          }`}>
+          {/* Icon with hover effect */}
+          <div 
+            className={`mr-3 transition-all duration-300 transform ${
+              isActive 
+                ? 'text-primary scale-110' 
+                : 'text-muted-foreground group-hover:text-primary group-hover:scale-110'
+            }`}
+          >
             {icon}
           </div>
           
-          <span className={`transition-all duration-300 ${
-            isActive ? 'text-primary' : 'text-foreground group-hover:text-primary'
-          }`}>
+          {/* Label with hover effect */}
+          <span 
+            className={`transition-all duration-300 ${
+              isActive 
+                ? 'text-primary translate-x-1' 
+                : 'text-foreground group-hover:text-primary group-hover:translate-x-1'
+            }`}
+          >
             {label}
           </span>
         </SidebarMenuButton>
