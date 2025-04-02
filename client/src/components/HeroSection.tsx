@@ -47,6 +47,7 @@ export function HeroSection() {
     <div 
       ref={containerRef}
       className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-gray-900 via-[#0c0920] to-black"
+      style={{ position: 'relative' }} /* Ensure position is set for scroll calculation */
     >
       {/* Animated particles */}
       {particles.map((particle) => (
@@ -130,7 +131,7 @@ export function HeroSection() {
               <div className="flex flex-wrap gap-4">
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-lg px-6 py-6 shadow-lg shadow-purple-500/20"
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg shadow-purple-500/20 h-12 text-base font-medium"
                 >
                   Join Community
                   <ChevronRight className="ml-2 h-4 w-4" />
@@ -138,7 +139,7 @@ export function HeroSection() {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-purple-700 text-white hover:bg-purple-900/30 text-lg px-6 py-6"
+                  className="border-purple-700 text-white hover:bg-purple-900/30 h-12 text-base font-medium"
                 >
                   Explore Features
                 </Button>
