@@ -13,11 +13,11 @@ export function HeroSection() {
     target: containerRef,
     offset: ["start start", "end start"]
   });
-  
+
   // Parallax effects based on scroll
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  
+
   // Particles state
   const [particles, setParticles] = useState<Array<{
     id: number;
@@ -42,12 +42,12 @@ export function HeroSection() {
       setParticles(newParticles);
     }
   }, []);
-  
+
   return (
     <div 
       ref={containerRef}
-      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-gray-900 via-[#0c0920] to-black"
-      style={{ position: 'relative' }} /* Ensure position is set for scroll calculation */
+      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-gray-900 via-[#0c0920] to-black px-4 sm:px-6 lg:px-8"
+      style={{ position: 'relative' }}
     >
       {/* Animated particles */}
       {particles.map((particle) => (
@@ -85,7 +85,7 @@ export function HeroSection() {
           className="absolute -bottom-[40%] -right-[10%] w-[60%] h-[80%] rounded-full bg-gradient-to-r from-purple-900/30 to-indigo-800/30 blur-3xl"
         />
       </div>
-      
+
       {/* Grid overlay */}
       <div 
         className="absolute inset-0 opacity-10"
@@ -97,10 +97,10 @@ export function HeroSection() {
           backgroundSize: '40px 40px'
         }}
       />
-      
+
       <motion.div 
         style={{ y, opacity }}
-        className="container mx-auto px-4 md:px-6 relative z-10 py-20"
+        className="container mx-auto relative z-10 py-20"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
@@ -109,7 +109,7 @@ export function HeroSection() {
                 <span className="text-sm font-medium gradient-text">Welcome to Ghosty's Garage</span>
               </div>
             </AnimatedReveal>
-            
+
             <AnimatedReveal variant="fade" direction="up" delay={0.3}>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
                 <span className="text-white">The Ultimate</span>
@@ -120,13 +120,13 @@ export function HeroSection() {
                 </div>
               </h1>
             </AnimatedReveal>
-            
+
             <AnimatedReveal variant="fade" direction="up" delay={0.4}>
               <p className="text-xl text-gray-300 max-w-lg">
                 Connect with fellow riders, discover new routes, show off your bike, and find the best gear. All in one place!
               </p>
             </AnimatedReveal>
-            
+
             <AnimatedReveal variant="fade" direction="up" delay={0.5}>
               <div className="flex flex-wrap gap-4">
                 <Button 
@@ -146,7 +146,7 @@ export function HeroSection() {
               </div>
             </AnimatedReveal>
           </div>
-          
+
           <AnimatedReveal variant="fade" direction="up" delay={0.6} className="relative md:ml-auto">
             <ThreeDCard 
               glareEnabled={true} 
@@ -181,7 +181,7 @@ export function HeroSection() {
                 />
               </div>
             </ThreeDCard>
-            
+
             {/* Floating badge */}
             <motion.div 
               initial={{ opacity: 0, y: -20 }}

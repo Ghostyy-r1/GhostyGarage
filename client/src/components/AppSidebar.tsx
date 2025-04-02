@@ -168,7 +168,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
   return (
     <SidebarProvider>
       <Header />
-      <div className="flex min-h-screen">
+      <div className="flex min-h-screen relative">
         <Sidebar>
           <SidebarHeader className="pt-16">
             {/* User profile section */}

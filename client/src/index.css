@@ -76,3 +76,37 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(270 70% 60% / 0.8);
 }
+
+/* Responsive utilities */
+@layer utilities {
+  .responsive-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8;
+  }
+  
+  .responsive-text {
+    @apply text-base sm:text-lg lg:text-xl;
+  }
+
+  .responsive-heading {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-bold;
+  }
+}
+
+/* Better touch targets on mobile */
+@media (max-width: 640px) {
+  button, 
+  [role="button"],
+  .clickable {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  input,
+  select,
+  textarea {
+    @apply text-base; /* Prevent zoom on iOS */
+  }
+}
