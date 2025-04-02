@@ -101,7 +101,7 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
       <Link href={href} className="w-full">
         <SidebarMenuButton 
           data-active={isActive}
-          className={`group relative transition-all duration-300 ${
+          className={`group/item relative transition-all duration-300 ${
             isActive 
               ? 'bg-purple-900/20 text-purple-400 font-medium' 
               : 'hover:bg-purple-900/10'
@@ -109,29 +109,29 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
         >
           {/* Active indicator bar */}
           <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-r-md transition-all duration-300 ${
-            isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-60'
-          }`} />
+            isActive ? 'opacity-100' : 'opacity-0'
+          } group-hover/item:opacity-60`} />
           
-          {/* Icon container - isolate hover effect */}
+          {/* Icon container */}
           <div className="mr-3">
             <div 
-              className={`transition-all duration-300 transform ${
+              className={`transition-all duration-300 ${
                 isActive 
                   ? 'text-purple-400 scale-110' 
-                  : 'text-gray-400 group-hover:text-purple-400 group-hover:scale-110'
+                  : 'text-gray-400 group-hover/item:text-purple-400 group-hover/item:scale-110'
               }`}
             >
               {icon}
             </div>
           </div>
           
-          {/* Label container - isolate hover effect */}
+          {/* Label container */}
           <div className="overflow-hidden">
             <span 
-              className={`inline-block transition-transform duration-300 ${
+              className={`inline-block transition-all duration-300 ${
                 isActive 
                   ? 'text-purple-300 translate-x-1' 
-                  : 'text-gray-300 group-hover:text-purple-300 group-hover:translate-x-1'
+                  : 'text-gray-300 group-hover/item:text-purple-300 group-hover/item:translate-x-1'
               }`}
             >
               {label}
