@@ -79,7 +79,7 @@ export function GhostyChatButton() {
         {
           id: 'welcome',
           type: 'ai' as const,
-          content: "Hey there, rider! I'm Ghosty, your friendly motorcycle enthusiast assistant. How can I help you today? Ask me anything about our community, motorcycles, or just say hi!",
+          content: "Hey there, rider! I'm Ghosty from Toronto, Canada. I'm the creator of Ghosty's Garage and an Automotive Service Technician with a passion for motorcycles, especially my Yamaha YZF-R1M.\n\nHow can I help you today? You can ask me about:\n• My background and motorcycle journey\n• Our community features and events\n• Motorcycle maintenance tips\n• My merchandise and Instagram\n• Or just say hi! 🏍️",
           timestamp: new Date().toISOString(),
         }
       ]

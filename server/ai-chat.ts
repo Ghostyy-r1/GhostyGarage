@@ -83,7 +83,7 @@ function getBasicResponse(userMessage: string): string | null {
   
   // Merchandise questions
   if (/merch(andise)?|hoodie|clothing|apparel|buy|purchase/i.test(message)) {
-    return "I sell hoodies in collaboration with Throttle Bunny! My designs include phrases like 'Ghosty Boo-utiful' and 'Ghosty Boo St.' You can use code 'Ghosty10' for 10% off your order. We offer sizes from Small to 3XL and ship internationally. Would you like the link to check them out?";
+    return "I sell hoodies in collaboration with Throttle Bunny! My designs include phrases like 'Ghosty Boo-utiful' and 'Ghosty Boo St.' You can use code 'Ghosty10' for 10% off your order. We offer sizes from Small to 3XL and ship internationally. Check them out here:\n\n• [Ghosty Boo-utiful Hoodie](https://throttlebunny.com/ghosty-boo-utiful)\n• [Ghosty Boo St. Hoodie](https://throttlebunny.com/ghosty-boo-st)";
   }
   
   // Social media
@@ -179,7 +179,7 @@ export async function getGhostyResponse(userMessage: string, conversationHistory
       console.error('API error, falling back to default responses:', apiError);
       
       // If API fails, provide a more detailed fallback response based on the query
-      if (/product|motorcycle|bike|model|brand/i.test(userMessage)) {
+      if (/product|motorcycle|bike|model|brand/i.test(userMessage) && !/(hoodie|apparel|merch|throttle bunny)/i.test(userMessage)) {
         return "We have a great selection of motorcycles and products in our database! I personally ride a Yamaha YZF-R1M and love sports bikes, but our community covers everything from sport bikes to cruisers, adventure bikes, and touring models. You can browse by brand, type, or price range. Can I help you find something specific?";
       }
       
@@ -192,7 +192,7 @@ export async function getGhostyResponse(userMessage: string, conversationHistory
       }
       
       if (/merchandise|merch|hoodie|apparel|buy/i.test(userMessage)) {
-        return "I sell hoodies in collaboration with Throttle Bunny! My designs include phrases like 'Ghosty Boo-utiful' and 'Ghosty Boo St.' You can use code 'Ghosty10' for 10% off your order. We offer sizes from Small to 3XL and ship internationally. Would you like the link to check them out?";
+        return "I sell hoodies in collaboration with Throttle Bunny! My designs include phrases like 'Ghosty Boo-utiful' and 'Ghosty Boo St.' You can use code 'Ghosty10' for 10% off your order. We offer sizes from Small to 3XL and ship internationally. Check them out here:\n\n• [Ghosty Boo-utiful Hoodie](https://throttlebunny.com/ghosty-boo-utiful)\n• [Ghosty Boo St. Hoodie](https://throttlebunny.com/ghosty-boo-st)";
       }
       
       // Generic fallback
