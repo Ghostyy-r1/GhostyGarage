@@ -35,6 +35,7 @@ function Header() {
         <SidebarTrigger>
           <Menu className="h-5 w-5" />
         </SidebarTrigger>
+        <div className="mx-3 h-5 w-px bg-gray-700"></div>
       </div>
 
       {/* Center section with logo and brand name */}
@@ -54,14 +55,14 @@ function Header() {
       <div className="flex items-center gap-2">
         <Button 
           variant="ghost" 
-          className="flex items-center gap-2 bg-primary bg-opacity-10 hover:bg-primary hover:bg-opacity-20 text-primary"
+          className="flex items-center gap-2 bg-primary bg-opacity-10 hover:bg-primary hover:bg-opacity-20 text-primary hover-glow transition-all duration-300"
         >
           <FaDiscord className="h-4 w-4" />
           <span className="hidden sm:inline">Join Discord</span>
         </Button>
         <Button 
           variant="outline" 
-          className="border-white text-white hover:bg-white hover:bg-opacity-10"
+          className="border-white text-white hover:bg-white hover:bg-opacity-10 hover-glow transition-all duration-300"
         >
           Login / Signup
         </Button>
@@ -83,9 +84,29 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
   return (
     <SidebarMenuItem>
       <Link href={href}>
-        <SidebarMenuButton data-active={isActive}>
-          {icon}
-          <span>{label}</span>
+        <SidebarMenuButton 
+          data-active={isActive}
+          className={`group relative transition-all duration-300 ${
+            isActive 
+              ? 'bg-primary/20 text-primary font-medium' 
+              : 'hover:bg-primary/10 hover:text-primary'
+          }`}
+        >
+          <div className={`absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-r-md transition-all duration-300 ${
+            isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-60'
+          }`} />
+          
+          <div className={`mr-3 transition-all duration-300 ${
+            isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
+          }`}>
+            {icon}
+          </div>
+          
+          <span className={`transition-all duration-300 ${
+            isActive ? 'text-primary' : 'text-foreground group-hover:text-primary'
+          }`}>
+            {label}
+          </span>
         </SidebarMenuButton>
       </Link>
     </SidebarMenuItem>
