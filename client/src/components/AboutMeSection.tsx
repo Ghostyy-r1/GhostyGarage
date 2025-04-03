@@ -51,32 +51,73 @@ export function AboutMeSection() {
                     }}
                   />
                   <div className="absolute -bottom-16 left-6">
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <Avatar className="w-32 h-32 border-4 border-gray-900 ring-4 ring-purple-500/20">
-                        <AvatarImage src="/ghosty-avatar.png" />
-                        <AvatarFallback className="bg-purple-600/20">GG</AvatarFallback>
-                      </Avatar>
-                    </motion.div>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                            className="relative"
+                          >
+                            <Avatar className="w-32 h-32 border-4 border-gray-900 ring-4 ring-purple-500/20">
+                              <AvatarImage src="/ghosty-avatar.png" />
+                              <AvatarFallback className="bg-purple-600/20">GG</AvatarFallback>
+                            </Avatar>
+                            {/* Discord-like status indicator */}
+                            <div className="absolute bottom-1 right-1 w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center">
+                              <div className="w-5 h-5 bg-green-500 rounded-full animate-pulse" />
+                            </div>
+                          </motion.div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Online and ready to ride! 🏍️</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </div>
                 </div>
                 <CardContent className="pt-20 p-6">
                   <div className="space-y-4">
-                    <div>
+                    <div className="pt-2">
                       <motion.div 
                         className="flex items-center gap-2"
                         whileHover={{ x: 5 }}
                         transition={{ type: "spring", stiffness: 400 }}
                       >
-                        <h3 className="text-2xl font-bold text-white">Ghosty</h3>
-                        <span className="text-sm text-purple-400">@Ghostyy_r1</span>
+                        <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">Ghosty</h3>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <span className="text-sm text-purple-400 hover:underline cursor-pointer">@Ghostyy_r1</span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Click to copy username</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
                       </motion.div>
                       <div className="flex items-center gap-2 mt-1">
-                        <span className="text-sm text-gray-400">they/them</span>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <span className="text-sm text-gray-400 bg-gray-800/50 px-2 py-0.5 rounded-full hover:bg-gray-700/50 transition-colors">he/him</span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Preferred pronouns</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
                         <span className="text-purple-400 text-sm">•</span>
-                        <span className="text-sm text-gray-400">Discord ID: 123456789</span>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <span className="text-sm text-gray-400 hover:text-purple-400 transition-colors">Discord ID: 123456789</span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Click to copy Discord ID</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
                       </div>
                     </div>
 
