@@ -39,85 +39,37 @@ export function AboutMeSection() {
             >
               <Card className="bg-gray-900/50 backdrop-blur-md border-purple-600/20 overflow-hidden h-full">
                 <div className="h-32 bg-gradient-to-r from-purple-600 to-indigo-600 relative">
-                  <motion.div 
-                    className="absolute inset-0 bg-[url('/banner-pattern.png')] mix-blend-overlay opacity-30"
-                    animate={{ 
-                      backgroundPosition: ['0% 0%', '100% 100%'],
-                    }}
-                    transition={{ 
-                      duration: 20,
-                      repeat: Infinity,
-                      repeatType: 'reverse',
-                    }}
-                  />
                   <div className="absolute -bottom-16 left-6">
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger>
-                          <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ type: "spring", stiffness: 300 }}
-                            className="relative"
-                          >
-                            <Avatar className="w-32 h-32 border-4 border-gray-900 ring-4 ring-purple-500/20">
+                          <div className="relative">
+                            <Avatar className="w-24 h-24 border-[6px] border-gray-900">
                               <AvatarImage src="/ghosty-avatar.png" />
                               <AvatarFallback className="bg-purple-600/20">GG</AvatarFallback>
                             </Avatar>
                             {/* Discord-like status indicator */}
-                            <div className="absolute bottom-1 right-1 w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center">
-                              <div className="w-5 h-5 bg-green-500 rounded-full animate-pulse" />
+                            <div className="absolute bottom-0 right-0 w-7 h-7 bg-gray-900 rounded-full p-1">
+                              <div className="w-full h-full bg-green-500 rounded-full" />
                             </div>
-                          </motion.div>
+                          </div>
                         </TooltipTrigger>
                         <TooltipContent>
-                          <p>Online and ready to ride! 🏍️</p>
+                          <p>Online</p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
                   </div>
                 </div>
-                <CardContent className="pt-24 p-6">
+                <CardContent className="pt-16 p-6">
                   <div className="space-y-4">
                     <div className="pt-4">
-                      <motion.div 
-                        className="flex items-center gap-2"
-                        whileHover={{ x: 5 }}
-                        transition={{ type: "spring", stiffness: 400 }}
-                      >
-                        <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">Ghosty</h3>
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger>
-                              <span className="text-sm text-purple-400 hover:underline cursor-pointer">@Ghostyy_r1</span>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Click to copy username</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      </motion.div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-xl font-semibold text-white">Ghosty</h3>
+                        <span className="text-sm text-gray-400">@ghosty</span>
+                      </div>
                       <div className="flex items-center gap-2 mt-1">
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger>
-                              <span className="text-sm text-gray-400 bg-gray-800/50 px-2 py-0.5 rounded-full hover:bg-gray-700/50 transition-colors">he/him</span>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Preferred pronouns</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                        <span className="text-purple-400 text-sm">•</span>
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger>
-                              <span className="text-sm text-gray-400 hover:text-purple-400 transition-colors">Discord ID: 123456789</span>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Click to copy Discord ID</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
+                        <span className="text-sm text-gray-400 bg-gray-800/50 px-2 py-0.5 rounded-full">he/him</span>
                       </div>
                     </div>
 
@@ -126,41 +78,20 @@ export function AboutMeSection() {
                       <p className="text-sm text-gray-300">Automotive Service Technician with a passion for motorcycles and ADHD-powered creativity. Living life one ride at a time. 🏍️</p>
                     </div>
 
-                    <div className="space-y-3">
-                      <motion.div 
-                        className="flex items-center gap-2 text-sm"
-                        animate={{ 
-                          color: ['#22c55e', '#16a34a'],
-                        }}
-                        transition={{ 
-                          duration: 2,
-                          repeat: Infinity,
-                          repeatType: 'reverse'
-                        }}
-                      >
-                        <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                        <span>Online</span>
-                      </motion.div>
-
-                      <div className="bg-gray-800/30 rounded-lg p-4 space-y-3 backdrop-blur-sm">
-                        <motion.div 
-                          className="flex items-center gap-2"
-                          whileHover={{ scale: 1.02 }}
-                        >
+                    <div className="space-y-3 mt-4">
+                      <div className="bg-gray-800/30 rounded-lg p-3 space-y-2">
+                        <div className="flex items-center gap-2">
                           <svg className="w-4 h-4 text-purple-400" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 12 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z"/>
                           </svg>
                           <span className="text-sm text-gray-300">Listening to Spotify</span>
-                        </motion.div>
-                        <motion.div 
-                          className="flex items-center gap-2"
-                          whileHover={{ scale: 1.02 }}
-                        >
+                        </div>
+                        <div className="flex items-center gap-2">
                           <svg className="w-4 h-4 text-purple-400" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H3V8h18v8zM6 15h2v-2h2v-2H8V9H6v2H4v2h2z"/>
                           </svg>
                           <span className="text-sm text-gray-300">Coding in VS Code</span>
-                        </motion.div>
+                        </div>
                       </div>
                     </div>
 
