@@ -77,9 +77,9 @@ export function AboutMeSection() {
                     </TooltipProvider>
                   </div>
                 </div>
-                <CardContent className="pt-20 p-6">
+                <CardContent className="pt-24 p-6">
                   <div className="space-y-4">
-                    <div className="pt-2">
+                    <div className="pt-4">
                       <motion.div 
                         className="flex items-center gap-2"
                         whileHover={{ x: 5 }}
@@ -191,25 +191,14 @@ export function AboutMeSection() {
             </ThreeDCard>
           </motion.div>
 
-          <motion.div 
-            className="md:col-span-8"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <ThreeDCard
-              className="h-full"
-              glareEnabled={true}
-              rotationIntensity={5}
-              glareColor="rgba(168, 85, 247, 0.2)"
-              borderRadius={24}
-            >
+          <div className="md:col-span-8">
+            <Card className="h-full bg-gray-900/50 backdrop-blur-md border-purple-600/20">
               <Tabs defaultValue="about" className="w-full h-full">
                 <TabsList className="w-full bg-gray-900/50 border border-purple-600/20">
-                  <TabsTrigger value="about" className="flex-1">About</TabsTrigger>
-                  <TabsTrigger value="vision" className="flex-1">Vision</TabsTrigger>
-                  <TabsTrigger value="values" className="flex-1">Values</TabsTrigger>
-                  <TabsTrigger value="history" className="flex-1">History</TabsTrigger>
+                  <TabsTrigger value="about" className="flex-1 data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-400">About</TabsTrigger>
+                  <TabsTrigger value="vision" className="flex-1 data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-400">Vision</TabsTrigger>
+                  <TabsTrigger value="values" className="flex-1 data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-400">Values</TabsTrigger>
+                  <TabsTrigger value="history" className="flex-1 data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-400">History</TabsTrigger>
                 </TabsList>
                 
                 <TabsContent value="about" className="mt-4">
