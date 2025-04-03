@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ThreeDCard } from '@/components/ui/3d-card';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export function AboutMeSection() {
   return (
@@ -37,7 +38,7 @@ export function AboutMeSection() {
               glareColor="rgba(168, 85, 247, 0.4)"
               borderRadius={24}
             >
-              <Card className="bg-gray-900/50 backdrop-blur-md border-purple-600/20 overflow-hidden h-full">
+              <Card className="bg-gray-900/50 backdrop-blur-md border-purple-600/20 overflow-hidden h-full hover:shadow-lg hover:shadow-purple-500/20 transition-shadow duration-300">
                 <div className="h-32 bg-gradient-to-r from-purple-600 to-indigo-600 relative">
                   <motion.div 
                     className="absolute inset-0 bg-[url('/banner-pattern.png')] mix-blend-overlay opacity-30"
