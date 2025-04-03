@@ -38,7 +38,7 @@ export function AboutMeSection() {
               glareColor="rgba(168, 85, 247, 0.4)"
               borderRadius={24}
             >
-              <Card className="bg-gray-900/50 backdrop-blur-md border-purple-600/20 overflow-hidden h-full hover:shadow-lg hover:shadow-purple-500/20 transition-shadow duration-300">
+              <Card className="bg-gray-900/50 backdrop-blur-md border-purple-600/20 overflow-hidden h-full">
                 <div className="h-32 bg-gradient-to-r from-purple-600 to-indigo-600 relative">
                   <motion.div 
                     className="absolute inset-0 bg-[url('/banner-pattern.png')] mix-blend-overlay opacity-30"
