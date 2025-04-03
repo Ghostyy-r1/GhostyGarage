@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { Ghost, Heart, Star, History, Lightbulb, Target, Settings } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -142,7 +141,7 @@ export function AboutMeSection() {
                         <div className="w-2 h-2 rounded-full bg-green-500"></div>
                         <span>Online</span>
                       </motion.div>
-                      
+
                       <div className="bg-gray-800/30 rounded-lg p-4 space-y-3 backdrop-blur-sm">
                         <motion.div 
                           className="flex items-center gap-2"
@@ -200,7 +199,7 @@ export function AboutMeSection() {
                   <TabsTrigger value="values" className="flex-1 data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-400">Values</TabsTrigger>
                   <TabsTrigger value="history" className="flex-1 data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-400">History</TabsTrigger>
                 </TabsList>
-                
+
                 <TabsContent value="about" className="mt-4">
                   <Card className="bg-gray-900/50 backdrop-blur-md border-purple-600/20">
                     <CardContent className="p-6">
@@ -274,8 +273,8 @@ export function AboutMeSection() {
                   </Card>
                 </TabsContent>
               </Tabs>
-            </ThreeDCard>
-          </motion.div>
+            </Card>
+          </div>
         </div>
       </div>
     </section>
