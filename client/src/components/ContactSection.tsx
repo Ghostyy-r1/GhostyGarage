@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ContactForm } from './ContactForm';
+import { FAQSection } from './FAQSection';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 export function ContactSection() {
@@ -27,7 +28,9 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-gray-900 to-black contact-section">
+    <>
+      <FAQSection />
+      <section id="contact" className="py-20 bg-gradient-to-b from-gray-900 to-black contact-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="text-center mb-12"
@@ -133,5 +136,6 @@ export function ContactSection() {
         </div>
       </div>
     </section>
+    </>
   );
 }
