@@ -192,13 +192,45 @@ export function HeroSection() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="relative space-y-8">
-            {/* Background blobs scattered around */}
-            <div className="absolute -left-20 top-10 w-[300px] h-[300px] blur-3xl rounded-full bg-purple-600/20 animate-blob" />
-            <div className="absolute left-40 -top-20 w-[400px] h-[400px] blur-3xl rounded-full bg-indigo-600/15 animate-blob animation-delay-2000" />
-            <div className="absolute right-20 top-0 w-[350px] h-[350px] blur-3xl rounded-full bg-purple-500/20 animate-blob animation-delay-4000" />
-            <div className="absolute -right-40 bottom-0 w-[450px] h-[450px] blur-3xl rounded-full bg-indigo-500/15 animate-blob animation-delay-3000" />
-            <div className="absolute left-0 bottom-20 w-[250px] h-[250px] blur-3xl rounded-full bg-purple-700/20 animate-blob animation-delay-5000" />
-            <div className="absolute right-40 bottom-40 w-[320px] h-[320px] blur-3xl rounded-full bg-indigo-700/15 animate-blob animation-delay-1000" />
+            {/* Animated lava lamp blobs */}
+            {Array.from({ length: 6 }).map((_, i) => {
+              const size = 300 + Math.random() * 200;
+              const duration = 15 + Math.random() * 10;
+              const delay = i * 2;
+              
+              return (
+                <motion.div
+                  key={`hero-blob-${i}`}
+                  className="absolute blur-3xl rounded-full pointer-events-none"
+                  style={{
+                    width: size,
+                    height: size,
+                    background: `radial-gradient(circle at 50% 50%, rgba(147, 51, 234, ${0.15 + (Math.random() * 0.1)}) 0%, rgba(79, 70, 229, ${0.1 + (Math.random() * 0.05)}) 100%)`,
+                    filter: 'brightness(1.2) contrast(1.2)',
+                    mixBlendMode: 'plus-lighter',
+                  }}
+                  initial={{ 
+                    x: `${Math.random() * 100}%`,
+                    y: '120%',
+                    scale: 0.8,
+                    opacity: 0.1
+                  }}
+                  animate={{
+                    x: [`${Math.random() * 100}%`, `${Math.random() * 100}%`, `${Math.random() * 100}%`],
+                    y: ['120%', '0%', '120%'],
+                    scale: [0.8, 1.2, 0.8],
+                    opacity: [0.1, 0.3, 0.1],
+                  }}
+                  transition={{
+                    duration: duration,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: delay,
+                    times: [0, 0.5, 1]
+                  }}
+                />
+              );
+            })}
             <AnimatedReveal variant="fade" direction="up" delay={0.2}>
               <div className="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-1.5 rounded-full">
                 <span className="text-sm font-medium text-white">Welcome to Ghosty's Garage</span>
