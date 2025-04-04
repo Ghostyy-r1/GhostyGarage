@@ -1,3 +1,4 @@
+
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -9,8 +10,7 @@ import { AppSidebar } from "@/components/AppSidebar";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { GhostyChatButton } from "@/components/GhostyChatButton";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
-import FAQ from "@/components/FAQ";
-
+import { Navbar } from "@/components/Navbar";
 
 function App() {
   return (
@@ -21,15 +21,15 @@ function App() {
             <AnnouncementBanner />
             <Navbar />
           </div>
-          <div className="pt-24">
-            <AppSidebar>
+          <AppSidebar>
+            <div className="pt-32">
               <Switch>
                 <Route path="/" component={Home} />
                 <Route path="/about" component={About} />
                 <Route component={NotFound} />
               </Switch>
-            </AppSidebar>
-          </div>
+            </div>
+          </AppSidebar>
         </div>
         <GhostyChatButton />
         <Toaster />
