@@ -29,7 +29,7 @@ import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CartButton } from "@/components/CartButton";
-import { Header } from "./Navbar"; // Added import for the new Header component
+
 
 
 interface SidebarNavItemProps {
@@ -229,8 +229,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
         </Sidebar>
 
         <div className="flex flex-1 flex-col">
-          <Header /> {/* Added the new Header component */}
-          <main className="relative flex-1 overflow-y-auto pt-24"> {/* Increased padding to account for header */}
+          <main className="relative flex-1 overflow-y-auto pt-16">
             {children}
           </main>
         </div>

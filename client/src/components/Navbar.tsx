@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -7,7 +8,7 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 import { CartButton } from "./CartButton";
 import { AnnouncementBanner } from "./AnnouncementBanner";
 
-export function Header() {
+export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
@@ -187,4 +188,4 @@ export function Header() {
       </motion.nav>
     </div>
   );
-}
+};
