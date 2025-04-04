@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HeroSection } from "@/components/HeroSection";
 
 // Lazy load components for better performance
+const AboutGarageSectionTabs = lazy(() => import("@/components/AboutGarageSectionTabs").then(module => ({ default: module.AboutGarageSectionTabs })));
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection").then(module => ({ default: module.FeaturesSection })));
 const CommunityHighlights = lazy(() => import("@/components/CommunityHighlights").then(module => ({ default: module.CommunityHighlights })));
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection").then(module => ({ default: module.TestimonialsSection })));
@@ -44,7 +45,12 @@ export default function Home() {
         {/* Hero section is not lazy loaded because it's above the fold */}
         <HeroSection />
         
-        {/* Lazy loaded sections with loading indicators */}
+        {/* About Section */}
+        <Suspense fallback={<LoadingFallback />}>
+          <AboutGarageSectionTabs />
+        </Suspense>
+
+        {/* Other sections */}
         <Suspense fallback={<LoadingFallback />}>
           <FeaturesSection />
         </Suspense>

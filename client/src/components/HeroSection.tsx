@@ -213,9 +213,9 @@ export function HeroSection() {
         }}
         onClick={() => {
           // Get the next section (features or whatever comes after hero)
-          const nextSection = document.querySelector('.features-section, .community-highlights');
-          if (nextSection) {
-            nextSection.scrollIntoView({ behavior: 'smooth' });
+          const aboutSection = document.getElementById('about');
+          if (aboutSection) {
+            aboutSection.scrollIntoView({ behavior: 'smooth' });
           }
         }}
         whileHover={{ scale: 1.1 }}
