@@ -154,14 +154,14 @@ export function HeroSection() {
                     Explore Products
                     <ChevronRight className="ml-2 h-4 w-4 transition-all duration-300" />
                   </span>
-                  <div className="absolute -inset-[2px] border-2 border-purple-500/50 rounded-lg animate-pulse-outline"></div>
+                  <div className="absolute inset-0 ring-2 ring-purple-500/50 rounded-lg animate-pulse-border"></div>
                   <style jsx>{`
-                    @keyframes pulse-outline {
-                      0%, 100% { opacity: 0.3; transform: scale(1); }
-                      50% { opacity: 1; transform: scale(1.02); }
+                    @keyframes pulse-border {
+                      0%, 100% { opacity: 0.3; }
+                      50% { opacity: 0.8; }
                     }
-                    .animate-pulse-outline {
-                      animation: pulse-outline 2s ease-in-out infinite;
+                    .animate-pulse-border {
+                      animation: pulse-border 2s ease-in-out infinite;
                     }
                   `}</style>
                 </Button>
