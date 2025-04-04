@@ -47,6 +47,9 @@ export default function Home() {
         {/* Hero section is not lazy loaded because it's above the fold */}
         <HeroSection />
         
+        {/* Resources Section */}
+        <ResourcesSection />
+        
         {/* About Section */}
       <section id="about" className="relative z-10 bg-background min-h-screen flex items-center">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
