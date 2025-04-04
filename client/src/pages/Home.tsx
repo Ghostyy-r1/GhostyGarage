@@ -3,16 +3,16 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HeroSection } from "@/components/HeroSection";
+import { AboutGarageSectionTabs } from "@/components/AboutGarageSectionTabs";
 
 // Lazy load components for better performance
-const AboutGarageSectionTabs = lazy(() => import("@/components/AboutGarageSectionTabs"));
-const FeaturesSection = lazy(() => import("@/components/FeaturesSection"));
-const CommunityHighlights = lazy(() => import("@/components/CommunityHighlights"));
-const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
-const ProductShowcase = lazy(() => import("@/components/ProductShowcase"));
-const CTASection = lazy(() => import("@/components/CTASection"));
-const ContactSection = lazy(() => import("@/components/ContactSection"));
-const Footer = lazy(() => import("@/components/Footer"));
+const FeaturesSection = lazy(() => import("@/components/FeaturesSection").then(m => ({ default: m.FeaturesSection })));
+const CommunityHighlights = lazy(() => import("@/components/CommunityHighlights").then(m => ({ default: m.CommunityHighlights })));
+const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection").then(m => ({ default: m.TestimonialsSection })));
+const ProductShowcase = lazy(() => import("@/components/ProductShowcase").then(m => ({ default: m.ProductShowcase })));
+const CTASection = lazy(() => import("@/components/CTASection").then(m => ({ default: m.CTASection })));
+const ContactSection = lazy(() => import("@/components/ContactSection").then(m => ({ default: m.ContactSection })));
+const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
 
 // Loading component with animation
 function LoadingFallback() {
