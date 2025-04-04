@@ -23,7 +23,9 @@ import {
   MapPin,
   Settings,
   LogOut,
-  Search
+  Search,
+  Globe,
+  ChevronRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
@@ -217,23 +219,43 @@ export function AppSidebar({ children }: AppSidebarProps) {
             </div>
           </SidebarContent>
 
-          <SidebarFooter className="mt-auto">
-            <SidebarSeparator className="mb-4" />
-            <div className="px-4 mb-4">
-              <div className="flex items-center gap-3">
-                <Avatar className="h-10 w-10 border-2 border-purple-500/30">
-                  <AvatarImage src="/placeholder-avatar.jpg" />
-                  <AvatarFallback className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white">
-                    GH
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col">
-                  <span className="text-sm font-medium text-white">Guest User</span>
-                  <span className="text-xs text-gray-400">Join to sync your data</span>
+          <SidebarFooter className="mt-auto space-y-4">
+            <div className="px-4 space-y-3">
+              <div className="flex flex-col space-y-2">
+                <div className="flex items-center justify-between px-2 py-1.5 bg-gray-900/50 rounded-lg border border-purple-500/20">
+                  <Globe className="h-4 w-4 text-purple-400/70" />
+                  <span className="text-xs font-medium text-gray-300">Canada - $ CAD</span>
+                  <ChevronRight className="h-4 w-4 text-gray-500" />
+                </div>
+                <div className="flex items-center justify-between px-2 py-1.5 bg-gray-900/50 rounded-lg border border-purple-500/20">
+                  <Globe className="h-4 w-4 text-purple-400/70" />
+                  <span className="text-xs font-medium text-gray-300">English - EN</span>
+                  <ChevronRight className="h-4 w-4 text-gray-500" />
                 </div>
               </div>
             </div>
-            <SidebarMenu>
+
+            <SidebarSeparator className="bg-purple-500/20" />
+            
+            <div className="px-4">
+              <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-purple-900/50 to-indigo-900/50 p-4 backdrop-blur-sm border border-purple-500/20 transition-all duration-300 hover:border-purple-500/40">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative flex items-center gap-3">
+                  <Avatar className="h-12 w-12 border-2 border-purple-500/30 shadow-lg shadow-purple-500/20">
+                    <AvatarImage src="/placeholder-avatar.jpg" />
+                    <AvatarFallback className="bg-gradient-to-br from-purple-600 to-indigo-600 text-white">
+                      GH
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium text-white">Guest User</span>
+                    <span className="text-xs text-purple-300/70">Join to sync your data</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <SidebarMenu className="px-2">
               <SidebarMenuItem>
                 <Link href="/settings" className="w-full">
                   <SidebarMenuButton className="group hover:bg-purple-900/10 hover:text-purple-400">
