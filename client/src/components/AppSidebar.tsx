@@ -185,10 +185,13 @@ export function AppSidebar({ children }: AppSidebarProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentLanguage, setCurrentLanguage] = useState('en');
   const [currentCurrency, setCurrentCurrency] = useState('cad');
+  
+  const navigationItems = [
     { href: "/", icon: <Home className="h-5 w-5" />, label: "Home" },
     { href: "/about", icon: <FileText className="h-5 w-5" />, label: "About" },
     { href: "/community", icon: <Users className="h-5 w-5" />, label: "Community" },
     { href: "/merch", icon: <ShoppingCart className="h-5 w-5" />, label: "Merchandise" },
+  ];
     { href: "/events", icon: <Calendar className="h-5 w-5" />, label: "Events & Rides" },
     { href: "/blog", icon: <FileText className="h-5 w-5" />, label: "Blog" },
   ];
@@ -280,7 +283,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                 </DropdownMenu>
                 <div className="h-8 w-px bg-purple-500/20" />
                 <div className="relative flex-1">
-                  <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-purple-400" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-purple-400" />
                   <input 
                     type="search"
                     placeholder="Search..."
