@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HeroSection } from "@/components/HeroSection";
 
 // Lazy load components for better performance
-const AboutGarageSectionTabs = lazy(() => import("@/components/AboutGarageSectionTabs").then(module => ({ default: module.AboutGarageSectionTabs })));
+const AboutGarageSectionTabs = lazy(() => import("@/components/AboutGarageSectionTabs"));
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection").then(module => ({ default: module.FeaturesSection })));
 const CommunityHighlights = lazy(() => import("@/components/CommunityHighlights").then(module => ({ default: module.CommunityHighlights })));
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection").then(module => ({ default: module.TestimonialsSection })));
@@ -46,10 +46,12 @@ export default function Home() {
         <HeroSection />
         
         {/* About Section */}
-      <section id="about" className="relative z-10 bg-background">
-        <Suspense fallback={<LoadingFallback />}>
-          <AboutGarageSectionTabs />
-        </Suspense>
+      <section id="about" className="relative z-10 bg-background min-h-screen flex items-center">
+        <div className="w-full">
+          <Suspense fallback={<LoadingFallback />}>
+            <AboutGarageSectionTabs />
+          </Suspense>
+        </div>
       </section>
 
         {/* Other sections */}
