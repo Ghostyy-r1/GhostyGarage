@@ -4,6 +4,7 @@ import { Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HeroSection } from "@/components/HeroSection";
 import { AboutGarageSectionTabs } from "@/components/AboutGarageSectionTabs";
+import { ResourcesSection } from "@/components/ResourcesSection";
 
 // Lazy load components for better performance
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection").then(m => ({ default: m.FeaturesSection })));
