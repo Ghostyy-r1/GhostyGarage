@@ -19,7 +19,8 @@ import {
   Video,
   Image,
   MessageSquare,
-  HelpCircle
+  HelpCircle,
+  Menu
 } from "lucide-react";
 import { 
   Sidebar, 
@@ -33,26 +34,6 @@ import {
   SidebarSeparator,
   SidebarFooter
 } from "@/components/ui/sidebar";
-import { 
-  Home, 
-  Users, 
-  ShoppingCart, 
-  Calendar, 
-  FileText,
-  Menu,
-  Settings,
-  LogOut,
-  Search as SearchIcon,
-  Globe,
-  ChevronRight,
-  Check,
-  Wrench,
-  Tool,
-  Video,
-  Image,
-  MessageSquare,
-  HelpCircle
-} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
