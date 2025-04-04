@@ -152,7 +152,7 @@ export function HeroSection() {
                 >
                   <span className="relative z-10 flex items-center justify-center w-full">
                     Explore Products
-                    <ChevronRight className="ml-2 h-4 w-4 transition-all duration-700 group-hover:translate-x-2 animate-pulse-chevron" />
+                    <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-all duration-700" />
                   </span>
                   <div className="absolute inset-0 ring-2 ring-purple-500/50 rounded-lg animate-pulse-border"></div>
                   <style jsx>{`
@@ -160,18 +160,8 @@ export function HeroSection() {
                       0%, 100% { opacity: 0.3; }
                       50% { opacity: 0.8; }
                     }
-                    @keyframes pulse-chevron {
-                      0%, 100% { transform: translateX(0); }
-                      50% { transform: translateX(2px); }
-                    }
                     .animate-pulse-border {
                       animation: pulse-border 2s ease-in-out infinite;
-                    }
-                    .animate-pulse-chevron {
-                      animation: pulse-chevron 2s ease-in-out infinite;
-                    }
-                    .group:hover .animate-pulse-chevron {
-                      animation: none;
                     }
                   `}</style>
                 </Button>
