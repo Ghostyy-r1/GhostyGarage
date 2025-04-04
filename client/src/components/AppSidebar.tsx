@@ -63,18 +63,6 @@ function Header() {
         {/* Empty space for balance */}
       </div>
 
-      {/* Search bar */}
-      <div className="flex-1 max-w-xl mx-4">
-        <div className="relative">
-          <input 
-            type="search"
-            placeholder="Search for products, guides, or resources..."
-            className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-2 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
-          />
-          {/* Search component removed until implemented */}
-        </div>
-      </div>
-
       {/* Right section with action buttons */}
       <div className="flex items-center gap-3">
         <Button 
@@ -188,9 +176,81 @@ export function AppSidebar({ children }: AppSidebarProps) {
       <div className="flex min-h-screen relative">
         <Sidebar>
           <SidebarHeader className="pt-16">
-            {/* User profile section */}
-            <div className="px-2 py-4">
-              <div className="flex items-center gap-3 px-2">
+            {/* Search bar */}
+            <div className="px-4 py-4">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-purple-400" />
+                <input 
+                  type="search"
+                  placeholder="Search..."
+                  className="w-full bg-gray-900/50 border-2 border-purple-500/30 rounded-lg pl-10 pr-4 py-2 text-xs text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
+                />
+              </div>
+            </div>
+            <SidebarSeparator className="mb-2" />
+          </SidebarHeader>
+
+          <SidebarContent className="px-2">
+            {/* Main navigation */}
+            <div className="flex flex-col space-y-6">
+              <div>
+                <div className="mb-2 px-2">
+                  <h3 className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-purple-400/80">
+                    Navigation
+                  </h3>
+                </div>
+
+                <SidebarMenu>
+                  {primaryNavItems.map((item, index) => (
+                    <motion.div
+                      key={item.href}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                    >
+                      <SidebarNavItem
+                        href={item.href}
+                        icon={item.icon}
+                        label={item.label}
+                        currentPath={location}
+                      />
+                    </motion.div>
+                  ))}
+                </SidebarMenu>
+              </div>
+
+              <div>
+                <div className="mb-2 px-2">
+                  <h3 className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-purple-400/80">
+                    Explore
+                  </h3>
+                </div>
+
+                <SidebarMenu>
+                  {secondaryNavItems.map((item, index) => (
+                    <motion.div
+                      key={item.href}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: (index + primaryNavItems.length) * 0.05 }}
+                    >
+                      <SidebarNavItem
+                        href={item.href}
+                        icon={item.icon}
+                        label={item.label}
+                        currentPath={location}
+                      />
+                    </motion.div>
+                  ))}
+                </SidebarMenu>
+              </div>
+            </div>
+          </SidebarContent>
+
+          <SidebarFooter className="mt-auto">
+            <SidebarSeparator className="mb-4" />
+            <div className="px-4 mb-4">
+              <div className="flex items-center gap-3">
                 <Avatar className="h-10 w-10 border-2 border-purple-500/30">
                   <AvatarImage src="/placeholder-avatar.jpg" />
                   <AvatarFallback className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white">
@@ -203,64 +263,6 @@ export function AppSidebar({ children }: AppSidebarProps) {
                 </div>
               </div>
             </div>
-          </SidebarHeader>
-
-          <SidebarContent className="px-2">
-            {/* Main navigation */}
-            <div className="mb-2 px-2">
-              <h3 className="mb-1 px-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Navigation
-              </h3>
-            </div>
-
-            <SidebarMenu>
-              {primaryNavItems.map((item, index) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
-                >
-                  <SidebarNavItem
-                    href={item.href}
-                    icon={item.icon}
-                    label={item.label}
-                    currentPath={location}
-                  />
-                </motion.div>
-              ))}
-            </SidebarMenu>
-
-            <SidebarSeparator className="my-3" />
-
-            {/* Personal section */}
-            <div className="mb-2 px-2">
-              <h3 className="mb-1 px-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                Personal
-              </h3>
-            </div>
-
-            <SidebarMenu>
-              {secondaryNavItems.map((item, index) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: (index + primaryNavItems.length) * 0.05 }}
-                >
-                  <SidebarNavItem
-                    href={item.href}
-                    icon={item.icon}
-                    label={item.label}
-                    currentPath={location}
-                  />
-                </motion.div>
-              ))}
-            </SidebarMenu>
-          </SidebarContent>
-
-          <SidebarFooter className="mt-auto">
-            <SidebarSeparator className="mb-2" />
             <SidebarMenu>
               <SidebarMenuItem>
                 <Link href="/settings" className="w-full">
@@ -269,7 +271,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                       <Settings className="h-5 w-5" />
                     </div>
                     <span className="text-gray-300 group-hover:text-purple-300">
-                      Settings
+                      Account Settings
                     </span>
                   </SidebarMenuButton>
                 </Link>
@@ -280,7 +282,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                     <LogOut className="h-5 w-5" />
                   </div>
                   <span className="group-hover:text-red-300">
-                    Logout
+                    Sign Out
                   </span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
