@@ -8,10 +8,10 @@ import About from "@/pages/About"; // Added About page import
 import { AppSidebar } from "@/components/AppSidebar";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { GhostyChatButton } from "@/components/GhostyChatButton";
-import { Navbar } from "@/components/Navbar";
+import { Navbar } from "./components/Navbar";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 import FAQ from "@/components/FAQ"; // Added FAQ component import
-
+import { SidebarProvider } from "./components/ui/sidebar";
 
 function Router() {
   return (
@@ -32,9 +32,11 @@ function App() {
       {useSidebar ? (
         <>
           <ErrorBoundary>
-            <AppSidebar>
-            <Router />
-          </AppSidebar>
+            <SidebarProvider>
+              <AppSidebar>
+                <Router />
+              </AppSidebar>
+            </SidebarProvider>
           </ErrorBoundary>
           <div className="fixed top-0 left-0 right-0">
             <ErrorBoundary>
