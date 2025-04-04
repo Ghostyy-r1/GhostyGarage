@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Ghost, Heart, Star, History, Lightbulb, Target, Settings, Mail, MapPin, Calendar, Code, Laptop, Brain, Brush, Coffee, Music, BookOpen } from 'lucide-react';
+import { Ghost, Heart, Star, Lightbulb, Target, MapPin, Calendar, Code, Coffee, Music, BookOpen } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -380,7 +380,7 @@ export function AboutMeSection() {
 
                         <div className="space-y-6">
                           <div className="relative pl-6 border-l border-purple-600/30">
-                            <div className="absolute w-3 h-3 bg-purple-600 rounded-full -left-[6.5px] top-1</div>
+                            <div className="absolute w-3 h-3 bg-purple-600 rounded-full -left-[6.5px] top-1"></div>
                             <div className="mb-1">
                               <span className="text-purple-400">2024 - Present</span>
                               <h5 className="text-white font-medium">Founder & Lead Developer - Ghosty's Garage</h5>
