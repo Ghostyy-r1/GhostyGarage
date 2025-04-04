@@ -86,11 +86,25 @@ export function HeroSection() {
           </defs>
         </svg>
         <div className="absolute inset-0" style={{ filter: 'url(#goo)' }}>
-          {Array.from({ length: 12 }).map((_, i) => {
-            const initialSize = 80 + (Math.random() * 40);
+          {Array.from({ length: 17 }).map((_, i) => {
+            const initialSize = i > 11 ? 120 + (Math.random() * 60) : 80 + (Math.random() * 40);
             const randomStartX = Math.random() * 100;
-            const cycleDelay = i * (20 / 12);
-            const cycleDuration = 20 + (Math.random() * 10);
+            const randomStartY = i > 11 ? Math.random() * 80 + 10 : 120; // Distribute new blobs across the height
+            const cycleDelay = i * (20 / 17);
+            const cycleDuration = i > 11 ? 25 + (Math.random() * 15) : 20 + (Math.random() * 10);
+            const customPath = i > 11 ? [
+              [randomStartX, randomStartY],
+              [(randomStartX + 40) % 100, randomStartY - 30],
+              [(randomStartX + 80) % 100, randomStartY + 30],
+              [(randomStartX + 120) % 100, randomStartY - 20],
+              [randomStartX, randomStartY]
+            ] : [
+              [randomStartX, 120],
+              [(randomStartX + 30) % 100, 70],
+              [(randomStartX + 60) % 100, 20],
+              [(randomStartX + 90) % 100, 70],
+              [randomStartX, 120]
+            ];
             
             return (
               <motion.div
@@ -104,14 +118,8 @@ export function HeroSection() {
                 animate={{
                   scale: [0.3, 1.4, 1.8, 1.2, 0.3],
                   opacity: [0.2, 0.5, 0.6, 0.4, 0.2],
-                  x: [
-                    `${randomStartX}%`,
-                    `${(randomStartX + 30) % 100}%`,
-                    `${(randomStartX + 60) % 100}%`,
-                    `${(randomStartX + 90) % 100}%`,
-                    `${randomStartX}%`
-                  ],
-                  y: ['120%', '70%', '20%', '70%', '120%']
+                  x: customPath.map(([x]) => `${x}%`),
+                  y: customPath.map(([, y]) => `${y}%`)
                 }}
                 transition={{
                   duration: cycleDuration,
