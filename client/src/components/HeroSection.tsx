@@ -46,7 +46,7 @@ export function HeroSection() {
   return (
     <div 
       ref={containerRef}
-      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-gray-900 via-[#0c0920] to-black px-4 sm:px-6 lg:px-8"
+      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-gray-900 via-[#0c0920] to-transparent px-4 sm:px-6 lg:px-8"
       style={{ position: 'relative' }}
     >
       {/* Animated particles */}

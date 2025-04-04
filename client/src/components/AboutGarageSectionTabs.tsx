@@ -7,8 +7,9 @@ import { ThreeDCard } from '@/components/ui/3d-card';
 
 export function AboutGarageSectionTabs() {
   return (
-    <section id="about" className="py-24 bg-gray-900 relative border-t border-purple-500/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-24 relative bg-gradient-to-b from-black via-gray-900 to-black border-t border-purple-500/20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent pointer-events-none" />
         <motion.div 
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -23,7 +24,7 @@ export function AboutGarageSectionTabs() {
         </motion.div>
 
         <Tabs defaultValue="what" className="w-full">
-          <TabsList className="grid grid-cols-3 lg:grid-cols-6 bg-gray-800 border-2 border-purple-600/30 rounded-xl p-2 gap-2 mb-12 shadow-xl shadow-purple-500/5">
+          <TabsList className="grid grid-cols-3 lg:grid-cols-6 bg-black/50 backdrop-blur-xl border-2 border-purple-600/30 rounded-xl p-3 gap-3 mb-12 shadow-xl shadow-purple-500/10 relative">
             {[
               { id: 'what', label: 'What We Are', icon: Heart },
               { id: 'values', label: 'Values', icon: Star },
@@ -35,8 +36,9 @@ export function AboutGarageSectionTabs() {
               <TabsTrigger 
                 key={tab.id} 
                 value={tab.id}
-                className="group data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-400 relative py-2 transition-all duration-300 hover:bg-purple-600/20"
+                className="group data-[state=active]:bg-purple-600/40 data-[state=active]:text-purple-300 relative py-3 transition-all duration-500 hover:bg-purple-600/20 overflow-hidden"
               >
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-purple-600/5 to-purple-600/0 animate-shimmer" />
                 <div className="flex flex-col items-center gap-1">
                   <tab.icon className="w-5 h-5 group-hover:text-purple-400 transition-colors" />
                   <span className="text-sm hidden md:block">{tab.label}</span>
