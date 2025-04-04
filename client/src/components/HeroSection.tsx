@@ -74,7 +74,7 @@ export function HeroSection() {
         />
       ))}
 
-      {/* Background gradient elements with animated bubbles */}
+      {/* Background gradient elements with animated blobs */}
       <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
         <motion.div 
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, -50]) }}
@@ -84,6 +84,38 @@ export function HeroSection() {
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, 50]) }}
           className="absolute -bottom-[40%] -right-[10%] w-[60%] h-[80%] rounded-full bg-gradient-to-r from-purple-900/30 to-indigo-800/30 blur-3xl"
         />
+        {Array.from({ length: 6 }).map((_, i) => (
+          <motion.div
+            key={`blob-${i}`}
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.6, 0.3],
+              x: [
+                `${Math.random() * 100 - 50}%`,
+                `${Math.random() * 100 - 50}%`,
+                `${Math.random() * 100 - 50}%`
+              ],
+              y: [
+                `${Math.random() * 100 - 50}%`,
+                `${Math.random() * 100 - 50}%`,
+                `${Math.random() * 100 - 50}%`
+              ],
+              borderRadius: ['60% 40% 30% 70%', '30% 60% 70% 40%', '60% 40% 30% 70%']
+            }}
+            transition={{
+              duration: Math.random() * 10 + 15,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className={`absolute bg-gradient-to-br from-purple-600/20 to-indigo-600/20 blur-3xl pointer-events-none`}
+            style={{
+              width: `${Math.random() * 30 + 20}%`,
+              height: `${Math.random() * 30 + 20}%`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+          />
+        ))}
         {Array.from({ length: 15 }).map((_, i) => (
           <motion.div
             key={i}
