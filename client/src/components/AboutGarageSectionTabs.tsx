@@ -24,7 +24,7 @@ export function AboutGarageSectionTabs() {
         </motion.div>
 
         <Tabs defaultValue="what" className="w-full">
-          <TabsList className="grid grid-cols-3 lg:grid-cols-6 bg-black/50 backdrop-blur-xl border-2 border-purple-600/30 rounded-xl p-3 gap-3 mb-12 shadow-xl shadow-purple-500/10 relative">
+          <TabsList className="grid grid-cols-3 lg:grid-cols-6 bg-black/50 backdrop-blur-xl border-2 border-purple-600/30 rounded-xl p-4 gap-3 mb-12 shadow-xl shadow-purple-500/10 relative min-h-[80px]">
             {[
               { id: 'what', label: 'What We Are', icon: Heart },
               { id: 'values', label: 'Values', icon: Star },
@@ -65,12 +65,29 @@ export function AboutGarageSectionTabs() {
                   <Card className="bg-gray-900/50 backdrop-blur-lg border-purple-600/20 hover:bg-gray-900/60 hover:border-purple-500/30 transition-all duration-300 shadow-lg hover:shadow-purple-500/10">
                     <CardContent className="p-6">
                       <h3 className="text-2xl font-bold text-white mb-4">Welcome to the Garage</h3>
-                      <p className="text-gray-300 mb-6">
-                        Ghosty's Garage is more than just a platform - it's a thriving community where motorcycle 
-                        enthusiasts come together to share their passion, knowledge, and experiences. We provide 
-                        a space where riders can connect, learn, and grow together while celebrating the freedom 
-                        of two wheels.
+                      <p className="text-gray-300 mb-8 text-lg leading-relaxed">
+                        Ghosty's Garage transcends the conventional concept of a platform - it's a meticulously crafted 
+                        ecosystem where motorcycle enthusiasts converge to share their passion, expertise, and unique 
+                        experiences. We've created an exclusive space where riders from all walks of life can connect, 
+                        learn, and evolve together while celebrating the unparalleled freedom that comes with two wheels.
                       </p>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                        <div className="p-6 bg-purple-600/10 rounded-lg border border-purple-600/20 hover:bg-purple-600/20 transition-all duration-300">
+                          <Users className="w-10 h-10 text-purple-400 mb-4" />
+                          <h4 className="text-xl font-semibold text-white mb-3">Elite Community</h4>
+                          <p className="text-gray-300">Join a select group of passionate riders dedicated to excellence</p>
+                        </div>
+                        <div className="p-6 bg-purple-600/10 rounded-lg border border-purple-600/20 hover:bg-purple-600/20 transition-all duration-300">
+                          <Globe className="w-10 h-10 text-purple-400 mb-4" />
+                          <h4 className="text-xl font-semibold text-white mb-3">Global Network</h4>
+                          <p className="text-gray-300">Connect with distinguished riders from across the globe</p>
+                        </div>
+                        <div className="p-6 bg-purple-600/10 rounded-lg border border-purple-600/20 hover:bg-purple-600/20 transition-all duration-300">
+                          <Zap className="w-10 h-10 text-purple-400 mb-4" />
+                          <h4 className="text-xl font-semibold text-white mb-3">Premium Experience</h4>
+                          <p className="text-gray-300">Enjoy exclusive access to expert knowledge and resources</p>
+                        </div>
+                      </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="p-4 bg-purple-600/10 rounded-lg border border-purple-600/20">
                           <Users className="w-8 h-8 text-purple-400 mb-3" />
