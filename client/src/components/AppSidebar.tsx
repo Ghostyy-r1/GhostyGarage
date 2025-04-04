@@ -1,22 +1,23 @@
+
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuItem,
+import { 
+  Sidebar, 
+  SidebarContent, 
+  SidebarHeader, 
+  SidebarMenu, 
+  SidebarMenuItem, 
   SidebarMenuButton,
   SidebarProvider,
   SidebarTrigger,
   SidebarSeparator,
   SidebarFooter
 } from "@/components/ui/sidebar";
-import {
-  Home,
-  Users,
-  ShoppingCart,
-  Calendar,
+import { 
+  Home, 
+  Users, 
+  ShoppingCart, 
+  Calendar, 
   FileText,
   Menu,
   Settings,
@@ -41,8 +42,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useState } from 'react';
-
 
 const languages = [
   { label: "English", value: "en" },
@@ -60,33 +59,46 @@ const currencies = [
   { label: "AUD ($)", value: "aud" },
 ];
 
-const Header = () => {
-  const [searchValue, setSearchValue] = useState("");
-
+function Header() {
   return (
-    <div className="flex items-center justify-between h-16 px-4">
-      <div className="flex items-center flex-1">
-        <div className="relative w-full max-w-md">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500" />
-          <input
-            type="search"
-            placeholder="Search..."
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            className="w-full bg-gray-900/50 border-2 border-purple-500/30 rounded-lg pl-10 pr-4 py-2 text-xs text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
-          />
-        </div>
+    <motion.header 
+      className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b border-gray-800 bg-background bg-gradient-to-r from-gray-900 to-black px-4 shadow-lg mt-auto"
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="flex items-center">
+        <SidebarTrigger>
+          <Menu className="h-5 w-5 text-gray-300 hover:text-white" />
+        </SidebarTrigger>
+        <div className="mx-3 h-5 w-px bg-gray-700"></div>
+        <Link href="/">
+          <div className="flex items-center gap-2 cursor-pointer">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-md">
+              <span className="text-md font-bold">G</span>
+            </div>
+            <span className="text-xl font-bold">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">Ghosty's</span>
+              <span className="text-white"> Garage</span>
+            </span>
+          </div>
+        </Link>
       </div>
+
+      <div className="hidden md:block">
+        {/* Empty space for balance */}
+      </div>
+
       <div className="flex items-center gap-3">
-        <Button
-          variant="ghost"
+        <Button 
+          variant="ghost" 
           size="sm"
           className="flex items-center gap-2 bg-purple-900/20 hover:bg-purple-900/30 text-purple-400 border border-purple-800/50 transition-all duration-300"
         >
           <FaDiscord className="h-4 w-4" />
           <span className="hidden sm:inline">Discord</span>
         </Button>
-        <Button
+        <Button 
           size="sm"
           className="relative bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-md shadow-purple-900/20 group overflow-hidden animate-pulse"
         >
@@ -99,10 +111,9 @@ const Header = () => {
           <CartButton className="border-2 border-purple-500/50 hover:border-purple-500/80 transition-colors duration-300 shadow-lg shadow-purple-500/20" />
         </div>
       </div>
-    </div>
+    </motion.header>
   );
-};
-
+}
 
 interface SidebarNavItemProps {
   href: string;
@@ -117,11 +128,11 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
   return (
     <SidebarMenuItem>
       <Link href={href} className="w-full">
-        <SidebarMenuButton
+        <SidebarMenuButton 
           data-active={isActive}
           className={`group/item relative transition-all duration-300 ${
-            isActive
-              ? 'bg-purple-900/20 text-purple-400 font-medium'
+            isActive 
+              ? 'bg-purple-900/20 text-purple-400 font-medium' 
               : 'hover:bg-purple-900/10 hover:text-purple-400'
           }`}
         >
@@ -130,10 +141,10 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
           } group-hover/item:opacity-60`} />
 
           <div className="mr-3">
-            <div
+            <div 
               className={`transition-all duration-300 ${
-                isActive
-                  ? 'text-purple-400 scale-110'
+                isActive 
+                  ? 'text-purple-400 scale-110' 
                   : 'text-gray-400 group-hover/item:text-purple-400 group-hover/item:scale-110'
               }`}
             >
@@ -142,10 +153,10 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
           </div>
 
           <div className="overflow-visible whitespace-nowrap">
-            <span
+            <span 
               className={`inline-block transition-all duration-300 ${
-                isActive
-                  ? 'text-purple-300 translate-x-1'
+                isActive 
+                  ? 'text-purple-300 translate-x-1' 
                   : 'text-gray-300 group-hover/item:text-purple-300 group-hover/item:translate-x-1'
               }`}
             >
@@ -164,7 +175,6 @@ interface AppSidebarProps {
 
 export function AppSidebar({ children }: AppSidebarProps) {
   const [location] = useLocation();
-  const [searchValue, setSearchValue] = useState("");
 
   const primaryNavItems = [
     { href: "/", icon: <Home className="h-5 w-5" />, label: "Home" },
@@ -185,11 +195,9 @@ export function AppSidebar({ children }: AppSidebarProps) {
               <div className="flex items-center gap-3">
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-purple-400" />
-                  <input
+                  <input 
                     type="search"
                     placeholder="Search..."
-                    value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
                     className="w-full bg-gray-900/50 border-2 border-purple-500/30 rounded-lg pl-10 pr-4 py-2 text-xs text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
                   />
                 </div>
@@ -220,7 +228,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator className="bg-purple-500/20" />
-
+                    
                     <DropdownMenuSub>
                       <DropdownMenuSubTrigger className="flex items-center">
                         <Globe className="mr-2 h-4 w-4 text-purple-400" />
@@ -256,12 +264,12 @@ export function AppSidebar({ children }: AppSidebarProps) {
                     </DropdownMenuSub>
 
                     <DropdownMenuSeparator className="bg-purple-500/20" />
-
+                    
                     <DropdownMenuItem className="flex items-center">
                       <Settings className="mr-2 h-4 w-4 text-purple-400" />
                       <span>Settings</span>
                     </DropdownMenuItem>
-
+                    
                     <DropdownMenuItem className="text-red-400 focus:text-red-400 focus:bg-red-950/50">
                       <LogOut className="mr-2 h-4 w-4" />
                       <span>Sign Out</span>
@@ -315,5 +323,3 @@ export function AppSidebar({ children }: AppSidebarProps) {
     </SidebarProvider>
   );
 }
-
-export default AppSidebar;
