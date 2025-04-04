@@ -22,10 +22,16 @@ import {
   Menu,
   Settings,
   LogOut,
-  Search,
+  Search as SearchIcon,
   Globe,
   ChevronRight,
-  Check
+  Check,
+  Wrench,
+  Tool,
+  Video,
+  Image,
+  MessageSquare,
+  HelpCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
@@ -193,14 +199,6 @@ export function AppSidebar({ children }: AppSidebarProps) {
           <SidebarHeader className="pt-16">
             <div className="px-4 py-4">
               <div className="flex items-center gap-3">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-purple-400" />
-                  <input 
-                    type="search"
-                    placeholder="Search..."
-                    className="w-full bg-gray-900/50 border-2 border-purple-500/30 rounded-lg pl-10 pr-4 py-2 text-xs text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
-                  />
-                </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="icon" className="relative">
@@ -212,7 +210,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                       </Avatar>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-64 bg-gray-900/95 backdrop-blur-sm border border-purple-500/20">
+                  <DropdownMenuContent side="right" align="start" className="w-64 mt-2 bg-gray-900/95 backdrop-blur-sm border border-purple-500/20">
                     <DropdownMenuLabel>
                       <div className="flex items-center gap-3 p-2">
                         <Avatar className="h-10 w-10 border-2 border-purple-500/30">
@@ -233,6 +231,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                       <DropdownMenuSubTrigger className="flex items-center">
                         <Globe className="mr-2 h-4 w-4 text-purple-400" />
                         <span>Language</span>
+                        <span className="ml-auto text-xs text-purple-400">EN</span>
                       </DropdownMenuSubTrigger>
                       <DropdownMenuSubContent className="bg-gray-900/95 backdrop-blur-sm border border-purple-500/20">
                         {languages.map((language) => (
@@ -250,6 +249,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                       <DropdownMenuSubTrigger className="flex items-center">
                         <Globe className="mr-2 h-4 w-4 text-purple-400" />
                         <span>Currency</span>
+                        <span className="ml-auto text-xs text-purple-400">CAD</span>
                       </DropdownMenuSubTrigger>
                       <DropdownMenuSubContent className="bg-gray-900/95 backdrop-blur-sm border border-purple-500/20">
                         {currencies.map((currency) => (
@@ -276,9 +276,19 @@ export function AppSidebar({ children }: AppSidebarProps) {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
+                <div className="h-8 w-px bg-purple-500/20" />
+                <div className="relative flex-1">
+                  <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-purple-400" />
+                  <input 
+                    type="search"
+                    placeholder="Search..."
+                    className="w-full bg-gray-900/50 border-2 border-purple-500/30 rounded-lg pl-10 pr-4 py-2 text-xs text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
+                  />
+                </div>
+                  
               </div>
             </div>
-            <SidebarSeparator className="my-4 bg-purple-500/20" />
+            <SidebarSeparator className="my-2 bg-purple-500/20" />
           </SidebarHeader>
 
           <SidebarContent className="px-2">
@@ -292,7 +302,20 @@ export function AppSidebar({ children }: AppSidebarProps) {
                 </div>
 
                 <SidebarMenu className="space-y-1">
-                  {primaryNavItems.map((item, index) => (
+                  {[
+                    { href: "/", icon: <Home className="h-5 w-5" />, label: "Home" },
+                    { href: "/about", icon: <FileText className="h-5 w-5" />, label: "About" },
+                    { href: "/community", icon: <Users className="h-5 w-5" />, label: "Community" },
+                    { href: "/merch", icon: <ShoppingCart className="h-5 w-5" />, label: "Shop" },
+                    { href: "/events", icon: <Calendar className="h-5 w-5" />, label: "Events" },
+                    { href: "/blog", icon: <FileText className="h-5 w-5" />, label: "Blog" },
+                    { href: "/garage", icon: <Wrench className="h-5 w-5" />, label: "Garage" },
+                    { href: "/builds", icon: <Tool className="h-5 w-5" />, label: "Builds" },
+                    { href: "/tutorials", icon: <Video className="h-5 w-5" />, label: "Tutorials" },
+                    { href: "/gallery", icon: <Image className="h-5 w-5" />, label: "Gallery" },
+                    { href: "/forum", icon: <MessageSquare className="h-5 w-5" />, label: "Forum" },
+                    { href: "/support", icon: <HelpCircle className="h-5 w-5" />, label: "Support" }
+                  ].map((item, index) => (
                     <motion.div
                       key={item.href}
                       initial={{ opacity: 0, x: -20 }}

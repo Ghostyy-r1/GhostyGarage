@@ -701,6 +701,32 @@ export function ProductShowcase() {
           </div>
         )}
 
+        {/* CTA Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-16 p-6 md:p-8 rounded-xl bg-gradient-to-r from-purple-900/40 to-indigo-900/40 border border-purple-800/30 relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full filter blur-3xl -z-10 transform translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/10 rounded-full filter blur-3xl -z-10 transform -translate-x-1/2 translate-y-1/2"></div>
+
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-2">Join Our Premium Riders Club</h3>
+              <p className="text-gray-300">Get exclusive deals, early access to new products, and member-only perks.</p>
+            </div>
+
+            <Button 
+              size="lg"
+              className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white border-none whitespace-nowrap"
+            >
+              Become a Member
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </motion.div>
+
         {/* View All Products Button */}
         <div className="mt-12 flex justify-center">
           <motion.div
