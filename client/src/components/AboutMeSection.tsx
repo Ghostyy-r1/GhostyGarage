@@ -43,16 +43,19 @@ export function AboutMeSection() {
                 </div>
               </div>
               
-              <CardContent className="pt-20 px-6 pb-6">
+              <CardContent className="pt-28 px-6 pb-6">
                 <div className="space-y-6">
                   <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="text-xl font-semibold text-white">Ghosty</h3>
-                      <Badge variant="outline" className="bg-purple-500/10 text-purple-400 border-purple-500/20">
-                        Founder
-                      </Badge>
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-xl font-semibold text-white">Ghosty</h3>
+                        <Badge variant="outline" className="bg-purple-500/10 text-purple-400 border-purple-500/20">
+                          Founder
+                        </Badge>
+                      </div>
+                      <p className="text-gray-400 mt-1">@ghosty</p>
+                      <p className="text-sm text-gray-500 mt-1">Professional Motorcycle Enthusiast</p>
                     </div>
-                    <p className="text-gray-400 mt-1">@ghosty</p>
                   </div>
 
                   <div className="flex flex-wrap gap-2">
@@ -364,18 +367,18 @@ export function AboutMeSection() {
                             <div className="absolute w-3 h-3 bg-purple-600 rounded-full -left-[6.5px] top-1"></div>
                             <div className="mb-1">
                               <span className="text-purple-400">2024 - Present</span>
-                              <h5 className="text-white font-medium">Founder - Ghosty's Garage</h5>
+                              <h5 className="text-white font-medium">Founder & Lead Developer - Ghosty's Garage</h5>
                             </div>
-                            <p className="text-gray-300 text-sm">Creating an inclusive space for motorcycle enthusiasts to learn and connect.</p>
+                            <p className="text-gray-300 text-sm">Building a next-gen platform for motorcycle enthusiasts, combining technical expertise with community building.</p>
                           </div>
 
                           <div className="relative pl-6 border-l border-purple-600/30">
                             <div className="absolute w-3 h-3 bg-purple-600 rounded-full -left-[6.5px] top-1"></div>
                             <div className="mb-1">
                               <span className="text-purple-400">2019 - 2024</span>
-                              <h5 className="text-white font-medium">Lead Technician - Custom Motorcycle Shop</h5>
+                              <h5 className="text-white font-medium">Master Technician - Performance Motorsports</h5>
                             </div>
-                            <p className="text-gray-300 text-sm">Specialized in custom builds and performance modifications.</p>
+                            <p className="text-gray-300 text-sm">Led performance tuning division, specializing in high-end motorcycle modifications and custom builds. Managed a team of 5 technicians.</p>
                           </div>
 
                           <div className="relative pl-6 border-l border-purple-600/30">
