@@ -49,30 +49,25 @@ export function HeroSection() {
       className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-purple-900/40 via-[#0c0920] to-black px-4 sm:px-6 lg:px-8"
       style={{ position: 'relative' }}
     >
-      {/* Animated blob particles */}
+      {/* Animated particles */}
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute blur-2xl rounded-full pointer-events-none"
+          className="absolute rounded-full"
           style={{
-            width: particle.size * 3,
-            height: particle.size * 3,
-            background: `radial-gradient(circle at ${Math.random() * 100}% ${Math.random() * 100}%, 
-              rgba(168, 85, 247, ${0.2 + (Math.random() * 0.2)}) 0%,
-              rgba(147, 51, 234, ${0.15 + (Math.random() * 0.15)}) 50%,
-              rgba(88, 28, 135, ${0.1 + (Math.random() * 0.1)}) 100%)`,
+            width: particle.size,
+            height: particle.size,
+            backgroundColor: particle.color,
             x: particle.x,
             y: particle.y,
-            mixBlendMode: 'plus-lighter',
-            filter: 'brightness(1.2) contrast(1.2)',
+            boxShadow: `0 0 ${particle.size * 2}px ${particle.color}`
           }}
           animate={{
-            y: [particle.y, particle.y - 200, particle.y],
-            scale: [0.8, 1.2, 0.8],
-            opacity: [0.3, 0.6, 0.3],
+            y: [particle.y, particle.y + 100, particle.y],
+            opacity: [0.7, 0.4, 0.7],
           }}
           transition={{
-            duration: 8 + particle.speed * 4,
+            duration: 3 + particle.speed * 2,
             repeat: Infinity,
             ease: "easeInOut"
           }}
@@ -91,25 +86,11 @@ export function HeroSection() {
           </defs>
         </svg>
         <div className="absolute inset-0" style={{ filter: 'url(#goo)' }}>
-          {Array.from({ length: 17 }).map((_, i) => {
-            const initialSize = i > 11 ? 120 + (Math.random() * 60) : 80 + (Math.random() * 40);
+          {Array.from({ length: 12 }).map((_, i) => {
+            const initialSize = 80 + (Math.random() * 40);
             const randomStartX = Math.random() * 100;
-            const randomStartY = i > 11 ? Math.random() * 80 + 10 : 120; // Distribute new blobs across the height
-            const cycleDelay = i * (20 / 17);
-            const cycleDuration = i > 11 ? 25 + (Math.random() * 15) : 20 + (Math.random() * 10);
-            const customPath = i > 11 ? [
-              [randomStartX, randomStartY],
-              [(randomStartX + 40) % 100, randomStartY - 30],
-              [(randomStartX + 80) % 100, randomStartY + 30],
-              [(randomStartX + 120) % 100, randomStartY - 20],
-              [randomStartX, randomStartY]
-            ] : [
-              [randomStartX, 120],
-              [(randomStartX + 30) % 100, 70],
-              [(randomStartX + 60) % 100, 20],
-              [(randomStartX + 90) % 100, 70],
-              [randomStartX, 120]
-            ];
+            const cycleDelay = i * (20 / 12);
+            const cycleDuration = 20 + (Math.random() * 10);
             
             return (
               <motion.div
@@ -123,8 +104,14 @@ export function HeroSection() {
                 animate={{
                   scale: [0.3, 1.4, 1.8, 1.2, 0.3],
                   opacity: [0.2, 0.5, 0.6, 0.4, 0.2],
-                  x: customPath.map(([x]) => `${x}%`),
-                  y: customPath.map(([, y]) => `${y}%`)
+                  x: [
+                    `${randomStartX}%`,
+                    `${(randomStartX + 30) % 100}%`,
+                    `${(randomStartX + 60) % 100}%`,
+                    `${(randomStartX + 90) % 100}%`,
+                    `${randomStartX}%`
+                  ],
+                  y: ['120%', '70%', '20%', '70%', '120%']
                 }}
                 transition={{
                   duration: cycleDuration,
@@ -151,6 +138,32 @@ export function HeroSection() {
           })}
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
+        {Array.from({ length: 15 }).map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ 
+              opacity: 0,
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight
+            }}
+            animate={{ 
+              opacity: [0.1, 0.3, 0.1],
+              y: ["-10%", "110%"],
+              x: ["-10%", "110%"]
+            }}
+            transition={{
+              duration: Math.random() * 10 + 20,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "linear"
+            }}
+            className={`absolute w-${Math.floor(Math.random() * 16 + 8)} h-${Math.floor(Math.random() * 16 + 8)} rounded-full bg-gradient-to-br from-purple-500/10 to-indigo-500/10 blur-xl pointer-events-none`}
+            style={{
+              width: Math.random() * 100 + 50,
+              height: Math.random() * 100 + 50
+            }}
+          />
+        ))}
       </div>
 
       {/* Grid overlay */}
@@ -171,45 +184,13 @@ export function HeroSection() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="relative space-y-8">
-            {/* Animated lava lamp blobs */}
-            {Array.from({ length: 6 }).map((_, i) => {
-              const size = 300 + Math.random() * 200;
-              const duration = 15 + Math.random() * 10;
-              const delay = i * 2;
-              
-              return (
-                <motion.div
-                  key={`hero-blob-${i}`}
-                  className="absolute blur-3xl rounded-full pointer-events-none"
-                  style={{
-                    width: size,
-                    height: size,
-                    background: `radial-gradient(circle at 50% 50%, rgba(147, 51, 234, ${0.15 + (Math.random() * 0.1)}) 0%, rgba(79, 70, 229, ${0.1 + (Math.random() * 0.05)}) 100%)`,
-                    filter: 'brightness(1.2) contrast(1.2)',
-                    mixBlendMode: 'plus-lighter',
-                  }}
-                  initial={{ 
-                    x: `${Math.random() * 100}%`,
-                    y: '120%',
-                    scale: 0.8,
-                    opacity: 0.1
-                  }}
-                  animate={{
-                    x: [`${Math.random() * 100}%`, `${Math.random() * 100}%`, `${Math.random() * 100}%`],
-                    y: ['120%', '0%', '120%'],
-                    scale: [0.8, 1.2, 0.8],
-                    opacity: [0.1, 0.3, 0.1],
-                  }}
-                  transition={{
-                    duration: duration,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: delay,
-                    times: [0, 0.5, 1]
-                  }}
-                />
-              );
-            })}
+            {/* Background blobs scattered around */}
+            <div className="absolute -left-20 top-10 w-[300px] h-[300px] blur-3xl rounded-full bg-purple-600/20 animate-blob" />
+            <div className="absolute left-40 -top-20 w-[400px] h-[400px] blur-3xl rounded-full bg-indigo-600/15 animate-blob animation-delay-2000" />
+            <div className="absolute right-20 top-0 w-[350px] h-[350px] blur-3xl rounded-full bg-purple-500/20 animate-blob animation-delay-4000" />
+            <div className="absolute -right-40 bottom-0 w-[450px] h-[450px] blur-3xl rounded-full bg-indigo-500/15 animate-blob animation-delay-3000" />
+            <div className="absolute left-0 bottom-20 w-[250px] h-[250px] blur-3xl rounded-full bg-purple-700/20 animate-blob animation-delay-5000" />
+            <div className="absolute right-40 bottom-40 w-[320px] h-[320px] blur-3xl rounded-full bg-indigo-700/15 animate-blob animation-delay-1000" />
             <AnimatedReveal variant="fade" direction="up" delay={0.2}>
               <div className="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-1.5 rounded-full">
                 <span className="text-sm font-medium text-white">Welcome to Ghosty's Garage</span>
