@@ -1,5 +1,6 @@
+
 import { Link, useLocation } from "wouter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   Sidebar, 
   SidebarContent, 
@@ -19,20 +20,45 @@ import {
   Calendar, 
   FileText,
   Menu,
-  Bike,
-  MapPin,
   Settings,
   LogOut,
   Search,
   Globe,
-  ChevronRight
+  ChevronRight,
+  Check
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CartButton } from "@/components/CartButton";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-// Header Component (now inside the Sidebar context)
+const languages = [
+  { label: "English", value: "en" },
+  { label: "French", value: "fr" },
+  { label: "Spanish", value: "es" },
+  { label: "German", value: "de" },
+  { label: "Japanese", value: "ja" },
+];
+
+const currencies = [
+  { label: "USD ($)", value: "usd" },
+  { label: "EUR (€)", value: "eur" },
+  { label: "GBP (£)", value: "gbp" },
+  { label: "CAD ($)", value: "cad" },
+  { label: "AUD ($)", value: "aud" },
+];
+
 function Header() {
   return (
     <motion.header 
@@ -41,7 +67,6 @@ function Header() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Left section with hamburger menu */}
       <div className="flex items-center">
         <SidebarTrigger>
           <Menu className="h-5 w-5 text-gray-300 hover:text-white" />
@@ -60,12 +85,10 @@ function Header() {
         </Link>
       </div>
 
-      {/* Center section - empty for balance */}
       <div className="hidden md:block">
         {/* Empty space for balance */}
       </div>
 
-      {/* Right section with action buttons */}
       <div className="flex items-center gap-3">
         <Button 
           variant="ghost" 
@@ -113,12 +136,10 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
               : 'hover:bg-purple-900/10 hover:text-purple-400'
           }`}
         >
-          {/* Active indicator bar */}
           <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-r-md transition-all duration-300 ${
             isActive ? 'opacity-100' : 'opacity-0'
           } group-hover/item:opacity-60`} />
 
-          {/* Icon container */}
           <div className="mr-3">
             <div 
               className={`transition-all duration-300 ${
@@ -131,7 +152,6 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
             </div>
           </div>
 
-          {/* Label container */}
           <div className="overflow-visible whitespace-nowrap">
             <span 
               className={`inline-block transition-all duration-300 ${
@@ -156,7 +176,6 @@ interface AppSidebarProps {
 export function AppSidebar({ children }: AppSidebarProps) {
   const [location] = useLocation();
 
-  // Primary navigation items
   const primaryNavItems = [
     { href: "/", icon: <Home className="h-5 w-5" />, label: "Home" },
     { href: "/about", icon: <FileText className="h-5 w-5" />, label: "About" },
@@ -172,22 +191,97 @@ export function AppSidebar({ children }: AppSidebarProps) {
       <div className="flex min-h-screen relative">
         <Sidebar>
           <SidebarHeader className="pt-16">
-            {/* Search bar */}
             <div className="px-4 py-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-purple-400" />
-                <input 
-                  type="search"
-                  placeholder="Search..."
-                  className="w-full bg-gray-900/50 border-2 border-purple-500/30 rounded-lg pl-10 pr-4 py-2 text-xs text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
-                />
+              <div className="flex items-center gap-3">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-purple-400" />
+                  <input 
+                    type="search"
+                    placeholder="Search..."
+                    className="w-full bg-gray-900/50 border-2 border-purple-500/30 rounded-lg pl-10 pr-4 py-2 text-xs text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
+                  />
+                </div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="relative">
+                      <Avatar className="h-8 w-8 border-2 border-purple-500/30">
+                        <AvatarImage src="/placeholder-avatar.jpg" />
+                        <AvatarFallback className="bg-gradient-to-br from-purple-600 to-indigo-600 text-white text-xs">
+                          GH
+                        </AvatarFallback>
+                      </Avatar>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-64 bg-gray-900/95 backdrop-blur-sm border border-purple-500/20">
+                    <DropdownMenuLabel>
+                      <div className="flex items-center gap-3 p-2">
+                        <Avatar className="h-10 w-10 border-2 border-purple-500/30">
+                          <AvatarImage src="/placeholder-avatar.jpg" />
+                          <AvatarFallback className="bg-gradient-to-br from-purple-600 to-indigo-600 text-white">
+                            GH
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex flex-col">
+                          <span className="text-sm font-medium text-white">Guest User</span>
+                          <span className="text-xs text-purple-300/70">Join to sync your data</span>
+                        </div>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator className="bg-purple-500/20" />
+                    
+                    <DropdownMenuSub>
+                      <DropdownMenuSubTrigger className="flex items-center">
+                        <Globe className="mr-2 h-4 w-4 text-purple-400" />
+                        <span>Language</span>
+                      </DropdownMenuSubTrigger>
+                      <DropdownMenuSubContent className="bg-gray-900/95 backdrop-blur-sm border border-purple-500/20">
+                        {languages.map((language) => (
+                          <DropdownMenuItem key={language.value} className="flex items-center justify-between">
+                            {language.label}
+                            {language.value === "en" && (
+                              <Check className="h-4 w-4 text-purple-400" />
+                            )}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuSubContent>
+                    </DropdownMenuSub>
+
+                    <DropdownMenuSub>
+                      <DropdownMenuSubTrigger className="flex items-center">
+                        <Globe className="mr-2 h-4 w-4 text-purple-400" />
+                        <span>Currency</span>
+                      </DropdownMenuSubTrigger>
+                      <DropdownMenuSubContent className="bg-gray-900/95 backdrop-blur-sm border border-purple-500/20">
+                        {currencies.map((currency) => (
+                          <DropdownMenuItem key={currency.value} className="flex items-center justify-between">
+                            {currency.label}
+                            {currency.value === "cad" && (
+                              <Check className="h-4 w-4 text-purple-400" />
+                            )}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuSubContent>
+                    </DropdownMenuSub>
+
+                    <DropdownMenuSeparator className="bg-purple-500/20" />
+                    
+                    <DropdownMenuItem className="flex items-center">
+                      <Settings className="mr-2 h-4 w-4 text-purple-400" />
+                      <span>Settings</span>
+                    </DropdownMenuItem>
+                    
+                    <DropdownMenuItem className="text-red-400 focus:text-red-400 focus:bg-red-950/50">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Sign Out</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             </div>
             <SidebarSeparator className="my-4 bg-purple-500/20" />
           </SidebarHeader>
 
           <SidebarContent className="px-2">
-            {/* Main navigation */}
             <div className="flex flex-col">
               <div>
                 <div className="mb-4 px-2">
@@ -218,68 +312,6 @@ export function AppSidebar({ children }: AppSidebarProps) {
               </div>
             </div>
           </SidebarContent>
-
-          <SidebarFooter className="mt-auto space-y-4">
-            <div className="px-4 space-y-3">
-              <div className="flex flex-col space-y-2">
-                <div className="flex items-center justify-between px-2 py-1.5 bg-gray-900/50 rounded-lg border border-purple-500/20">
-                  <Globe className="h-4 w-4 text-purple-400/70" />
-                  <span className="text-xs font-medium text-gray-300">Canada - $ CAD</span>
-                  <ChevronRight className="h-4 w-4 text-gray-500" />
-                </div>
-                <div className="flex items-center justify-between px-2 py-1.5 bg-gray-900/50 rounded-lg border border-purple-500/20">
-                  <Globe className="h-4 w-4 text-purple-400/70" />
-                  <span className="text-xs font-medium text-gray-300">English - EN</span>
-                  <ChevronRight className="h-4 w-4 text-gray-500" />
-                </div>
-              </div>
-            </div>
-
-            <SidebarSeparator className="bg-purple-500/20" />
-            
-            <div className="px-4">
-              <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-purple-900/50 to-indigo-900/50 p-4 backdrop-blur-sm border border-purple-500/20 transition-all duration-300 hover:border-purple-500/40">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative flex items-center gap-3">
-                  <Avatar className="h-12 w-12 border-2 border-purple-500/30 shadow-lg shadow-purple-500/20">
-                    <AvatarImage src="/placeholder-avatar.jpg" />
-                    <AvatarFallback className="bg-gradient-to-br from-purple-600 to-indigo-600 text-white">
-                      GH
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-medium text-white">Guest User</span>
-                    <span className="text-xs text-purple-300/70">Join to sync your data</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <SidebarMenu className="px-2">
-              <SidebarMenuItem>
-                <Link href="/settings" className="w-full">
-                  <SidebarMenuButton className="group hover:bg-purple-900/10 hover:text-purple-400">
-                    <div className="mr-3 text-gray-400 group-hover:text-purple-400">
-                      <Settings className="h-5 w-5" />
-                    </div>
-                    <span className="text-gray-300 group-hover:text-purple-300">
-                      Account Settings
-                    </span>
-                  </SidebarMenuButton>
-                </Link>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton className="group text-gray-300 hover:bg-red-900/10 hover:text-red-400">
-                  <div className="mr-3 text-gray-400 group-hover:text-red-400">
-                    <LogOut className="h-5 w-5" />
-                  </div>
-                  <span className="group-hover:text-red-300">
-                    Sign Out
-                  </span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarFooter>
         </Sidebar>
 
         <div className="flex flex-1 flex-col">
