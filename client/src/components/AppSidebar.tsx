@@ -104,7 +104,7 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
           className={`group/item relative transition-all duration-300 ${
             isActive 
               ? 'bg-purple-900/20 text-purple-400 font-medium' 
-              : 'hover:bg-purple-900/10'
+              : 'hover:bg-purple-900/10 hover:text-purple-400'
           }`}
         >
           {/* Active indicator bar */}
@@ -126,7 +126,7 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
           </div>
           
           {/* Label container */}
-          <div className="overflow-hidden">
+          <div className="overflow-visible whitespace-nowrap">
             <span 
               className={`inline-block transition-all duration-300 ${
                 isActive 
