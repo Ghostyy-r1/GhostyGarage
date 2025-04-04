@@ -1,6 +1,7 @@
 
 import { Link, useLocation } from "wouter";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import React, { useState } from 'react';
 import { 
   Sidebar, 
   SidebarContent, 
@@ -181,8 +182,9 @@ interface AppSidebarProps {
 
 export function AppSidebar({ children }: AppSidebarProps) {
   const [location] = useLocation();
-
-  const primaryNavItems = [
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentLanguage, setCurrentLanguage] = useState('en');
+  const [currentCurrency, setCurrentCurrency] = useState('cad');
     { href: "/", icon: <Home className="h-5 w-5" />, label: "Home" },
     { href: "/about", icon: <FileText className="h-5 w-5" />, label: "About" },
     { href: "/community", icon: <Users className="h-5 w-5" />, label: "Community" },
