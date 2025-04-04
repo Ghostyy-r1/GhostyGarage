@@ -1,12 +1,20 @@
 
 import { motion } from 'framer-motion';
-import { Video, BookOpen, FileText, Code, PlayCircle, BookOpenCheck, Database, Tool } from 'lucide-react';
+import { Video, BookOpen, FileText, Code, PlayCircle, BookOpenCheck, Database, Wrench } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-const ResourceCard = ({ icon: Icon, title, description, link, tags }: any) => (
+interface ResourceCardProps {
+  icon: any;
+  title: string;
+  description: string;
+  link: string;
+  tags: string[];
+}
+
+const ResourceCard = ({ icon: Icon, title, description, link, tags }: ResourceCardProps) => (
   <Card className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
     <CardContent className="p-6 space-y-4">
       <div className="bg-purple-600/20 rounded-lg p-3 w-fit">
@@ -87,7 +95,7 @@ export function ResourcesSection() {
               value="tools"
               className="bg-gray-800/50 border border-purple-500/20 hover:bg-purple-600/20 data-[state=active]:bg-purple-600/30"
             >
-              <Tool className="w-5 h-5 mr-2" />
+              <Wrench className="w-5 h-5 mr-2" />
               Tools
             </TabsTrigger>
           </TabsList>
@@ -186,21 +194,21 @@ export function ResourcesSection() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 {
-                  icon: Tool,
+                  icon: Wrench,
                   title: "Maintenance Calculator",
                   description: "Calculate maintenance schedules and track service intervals.",
                   link: "Use Calculator",
                   tags: ["Calculator", "Planning", "Maintenance"]
                 },
                 {
-                  icon: Tool,
+                  icon: Wrench,
                   title: "Part Finder",
                   description: "Interactive tool to find compatible parts for your motorcycle.",
                   link: "Find Parts",
                   tags: ["Parts", "Compatibility", "Search"]
                 },
                 {
-                  icon: Tool,
+                  icon: Wrench,
                   title: "Diagnostic Tools",
                   description: "Digital tools for motorcycle diagnostics and troubleshooting.",
                   link: "Start Diagnosis",
