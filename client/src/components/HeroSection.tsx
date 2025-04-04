@@ -178,6 +178,52 @@ export function HeroSection() {
         }}
       />
 
+      {/* Additional animated blobs */}
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ 
+          scale: [0.8, 1.2, 0.8],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute top-20 right-1/4 w-[300px] h-[300px] blur-3xl rounded-full bg-purple-600/20 pointer-events-none"
+        style={{ mixBlendMode: 'plus-lighter' }}
+      />
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ 
+          scale: [1, 1.5, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+        className="absolute bottom-40 left-1/4 w-[400px] h-[400px] blur-3xl rounded-full bg-indigo-600/20 pointer-events-none"
+        style={{ mixBlendMode: 'plus-lighter' }}
+      />
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ 
+          scale: [0.9, 1.3, 0.9],
+          opacity: [0.2, 0.5, 0.2],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+        className="absolute top-1/3 right-20 w-[350px] h-[350px] blur-3xl rounded-full bg-purple-500/20 pointer-events-none"
+        style={{ mixBlendMode: 'plus-lighter' }}
+      />
+
       <motion.div 
         style={{ y, opacity }}
         className="container mx-auto relative z-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8"
