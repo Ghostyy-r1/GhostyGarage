@@ -100,9 +100,9 @@ export function HeroSection() {
 
       <motion.div 
         style={{ y, opacity }}
-        className="container mx-auto relative z-10 py-20"
+        className="container mx-auto relative z-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="space-y-8">
             <AnimatedReveal variant="fade" direction="up" delay={0.2}>
               <div className="inline-block bg-gradient-to-r from-purple-600/20 to-indigo-600/20 backdrop-blur-md border border-purple-500/30 px-4 py-1.5 rounded-full">
@@ -116,7 +116,7 @@ export function HeroSection() {
                 <br />
                 <div className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500 inline-block relative">
                   Motorcycle Community
-                  <span className="absolute -bottom-1 left-0 w-[70%] h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full shadow-glow"></span>
+                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-[min(90%,300px)] h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full shadow-glow"></span>
                 </div>
               </h1>
             </AnimatedReveal>
@@ -131,15 +131,14 @@ export function HeroSection() {
               <div className="flex flex-wrap gap-4">
                 <Button 
                   size="lg" 
-                  className="relative group bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg shadow-purple-500/20 h-12 text-base font-medium overflow-hidden animate-pulse"
+                  className="relative group bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg shadow-purple-500/20 h-12 text-base font-medium overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center">
                     Join Community
-                    <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-all duration-500 animate-bounce-x" />
+                    <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-all duration-700" />
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-400 opacity-0 group-hover:opacity-30 animate-pulse transition-opacity duration-300"></div>
-                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-30 group-hover:opacity-50 animate-pulse transition-all duration-500"></div>
-                  <div className="absolute -inset-px bg-gradient-to-r from-purple-500/50 to-indigo-500/50 rounded-lg animate-pulse"></div>
+                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-purple-400/50 transition-all duration-700"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-0 group-hover:opacity-30 transition-all duration-700"></div>
                 </Button>
                 <Button 
                   size="lg" 
@@ -152,7 +151,7 @@ export function HeroSection() {
                     }
                   }}
                 >
-                  <span className="relative z-10 flex items-center">
+                  <span className="relative z-10 flex items-center justify-center w-full">
                     Explore Products
                     <ChevronRight className="ml-2 h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 animate-bounce-x" />
                   </span>
