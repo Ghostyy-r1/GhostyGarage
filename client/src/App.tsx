@@ -1,3 +1,4 @@
+
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -24,18 +25,20 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ErrorBoundary>
-        <SidebarProvider>
-          <AppSidebar>
-            <Router />
-            <GhostyChatButton />
-            <Toaster />
-          </AppSidebar>
-        </SidebarProvider>
-      </ErrorBoundary>
-      <div className="fixed top-0 left-0 right-0">
+      <div className="min-h-screen bg-black text-white">
         <ErrorBoundary>
-          <AnnouncementBanner />
+          <SidebarProvider>
+            <AppSidebar>
+              <Router />
+              <GhostyChatButton />
+              <Toaster />
+            </AppSidebar>
+          </SidebarProvider>
+          <div className="fixed top-0 left-0 right-0 z-50">
+            <ErrorBoundary>
+              <AnnouncementBanner />
+            </ErrorBoundary>
+          </div>
         </ErrorBoundary>
       </div>
     </QueryClientProvider>
