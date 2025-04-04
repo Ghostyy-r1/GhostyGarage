@@ -164,12 +164,6 @@ export function AppSidebar({ children }: AppSidebarProps) {
     { href: "/blog", icon: <FileText className="h-5 w-5" />, label: "Blog" },
   ];
 
-  // Secondary navigation items
-  const secondaryNavItems = [
-    { href: "/bikes", icon: <Bike className="h-5 w-5" />, label: "My Motorcycles" },
-    { href: "/routes", icon: <MapPin className="h-5 w-5" />, label: "My Routes" },
-  ];
-
   return (
     <SidebarProvider>
       <Header />
@@ -192,47 +186,22 @@ export function AppSidebar({ children }: AppSidebarProps) {
 
           <SidebarContent className="px-2">
             {/* Main navigation */}
-            <div className="flex flex-col space-y-6">
+            <div className="flex flex-col">
               <div>
-                <div className="mb-2 px-2">
-                  <h3 className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-purple-400/80">
+                <div className="mb-4 px-2">
+                  <h3 className="px-2 text-xs font-bold uppercase tracking-widest text-purple-400/90 bg-gradient-to-r from-purple-500/10 to-transparent py-2 rounded-lg">
                     Navigation
                   </h3>
                 </div>
 
-                <SidebarMenu>
+                <SidebarMenu className="space-y-1">
                   {primaryNavItems.map((item, index) => (
                     <motion.div
                       key={item.href}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: index * 0.05 }}
-                    >
-                      <SidebarNavItem
-                        href={item.href}
-                        icon={item.icon}
-                        label={item.label}
-                        currentPath={location}
-                      />
-                    </motion.div>
-                  ))}
-                </SidebarMenu>
-              </div>
-
-              <div>
-                <div className="mb-2 px-2">
-                  <h3 className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-purple-400/80">
-                    Explore
-                  </h3>
-                </div>
-
-                <SidebarMenu>
-                  {secondaryNavItems.map((item, index) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: (index + primaryNavItems.length) * 0.05 }}
+                      className="overflow-hidden"
                     >
                       <SidebarNavItem
                         href={item.href}
