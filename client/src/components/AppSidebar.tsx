@@ -62,6 +62,18 @@ function Header() {
         {/* Empty space for balance */}
       </div>
 
+      {/* Search bar */}
+      <div className="flex-1 max-w-xl mx-4">
+        <div className="relative">
+          <input 
+            type="search"
+            placeholder="Search for products, guides, or resources..."
+            className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-2 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+          />
+          <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
+        </div>
+      </div>
+
       {/* Right section with action buttons */}
       <div className="flex items-center gap-3">
         <Button 
@@ -72,15 +84,17 @@ function Header() {
           <FaDiscord className="h-4 w-4" />
           <span className="hidden sm:inline">Discord</span>
         </Button>
-        <div className="flex-shrink-0">
-          <CartButton />
-        </div>
         <Button 
           size="sm"
-          className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-md shadow-purple-900/20"
+          className="relative bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-md shadow-purple-900/20 group overflow-hidden"
         >
-          Sign In
+          <span className="relative z-10">Sign In</span>
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-400 opacity-0 group-hover:opacity-30 animate-pulse transition-opacity duration-300"></div>
+          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-30 group-hover:opacity-50 animate-pulse transition-all duration-500"></div>
         </Button>
+        <div className="flex-shrink-0">
+          <CartButton className="border-2 border-purple-500/30 hover:border-purple-500/50 transition-colors duration-300" />
+        </div>
       </div>
     </motion.header>
   );
