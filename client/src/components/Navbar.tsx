@@ -73,12 +73,12 @@ export function Navbar() {
             </div>
             
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-2">
+            <div className="hidden md:flex items-center space-x-1">
               {navLinks.map((link) => (
                 <div key={link.path} className="relative">
                   <Link href={link.path}>
                     <div 
-                      className={`px-3 py-2 rounded-md text-sm font-medium flex items-center cursor-pointer relative group transition-all duration-200 ${
+                      className={`px-2 py-2 rounded-md text-sm font-medium flex items-center cursor-pointer relative group transition-all duration-200 ${
                         location === link.path 
                           ? "text-white" 
                           : "text-gray-300 hover:text-white"
