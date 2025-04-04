@@ -1,96 +1,133 @@
 
-# Ghosty's Garage - Motorcycle Community Platform
+<div align="center">
+  
+# 🏍️ Ghosty's Garage
 
-A full-stack web application built with React, Express, and MongoDB, designed to connect motorcycle enthusiasts and provide valuable resources.
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
+[![Made with Love](https://img.shields.io/badge/Made%20with-❤️-red.svg)]()
 
-## Features
+**Connect · Ride · Thrive**
 
-- Community engagement through Discord integration
-- Event management and ride planning
-- Resource library with tutorials and documentation
-- Interactive garage space booking system
-- Photo galleries for motorcycle enthusiasts
-- Membership tiers with exclusive benefits
+*A premium motorcycle community platform built with modern technology*
 
-## Tech Stack
+[📘 Documentation](#documentation) · [🚀 Getting Started](#getting-started) · [🛠️ Tech Stack](#tech-stack) · [📊 Features](#features)
 
-- Frontend: React, TypeScript, Tailwind CSS, Shadcn/UI
-- Backend: Express.js, Node.js
-- Database: MongoDB
-- Real-time: WebSocket
+---
 
-## Prerequisites
+</div>
+
+## ✨ Features
+
+<div align="center">
+  
+| Community | Events | Resources | Garage |
+|:-:|:-:|:-:|:-:|
+| Discord Integration | Ride Planning | Tutorial Library | Space Booking |
+| Photo Galleries | Calendar Sync | Documentation | Equipment Access |
+| Member Profiles | Route Sharing | Tech Support | Maintenance Tips |
+
+</div>
+
+## 🚀 Getting Started
+
+### Prerequisites
 
 - Node.js v20+
-- MongoDB connection string
+- MongoDB connection
+- Replit account
 
-## Getting Started
+### Quick Start
 
-1. Clone this Repl
-2. Set up your MongoDB connection string in the Secrets tab (Environment Variables):
-   - Add `MONGODB_URI` with your MongoDB connection URL
+1️⃣ Clone this Repl
 
-3. Install dependencies:
+2️⃣ Set up environment variables in Secrets:
+```env
+MONGODB_URI=your_mongodb_connection_string
+DATABASE_URL=your_postgresql_connection_string
+```
+
+3️⃣ Install dependencies:
 ```bash
 npm install
 ```
 
-4. Start the development server:
+4️⃣ Start development server:
 ```bash
 npm run dev
 ```
 
-The application will be available at port 5000.
+## 🛠️ Tech Stack
 
-## Project Structure
+<div align="center">
+
+| Frontend | Backend | Database | Tools |
+|:--------:|:-------:|:--------:|:-----:|
+| React | Express | MongoDB | WebSocket |
+| TypeScript | Node.js | PostgreSQL | Tailwind |
+| Shadcn/UI | Drizzle ORM | - | Framer Motion |
+
+</div>
+
+## 📁 Project Structure
 
 ```
 ├── client/              # Frontend React application
 │   ├── src/
 │   │   ├── components/  # React components
-│   │   ├── hooks/       # Custom React hooks
-│   │   ├── pages/       # Page components
-│   │   └── types/       # TypeScript type definitions
-├── server/              # Backend Express application
-│   ├── routes.ts        # API routes
-│   ├── db.ts           # Database configuration
-│   └── ai-chat.ts      # AI chat integration
-└── shared/             # Shared code between frontend and backend
-    └── schema.ts       # Database schema
+│   │   ├── hooks/      # Custom React hooks
+│   │   ├── pages/      # Page components
+│   │   └── types/      # TypeScript definitions
+├── server/             # Backend Express application
+│   ├── routes.ts      # API routes
+│   ├── db.ts         # Database configuration
+│   └── ai-chat.ts    # AI chat integration
+└── shared/           # Shared code
+    └── schema.ts    # Database schema
 ```
 
-## Available Scripts
+## 🔧 Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run check` - TypeScript type checking
-- `npm run db:push` - Push database schema changes
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run check` | TypeScript checking |
+| `npm run db:push` | Push database changes |
 
-## Environment Variables
+## 🌟 Environment Variables
 
-Required environment variables:
-- `MONGODB_URI`: MongoDB connection string
-- `DATABASE_URL`: PostgreSQL connection string (for Drizzle ORM)
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `MONGODB_URI` | MongoDB connection string | ✅ |
+| `DATABASE_URL` | PostgreSQL connection string | ✅ |
 
-Set these up in the Secrets tab of your Repl.
+## 🚀 Deployment
 
-## Deployment
+Deployment is streamlined through Replit:
 
-This project is configured for deployment on Replit. The deployment settings are already configured in the `.replit` file.
-
-To deploy:
-1. Click the "Deploy" button in your Repl
+1. Click the "Deploy" button
 2. Follow the deployment wizard
-3. Your app will be live at your Repl's URL
+3. Your app will be live instantly
 
-## Contributing
+## 🤝 Contributing
 
 1. Fork the Repl
-2. Create your feature branch
-3. Commit your changes
-4. Push to your fork
-5. Create a new Pull Request
+2. Create feature branch
+3. Commit changes
+4. Push to fork
+5. Create Pull Request
 
-## License
+## 📄 License
 
-MIT
+MIT © Ghosty's Garage
+
+---
+
+<div align="center">
+
+**Built with 💜 on [Replit](https://replit.com)**
+
+[⬆ Back to Top](#ghostys-garage)
+
+</div>
