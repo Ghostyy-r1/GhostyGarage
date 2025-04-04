@@ -182,7 +182,11 @@ export function HeroSection() {
         className="container mx-auto relative z-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div className="space-y-8">
+          <div className="relative space-y-8">
+            {/* Background blobs for features */}
+            <div className="absolute -right-40 top-20 w-[600px] h-[600px] blur-3xl rounded-full bg-purple-600/10 animate-blob" />
+            <div className="absolute right-20 top-40 w-[500px] h-[500px] blur-3xl rounded-full bg-indigo-600/10 animate-blob animation-delay-2000" />
+            <div className="absolute -right-20 top-60 w-[400px] h-[400px] blur-3xl rounded-full bg-purple-800/10 animate-blob animation-delay-4000" />
             <AnimatedReveal variant="fade" direction="up" delay={0.2}>
               <div className="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-1.5 rounded-full">
                 <span className="text-sm font-medium text-white">Welcome to Ghosty's Garage</span>
