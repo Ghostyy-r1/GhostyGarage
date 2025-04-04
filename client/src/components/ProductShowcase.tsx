@@ -61,7 +61,7 @@ const ProductCard = ({
 }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  
+
   const salePrice = sale ? price * (1 - salePercentage / 100) : price;
 
   // Generate stars based on rating
@@ -120,7 +120,7 @@ const ProductCard = ({
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${image})` }}
           />
-          
+
           {/* Badges container */}
           <div className="absolute top-3 left-3 flex flex-col space-y-2">
             {featured && (
@@ -132,7 +132,7 @@ const ProductCard = ({
                 Featured
               </Badge>
             )}
-            
+
             {isNew && (
               <Badge
                 variant="default"
@@ -142,7 +142,7 @@ const ProductCard = ({
               </Badge>
             )}
           </div>
-          
+
           {sale && (
             <div className="absolute top-3 right-3">
               <Badge
@@ -154,7 +154,7 @@ const ProductCard = ({
               </Badge>
             </div>
           )}
-          
+
           {/* Quick actions */}
           <motion.div 
             className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"
@@ -176,7 +176,7 @@ const ProductCard = ({
                 )} />
                 <span>Save</span>
               </Button>
-              
+
               <Button
                 size="sm"
                 className="bg-purple-600 hover:bg-purple-700 text-white text-xs rounded-full"
@@ -187,7 +187,7 @@ const ProductCard = ({
             </div>
           </motion.div>
         </div>
-        
+
         <CardHeader className="p-4 pb-2 flex-grow">
           <div className="space-y-1">
             <div className="flex justify-between items-start">
@@ -196,22 +196,22 @@ const ProductCard = ({
                 {subcategory && ` • ${subcategory}`}
               </Badge>
             </div>
-            
+
             <CardTitle className="text-base md:text-lg mt-2 line-clamp-2 group-hover:text-purple-400 transition-colors">
               {name}
             </CardTitle>
-            
+
             <div className="flex mt-1">
               {renderStars()}
             </div>
           </div>
         </CardHeader>
-        
+
         <CardContent className="px-4 py-2">
           <CardDescription className="text-xs text-gray-400 line-clamp-2">
             {details.description}
           </CardDescription>
-          
+
           <div className="mt-2 flex items-center text-xs">
             <Truck className="h-3.5 w-3.5 text-gray-500 mr-1.5" />
             <span className={cn(
@@ -222,7 +222,7 @@ const ProductCard = ({
             </span>
           </div>
         </CardContent>
-        
+
         <CardFooter className="p-4 pt-2 flex justify-between items-center border-t border-gray-800/60 mt-auto">
           <div className="flex flex-col">
             {sale ? (
@@ -239,7 +239,7 @@ const ProductCard = ({
               <span className="text-lg font-bold text-purple-400">${price.toFixed(2)}</span>
             )}
           </div>
-          
+
           <Button 
             size="sm" 
             className="bg-gray-800 text-white border border-gray-700 hover:bg-purple-600 hover:border-purple-600 transition-colors rounded-lg"
@@ -257,7 +257,7 @@ export function ProductShowcase() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [currentPage, setCurrentPage] = useState(0);
   const productsPerPage = 8;
-  
+
   // Expanded product data with more details
   const products: ProductCardProps[] = [
     {
@@ -517,26 +517,26 @@ export function ProductShowcase() {
   };
 
   const filteredProducts = filterProducts();
-  
+
   // Get unique categories
   const categories = ["All", ...Array.from(new Set(products.map(p => p.category)))];
-  
+
   // Get current page products
   const currentProducts = filteredProducts.slice(
     currentPage * productsPerPage,
     (currentPage + 1) * productsPerPage
   );
-  
+
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
-  
+
   const handlePrevPage = () => {
     setCurrentPage(prev => Math.max(0, prev - 1));
   };
-  
+
   const handleNextPage = () => {
     setCurrentPage(prev => Math.min(totalPages - 1, prev + 1));
   };
-  
+
   // Reset to first page when changing category
   useEffect(() => {
     setCurrentPage(0);
@@ -554,7 +554,7 @@ export function ProductShowcase() {
           >
             RIDER EQUIPMENT
           </motion.div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -563,7 +563,7 @@ export function ProductShowcase() {
           >
             Shop Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">Premium Collection</span>
           </motion.h2>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -572,7 +572,7 @@ export function ProductShowcase() {
           >
             Discover our curated selection of high-quality motorcycle gear, apparel, and accessories designed for safety, style, and the ultimate riding experience.
           </motion.p>
-          
+
           {/* Category Tabs */}
           <div className="mt-4 w-full flex justify-center">
             <motion.div 
@@ -602,7 +602,7 @@ export function ProductShowcase() {
             </motion.div>
           </div>
         </div>
-        
+
         {/* Product Search & Filter Row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -618,7 +618,7 @@ export function ProductShowcase() {
               className="bg-transparent text-sm text-gray-300 focus:outline-none w-full" 
             />
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <Button 
               variant="outline" 
@@ -628,13 +628,13 @@ export function ProductShowcase() {
               <Filter className="h-3.5 w-3.5 mr-1.5" />
               Filters
             </Button>
-            
+
             <div className="text-sm text-gray-400">
               Showing <span className="font-medium text-purple-400">{currentProducts.length}</span> of <span className="font-medium text-purple-400">{filteredProducts.length}</span> products
             </div>
           </div>
         </motion.div>
-        
+
         {/* Products Grid */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -654,7 +654,7 @@ export function ProductShowcase() {
             ))}
           </motion.div>
         </AnimatePresence>
-        
+
         {/* Pagination Controls */}
         {totalPages > 1 && (
           <div className="mt-12 flex justify-center items-center space-x-4">
@@ -668,7 +668,7 @@ export function ProductShowcase() {
               <ChevronLeft className="h-4 w-4 mr-1" />
               Previous
             </Button>
-            
+
             <div className="flex items-center space-x-1">
               {Array.from({ length: totalPages }).map((_, index) => (
                 <Button
@@ -687,7 +687,7 @@ export function ProductShowcase() {
                 </Button>
               ))}
             </div>
-            
+
             <Button
               variant="outline"
               size="sm"
@@ -700,7 +700,7 @@ export function ProductShowcase() {
             </Button>
           </div>
         )}
-        
+
         {/* CTA Banner */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -710,13 +710,13 @@ export function ProductShowcase() {
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full filter blur-3xl -z-10 transform translate-x-1/2 -translate-y-1/2"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/10 rounded-full filter blur-3xl -z-10 transform -translate-x-1/2 translate-y-1/2"></div>
-          
+
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
               <h3 className="text-2xl font-bold text-white mb-2">Join Our Premium Riders Club</h3>
               <p className="text-gray-300">Get exclusive deals, early access to new products, and member-only perks.</p>
             </div>
-            
+
             <Button 
               size="lg"
               className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white border-none whitespace-nowrap"
@@ -726,7 +726,7 @@ export function ProductShowcase() {
             </Button>
           </div>
         </motion.div>
-        
+
         {/* View All Products Button */}
         <div className="mt-12 flex justify-center">
           <motion.div
@@ -744,9 +744,8 @@ export function ProductShowcase() {
           </motion.div>
         </div>
       </div>
-      
-      {/* Custom CSS for hiding scrollbars but keeping functionality */}
-      <style jsx="true" global="true">{`
+
+      <style>{`
         .hide-scrollbar {
           -ms-overflow-style: none;
           scrollbar-width: none;
@@ -755,7 +754,7 @@ export function ProductShowcase() {
           display: none;
         }
       `}</style>
-      <style jsx="true" global="true">{`
+      <style>{`
         .product-grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

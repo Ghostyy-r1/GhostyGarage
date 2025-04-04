@@ -1,6 +1,5 @@
-
 import { motion } from 'framer-motion';
-import { Ghost, Heart, Star, History, Lightbulb, Target, Settings, Mail, MapPin, Calendar, Tool, Coffee, Music, Code, BookOpen } from 'lucide-react';
+import { Ghost, Heart, Star, History, Lightbulb, Target, Settings, Mail, MapPin, Calendar, Code, Laptop, Brain, Brush, Coffee, Music, BookOpen } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -42,7 +41,7 @@ export function AboutMeSection() {
                   </Avatar>
                 </div>
               </div>
-              
+
               <CardContent className="pt-28 px-6 pb-6">
                 <div className="space-y-6">
                   <div>
@@ -85,7 +84,8 @@ export function AboutMeSection() {
                         <span className="text-sm">Joined January 2024</span>
                       </div>
                       <div className="flex items-center gap-2 text-gray-300">
-                        <Tool className="w-4 h-4 text-purple-400" />
+                        {/*Removed Tool icon here*/}
+                        <Code className="w-4 h-4 text-purple-400" />
                         <span className="text-sm">10+ years experience</span>
                       </div>
                     </div>
