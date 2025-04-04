@@ -116,9 +116,7 @@ export function HeroSection() {
                 <br />
                 <div className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500 inline-block relative">
                   Motorcycle Community
-                  <div className="absolute -bottom-1 left-0 right-0 flex justify-center">
-                    <div className="h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full shadow-glow w-full"></div>
-                  </div>
+                  <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full shadow-glow"></div>
                 </div>
               </h1>
             </AnimatedReveal>
