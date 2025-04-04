@@ -76,50 +76,57 @@ export function HeroSection() {
 
       {/* Background gradient elements with animated blobs */}
       <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
-        <motion.div 
-          style={{ y: useTransform(scrollYProgress, [0, 1], [0, -50]) }}
-          className="absolute -top-[30%] -left-[10%] w-[50%] h-[70%] rounded-full bg-gradient-to-r from-purple-800/30 to-indigo-900/30 blur-3xl"
-        />
-        <motion.div 
-          style={{ y: useTransform(scrollYProgress, [0, 1], [0, 50]) }}
-          className="absolute -bottom-[40%] -right-[10%] w-[60%] h-[80%] rounded-full bg-gradient-to-r from-purple-900/30 to-indigo-800/30 blur-3xl"
-        />
-        {Array.from({ length: 4 }).map((_, i) => {
-          const randomSize = Math.random() * 70 + 30; // Larger base sizes
-          const randomShape = Array.from({ length: 5 }, () => 
-            `${Math.random() * 60 + 40}% ${Math.random() * 60 + 40}% ${Math.random() * 60 + 40}% ${Math.random() * 60 + 40}% / ${Math.random() * 60 + 40}% ${Math.random() * 60 + 40}% ${Math.random() * 60 + 40}% ${Math.random() * 60 + 40}%`
-          );
-          return (
-            <motion.div
-              key={`blob-${i}`}
-              initial={{
-                x: `${Math.random() * 100}%`,
-                y: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                scale: [1, 1.4 + Math.random() * 0.4, 1.2, 1.5, 1],
-                opacity: [0.2, 0.3, 0.25, 0.35, 0.2],
-                x: Array.from({ length: 5 }, () => `${Math.random() * 80 + 10}%`),
-                y: Array.from({ length: 5 }, () => `${Math.random() * 80 + 10}%`),
-                borderRadius: randomShape
-              }}
-              transition={{
-                duration: Math.random() * 30 + 40,
-                repeat: Infinity,
-                ease: "easeInOut",
-                times: [0, 0.25, 0.5, 0.75, 1]
-              }}
-              className="absolute pointer-events-none"
-              style={{
-                width: `${randomSize}%`,
-                height: `${randomSize}%`,
-                background: `radial-gradient(circle at ${Math.random() * 100}% ${Math.random() * 100}%, rgba(88, 28, 135, 0.2), rgba(67, 56, 202, 0.2))`,
-                filter: 'blur(80px)',
-                mixBlendMode: 'soft-light'
-              }}
-            />
-          );
-        })}
+        <svg width="0" height="0">
+          <defs>
+            <filter id="goo">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+              <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+            </filter>
+          </defs>
+        </svg>
+        <div className="absolute inset-0" style={{ filter: 'url(#goo)' }}>
+          {Array.from({ length: 8 }).map((_, i) => {
+            const baseSize = Math.random() * 100 + 150;
+            const randomDelay = Math.random() * 10;
+            return (
+              <motion.div
+                key={`blob-${i}`}
+                initial={{
+                  x: `${Math.random() * 100}%`,
+                  y: `${Math.random() * 100}%`,
+                  scale: 0.8,
+                  opacity: 0
+                }}
+                animate={{
+                  scale: [0.8, 1.2, 1.1, 1.4, 0.9, 1.3, 0.8],
+                  opacity: [0.4, 0.6, 0.5, 0.7, 0.5, 0.6, 0.4],
+                  x: Array.from({ length: 7 }, () => `${Math.random() * 80 + 10}%`),
+                  y: Array.from({ length: 7 }, () => `${Math.random() * 80 + 10}%`),
+                }}
+                transition={{
+                  duration: Math.random() * 40 + 60,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: randomDelay,
+                  times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 1]
+                }}
+                className="absolute pointer-events-none origin-center"
+                style={{
+                  width: baseSize,
+                  height: baseSize,
+                  background: `radial-gradient(circle at 50% 50%, 
+                    rgb(${Math.random() * 50 + 120}, ${Math.random() * 20 + 20}, ${Math.random() * 150 + 150}) 0%,
+                    rgb(${Math.random() * 30 + 60}, ${Math.random() * 10 + 10}, ${Math.random() * 100 + 100}) 100%)`,
+                  borderRadius: '50%',
+                  mixBlendMode: 'screen',
+                  zIndex: Math.floor(Math.random() * 10)
+                }}
+              />
+            );
+          })}
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
         {Array.from({ length: 15 }).map((_, i) => (
           <motion.div
             key={i}
