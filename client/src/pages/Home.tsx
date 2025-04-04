@@ -12,6 +12,7 @@ const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"
 const ProductShowcase = lazy(() => import("@/components/ProductShowcase").then(m => ({ default: m.ProductShowcase })));
 const CTASection = lazy(() => import("@/components/CTASection").then(m => ({ default: m.CTASection })));
 const ContactSection = lazy(() => import("@/components/ContactSection").then(m => ({ default: m.ContactSection })));
+const MembershipTiers = lazy(() => import("@/components/MembershipTiers").then(m => ({ default: m.MembershipTiers })));
 const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
 
 // Loading component with animation
@@ -74,6 +75,10 @@ export default function Home() {
           <ProductShowcase />
         </Suspense>
         
+        <Suspense fallback={<LoadingFallback />}>
+          <MembershipTiers />
+        </Suspense>
+
         <Suspense fallback={<LoadingFallback />}>
           <CTASection />
         </Suspense>
