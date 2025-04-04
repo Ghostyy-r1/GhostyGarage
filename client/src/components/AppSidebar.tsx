@@ -23,7 +23,7 @@ import {
   MapPin,
   Settings,
   LogOut,
-  Search
+  Search,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
@@ -63,18 +63,6 @@ function Header() {
         {/* Empty space for balance */}
       </div>
 
-      {/* Search bar */}
-      <div className="flex-1 max-w-xl mx-4">
-        <div className="relative">
-          <input 
-            type="search"
-            placeholder="Search for products, guides, or resources..."
-            className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-2 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
-          />
-          {/* Search component removed until implemented */}
-        </div>
-      </div>
-
       {/* Right section with action buttons */}
       <div className="flex items-center gap-3">
         <Button 
@@ -87,7 +75,7 @@ function Header() {
         </Button>
         <Button 
           size="sm"
-          className="relative bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-md shadow-purple-900/20 group overflow-hidden animate-pulse"
+          className="relative bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-md shadow-purple-900/20 group overflow-hidden animate-pulse border-4 border-purple-400/50 hover:border-purple-400/80" //Added thicker glowing border
         >
           <span className="relative z-10">Sign In</span>
           <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-400 opacity-0 group-hover:opacity-30 animate-pulse transition-opacity duration-300"></div>
@@ -184,7 +172,6 @@ export function AppSidebar({ children }: AppSidebarProps) {
 
   return (
     <SidebarProvider>
-      <Header />
       <div className="flex min-h-screen relative">
         <Sidebar>
           <SidebarHeader className="pt-16">
@@ -201,6 +188,17 @@ export function AppSidebar({ children }: AppSidebarProps) {
                   <span className="text-sm font-medium text-white">Guest User</span>
                   <span className="text-xs text-gray-400">Join to sync your data</span>
                 </div>
+              </div>
+            </div>
+            {/* Search bar moved to sidebar header */}
+            <div className="flex-1 max-w-xl mx-4 mb-4"> {/*Added margin bottom*/}
+              <div className="relative">
+                <input 
+                  type="search"
+                  placeholder="Search for products, guides, or resources..."
+                  className="w-full bg-gray-900/50 border border-purple-500 rounded-lg px-4 py-2 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                />
+                {/* Search component removed until implemented */}
               </div>
             </div>
           </SidebarHeader>
