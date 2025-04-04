@@ -46,9 +46,11 @@ export default function Home() {
         <HeroSection />
         
         {/* About Section */}
+      <section id="about" className="relative">
         <Suspense fallback={<LoadingFallback />}>
           <AboutGarageSectionTabs />
         </Suspense>
+      </section>
 
         {/* Other sections */}
         <Suspense fallback={<LoadingFallback />}>
