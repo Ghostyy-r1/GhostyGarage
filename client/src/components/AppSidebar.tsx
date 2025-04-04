@@ -1,26 +1,6 @@
-import React from 'react';
+
 import { Link, useLocation } from "wouter";
-import { motion } from "framer-motion";
-import { 
-  Home,
-  Users,
-  ShoppingCart,
-  Calendar,
-  FileText,
-  Search as SearchIcon,
-  Settings,
-  LogOut,
-  Globe,
-  ChevronRight,
-  Check,
-  Wrench,
-  Tool,
-  Video,
-  Image,
-  MessageSquare,
-  HelpCircle,
-  Menu
-} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   Sidebar, 
   SidebarContent, 
@@ -33,6 +13,20 @@ import {
   SidebarSeparator,
   SidebarFooter
 } from "@/components/ui/sidebar";
+import { 
+  Home, 
+  Users, 
+  ShoppingCart, 
+  Calendar, 
+  FileText,
+  Menu,
+  Settings,
+  LogOut,
+  Search,
+  Globe,
+  ChevronRight,
+  Check
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -181,17 +175,14 @@ interface AppSidebarProps {
 
 export function AppSidebar({ children }: AppSidebarProps) {
   const [location] = useLocation();
-  const [searchQuery, setSearchQuery] = useState('');
-  const [currentLanguage, setCurrentLanguage] = useState('en');
-  const [currentCurrency, setCurrentCurrency] = useState('cad');
 
-  const navigationItems = [
+  const primaryNavItems = [
     { href: "/", icon: <Home className="h-5 w-5" />, label: "Home" },
     { href: "/about", icon: <FileText className="h-5 w-5" />, label: "About" },
     { href: "/community", icon: <Users className="h-5 w-5" />, label: "Community" },
     { href: "/merch", icon: <ShoppingCart className="h-5 w-5" />, label: "Merchandise" },
     { href: "/events", icon: <Calendar className="h-5 w-5" />, label: "Events & Rides" },
-    { href: "/blog", icon: <FileText className="h-5 w-5" />, label: "Blog" }
+    { href: "/blog", icon: <FileText className="h-5 w-5" />, label: "Blog" },
   ];
 
   return (
@@ -229,7 +220,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator className="bg-purple-500/20" />
-
+                    
                     <DropdownMenuSub>
                       <DropdownMenuSubTrigger className="flex items-center">
                         <Globe className="mr-2 h-4 w-4 text-purple-400" />
@@ -267,12 +258,12 @@ export function AppSidebar({ children }: AppSidebarProps) {
                     </DropdownMenuSub>
 
                     <DropdownMenuSeparator className="bg-purple-500/20" />
-
+                    
                     <DropdownMenuItem className="flex items-center">
                       <Settings className="mr-2 h-4 w-4 text-purple-400" />
                       <span>Settings</span>
                     </DropdownMenuItem>
-
+                    
                     <DropdownMenuItem className="text-red-400 focus:text-red-400 focus:bg-red-950/50">
                       <LogOut className="mr-2 h-4 w-4" />
                       <span>Sign Out</span>
@@ -281,17 +272,90 @@ export function AppSidebar({ children }: AppSidebarProps) {
                 </DropdownMenu>
                 <div className="h-8 w-px bg-purple-500/20" />
                 <div className="relative flex-1">
-                  <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-purple-400" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-purple-400" />
                   <input 
                     type="search"
                     placeholder="Search..."
                     className="w-full bg-gray-900/50 border-2 border-purple-500/30 rounded-lg pl-10 pr-4 py-2 text-xs text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all duration-300"
                   />
                 </div>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="relative">
+                      <Avatar className="h-8 w-8 border-2 border-purple-500/30">
+                        <AvatarImage src="/placeholder-avatar.jpg" />
+                        <AvatarFallback className="bg-gradient-to-br from-purple-600 to-indigo-600 text-white text-xs">
+                          GH
+                        </AvatarFallback>
+                      </Avatar>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-64 bg-gray-900/95 backdrop-blur-sm border border-purple-500/20">
+                    <DropdownMenuLabel>
+                      <div className="flex items-center gap-3 p-2">
+                        <Avatar className="h-10 w-10 border-2 border-purple-500/30">
+                          <AvatarImage src="/placeholder-avatar.jpg" />
+                          <AvatarFallback className="bg-gradient-to-br from-purple-600 to-indigo-600 text-white">
+                            GH
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex flex-col">
+                          <span className="text-sm font-medium text-white">Guest User</span>
+                          <span className="text-xs text-purple-300/70">Join to sync your data</span>
+                        </div>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator className="bg-purple-500/20" />
+                    
+                    <DropdownMenuSub>
+                      <DropdownMenuSubTrigger className="flex items-center">
+                        <Globe className="mr-2 h-4 w-4 text-purple-400" />
+                        <span>Language</span>
+                      </DropdownMenuSubTrigger>
+                      <DropdownMenuSubContent className="bg-gray-900/95 backdrop-blur-sm border border-purple-500/20">
+                        {languages.map((language) => (
+                          <DropdownMenuItem key={language.value} className="flex items-center justify-between">
+                            {language.label}
+                            {language.value === "en" && (
+                              <Check className="h-4 w-4 text-purple-400" />
+                            )}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuSubContent>
+                    </DropdownMenuSub>
 
+                    <DropdownMenuSub>
+                      <DropdownMenuSubTrigger className="flex items-center">
+                        <Globe className="mr-2 h-4 w-4 text-purple-400" />
+                        <span>Currency</span>
+                      </DropdownMenuSubTrigger>
+                      <DropdownMenuSubContent className="bg-gray-900/95 backdrop-blur-sm border border-purple-500/20">
+                        {currencies.map((currency) => (
+                          <DropdownMenuItem key={currency.value} className="flex items-center justify-between">
+                            {currency.label}
+                            {currency.value === "cad" && (
+                              <Check className="h-4 w-4 text-purple-400" />
+                            )}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuSubContent>
+                    </DropdownMenuSub>
+
+                    <DropdownMenuSeparator className="bg-purple-500/20" />
+                    
+                    <DropdownMenuItem className="flex items-center">
+                      <Settings className="mr-2 h-4 w-4 text-purple-400" />
+                      <span>Settings</span>
+                    </DropdownMenuItem>
+                    
+                    <DropdownMenuItem className="text-red-400 focus:text-red-400 focus:bg-red-950/50">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>Sign Out</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             </div>
-            <SidebarSeparator className="my-2 bg-purple-500/20" />
+            <SidebarSeparator className="my-3 bg-purple-500/20" />
           </SidebarHeader>
 
           <SidebarContent className="px-2">
@@ -305,20 +369,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                 </div>
 
                 <SidebarMenu className="space-y-1">
-                  {[
-                    { href: "/", icon: <Home className="h-5 w-5" />, label: "Home" },
-                    { href: "/about", icon: <FileText className="h-5 w-5" />, label: "About" },
-                    { href: "/community", icon: <Users className="h-5 w-5" />, label: "Community" },
-                    { href: "/merch", icon: <ShoppingCart className="h-5 w-5" />, label: "Shop" },
-                    { href: "/events", icon: <Calendar className="h-5 w-5" />, label: "Events" },
-                    { href: "/blog", icon: <FileText className="h-5 w-5" />, label: "Blog" },
-                    { href: "/garage", icon: <Wrench className="h-5 w-5" />, label: "Garage" },
-                    { href: "/builds", icon: <Tool className="h-5 w-5" />, label: "Builds" },
-                    { href: "/tutorials", icon: <Video className="h-5 w-5" />, label: "Tutorials" },
-                    { href: "/gallery", icon: <Image className="h-5 w-5" />, label: "Gallery" },
-                    { href: "/forum", icon: <MessageSquare className="h-5 w-5" />, label: "Forum" },
-                    { href: "/support", icon: <HelpCircle className="h-5 w-5" />, label: "Support" }
-                  ].map((item, index) => (
+                  {primaryNavItems.map((item, index) => (
                     <motion.div
                       key={item.href}
                       initial={{ opacity: 0, x: -20 }}

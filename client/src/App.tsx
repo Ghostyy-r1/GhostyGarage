@@ -1,46 +1,57 @@
-
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
-import About from "@/pages/About";
+import About from "@/pages/About"; // Added About page import
 import { AppSidebar } from "@/components/AppSidebar";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { GhostyChatButton } from "@/components/GhostyChatButton";
+import { Navbar } from "@/components/Navbar";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import FAQ from "@/components/FAQ"; // Added FAQ component import
+
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
+      <Route path="/about" component={About} /> {/* Added About page route */}
       <Route component={NotFound} />
     </Switch>
   );
 }
 
 function App() {
+  // Using the sidebar navigation as requested
+  const useSidebar = true;
+
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-black text-white">
-        <ErrorBoundary>
-          <SidebarProvider>
+      {useSidebar ? (
+        <>
+          <ErrorBoundary>
             <AppSidebar>
-              <Router />
-              <GhostyChatButton />
-              <Toaster />
-            </AppSidebar>
-          </SidebarProvider>
-          <div className="fixed top-0 left-0 right-0 z-50">
+            <Router />
+          </AppSidebar>
+          </ErrorBoundary>
+          <div className="fixed top-0 left-0 right-0">
             <ErrorBoundary>
               <AnnouncementBanner />
             </ErrorBoundary>
           </div>
-        </ErrorBoundary>
-      </div>
+        </>
+      ) : (
+        <>
+          <Navbar />
+          <div className="pt-16"> {/* Add padding for fixed navbar */}
+            <Router />
+          </div>
+        </>
+      )}
+      <GhostyChatButton />
+      <Toaster />
     </QueryClientProvider>
   );
 }
