@@ -49,25 +49,30 @@ export function HeroSection() {
       className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-purple-900/40 via-[#0c0920] to-black px-4 sm:px-6 lg:px-8"
       style={{ position: 'relative' }}
     >
-      {/* Animated particles */}
+      {/* Animated blob particles */}
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full"
+          className="absolute blur-2xl rounded-full pointer-events-none"
           style={{
-            width: particle.size,
-            height: particle.size,
-            backgroundColor: particle.color,
+            width: particle.size * 3,
+            height: particle.size * 3,
+            background: `radial-gradient(circle at ${Math.random() * 100}% ${Math.random() * 100}%, 
+              rgba(168, 85, 247, ${0.2 + (Math.random() * 0.2)}) 0%,
+              rgba(147, 51, 234, ${0.15 + (Math.random() * 0.15)}) 50%,
+              rgba(88, 28, 135, ${0.1 + (Math.random() * 0.1)}) 100%)`,
             x: particle.x,
             y: particle.y,
-            boxShadow: `0 0 ${particle.size * 2}px ${particle.color}`
+            mixBlendMode: 'plus-lighter',
+            filter: 'brightness(1.2) contrast(1.2)',
           }}
           animate={{
-            y: [particle.y, particle.y + 100, particle.y],
-            opacity: [0.7, 0.4, 0.7],
+            y: [particle.y, particle.y - 200, particle.y],
+            scale: [0.8, 1.2, 0.8],
+            opacity: [0.3, 0.6, 0.3],
           }}
           transition={{
-            duration: 3 + particle.speed * 2,
+            duration: 8 + particle.speed * 4,
             repeat: Infinity,
             ease: "easeInOut"
           }}
