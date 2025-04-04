@@ -105,7 +105,7 @@ export function HeroSection() {
               [(randomStartX + 90) % 100, 70],
               [randomStartX, 120]
             ];
-            
+
             return (
               <motion.div
                 key={`blob-${i}`}
@@ -116,13 +116,14 @@ export function HeroSection() {
                   opacity: 0.1
                 }}
                 animate={{
-                  scale: [0.3, 1.4, 1.8, 1.2, 0.3],
-                  opacity: [0.2, 0.5, 0.6, 0.4, 0.2],
+                  scale: [0.8, 1.6, 1.2, 1.8, 0.8],
+                  opacity: [0.3, 0.6, 0.8, 0.5, 0.3],
                   x: customPath.map(([x]) => `${x}%`),
-                  y: customPath.map(([, y]) => `${y}%`)
+                  y: customPath.map(([, y]) => `${y}%`),
+                  rotate: [0, 45, -45, 90, 0]
                 }}
                 transition={{
-                  duration: cycleDuration,
+                  duration: cycleDuration * 1.5,
                   repeat: Infinity,
                   ease: "easeInOut",
                   delay: cycleDelay,
@@ -130,15 +131,17 @@ export function HeroSection() {
                 }}
                 className="absolute pointer-events-none origin-center"
                 style={{
-                  width: initialSize,
-                  height: initialSize,
-                  background: `radial-gradient(circle at 50% 50%, 
-                    rgba(147, 51, 234, ${0.3 + (Math.random() * 0.2)}) 0%,
-                    rgba(88, 28, 135, ${0.2 + (Math.random() * 0.1)}) 100%)`,
-                  borderRadius: '50%',
+                  width: initialSize * 1.5,
+                  height: initialSize * 1.2,
+                  background: `radial-gradient(circle at ${Math.random() * 100}% ${Math.random() * 100}%, 
+                    rgba(168, 85, 247, ${0.4 + (Math.random() * 0.3)}) 0%,
+                    rgba(147, 51, 234, ${0.3 + (Math.random() * 0.2)}) 50%,
+                    rgba(88, 28, 135, ${0.2 + (Math.random() * 0.2)}) 100%)`,
+                  borderRadius: `${30 + Math.random() * 40}% ${70 + Math.random() * 30}% ${40 + Math.random() * 60}% ${50 + Math.random() * 50}%`,
                   mixBlendMode: 'plus-lighter',
-                  filter: 'brightness(1.2) contrast(1.2)',
+                  filter: 'brightness(1.4) contrast(1.3) blur(8px)',
                   zIndex: i,
+                  transform: `rotate(${Math.random() * 360}deg)`,
                   backdropFilter: 'blur(12px)'
                 }}
               />
@@ -197,7 +200,7 @@ export function HeroSection() {
               const size = 300 + Math.random() * 200;
               const duration = 15 + Math.random() * 10;
               const delay = i * 2;
-              
+
               return (
                 <motion.div
                   key={`hero-blob-${i}`}
