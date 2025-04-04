@@ -25,7 +25,13 @@ import {
   Search as SearchIcon,
   Globe,
   ChevronRight,
-  Check
+  Check,
+  Wrench,
+  Tool,
+  Video,
+  Image,
+  MessageSquare,
+  HelpCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
@@ -282,7 +288,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                   
               </div>
             </div>
-            <SidebarSeparator className="my-3 bg-purple-500/20" />
+            <SidebarSeparator className="my-2 bg-purple-500/20" />
           </SidebarHeader>
 
           <SidebarContent className="px-2">
@@ -296,7 +302,20 @@ export function AppSidebar({ children }: AppSidebarProps) {
                 </div>
 
                 <SidebarMenu className="space-y-1">
-                  {primaryNavItems.map((item, index) => (
+                  {[
+                    { href: "/", icon: <Home className="h-5 w-5" />, label: "Home" },
+                    { href: "/about", icon: <FileText className="h-5 w-5" />, label: "About" },
+                    { href: "/community", icon: <Users className="h-5 w-5" />, label: "Community" },
+                    { href: "/merch", icon: <ShoppingCart className="h-5 w-5" />, label: "Shop" },
+                    { href: "/events", icon: <Calendar className="h-5 w-5" />, label: "Events" },
+                    { href: "/blog", icon: <FileText className="h-5 w-5" />, label: "Blog" },
+                    { href: "/garage", icon: <Wrench className="h-5 w-5" />, label: "Garage" },
+                    { href: "/builds", icon: <Tool className="h-5 w-5" />, label: "Builds" },
+                    { href: "/tutorials", icon: <Video className="h-5 w-5" />, label: "Tutorials" },
+                    { href: "/gallery", icon: <Image className="h-5 w-5" />, label: "Gallery" },
+                    { href: "/forum", icon: <MessageSquare className="h-5 w-5" />, label: "Forum" },
+                    { href: "/support", icon: <HelpCircle className="h-5 w-5" />, label: "Support" }
+                  ].map((item, index) => (
                     <motion.div
                       key={item.href}
                       initial={{ opacity: 0, x: -20 }}
