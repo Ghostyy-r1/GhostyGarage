@@ -191,9 +191,8 @@ export function AppSidebar({ children }: AppSidebarProps) {
     { href: "/about", icon: <FileText className="h-5 w-5" />, label: "About" },
     { href: "/community", icon: <Users className="h-5 w-5" />, label: "Community" },
     { href: "/merch", icon: <ShoppingCart className="h-5 w-5" />, label: "Merchandise" },
-  ];
     { href: "/events", icon: <Calendar className="h-5 w-5" />, label: "Events & Rides" },
-    { href: "/blog", icon: <FileText className="h-5 w-5" />, label: "Blog" },
+    { href: "/blog", icon: <FileText className="h-5 w-5" />, label: "Blog" }
   ];
 
   return (

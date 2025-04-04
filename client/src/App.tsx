@@ -1,4 +1,3 @@
-
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -29,6 +28,8 @@ function App() {
         <SidebarProvider>
           <AppSidebar>
             <Router />
+            <GhostyChatButton />
+            <Toaster />
           </AppSidebar>
         </SidebarProvider>
       </ErrorBoundary>
@@ -37,8 +38,6 @@ function App() {
           <AnnouncementBanner />
         </ErrorBoundary>
       </div>
-      <GhostyChatButton />
-      <Toaster />
     </QueryClientProvider>
   );
 }
