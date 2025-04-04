@@ -22,7 +22,8 @@ import {
   Bike,
   MapPin,
   Settings,
-  LogOut
+  LogOut,
+  Search
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";

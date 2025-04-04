@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import About from "@/pages/About"; // Added About page import
 import { AppSidebar } from "@/components/AppSidebar";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { GhostyChatButton } from "@/components/GhostyChatButton";
 import { Navbar } from "@/components/Navbar";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
@@ -30,11 +31,15 @@ function App() {
     <QueryClientProvider client={queryClient}>
       {useSidebar ? (
         <>
-          <AppSidebar>
+          <ErrorBoundary>
+            <AppSidebar>
             <Router />
           </AppSidebar>
+          </ErrorBoundary>
           <div className="fixed top-0 left-0 right-0">
-            <AnnouncementBanner />
+            <ErrorBoundary>
+              <AnnouncementBanner />
+            </ErrorBoundary>
           </div>
         </>
       ) : (

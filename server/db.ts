@@ -13,11 +13,22 @@ const client = new MongoClient(process.env.MONGODB_URI, {
 
 export const db = client.db('motorcycleapp');
 
-try {
-  await client.connect();
-  console.log('Connected to MongoDB');
-} catch (err) {
-  console.error('MongoDB connection error:', err);
-  // Don't throw, just log the error
-  console.error('Application will continue without database connection');
+async function connectWithRetry(maxRetries = 5, delay = 5000) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      await client.connect();
+      console.log('Connected to MongoDB');
+      return;
+    } catch (err) {
+      console.error(`MongoDB connection attempt ${i + 1} failed:`, err);
+      if (i < maxRetries - 1) {
+        console.log(`Retrying in ${delay/1000} seconds...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+    }
+  }
+  console.error('Failed to connect to MongoDB after multiple attempts');
+  console.warn('Application will continue without database connection');
 }
+
+connectWithRetry();
