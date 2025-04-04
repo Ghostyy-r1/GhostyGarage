@@ -1,5 +1,7 @@
+import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
+import { Search } from "lucide-react";
 import { 
   Sidebar, 
   SidebarContent, 
@@ -171,14 +173,14 @@ export function AppSidebar({ children }: AppSidebarProps) {
               </div>
             </div>
             {/* Search bar moved to sidebar header */}
-            <div className="flex-1 max-w-xl mx-4 mb-4"> {/*Added margin bottom*/}
+            <div className="flex-1 max-w-xl mx-4 mb-4">
               <div className="relative">
                 <input 
                   type="search"
                   placeholder="Search for products, guides, or resources..."
-                  className="w-full bg-gray-900/50 border border-purple-500 rounded-lg px-4 py-2 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                  className="w-full bg-gray-900/50 border border-purple-500 rounded-lg pl-10 pr-4 py-2 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                 />
-                {/* Search component removed until implemented */}
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               </div>
             </div>
           </SidebarHeader>
@@ -267,7 +269,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
         </Sidebar>
 
         <div className="flex flex-1 flex-col">
-          <main className="relative flex-1 overflow-y-auto pt-16">
+          <main className="relative flex-1 overflow-y-auto pt-32">
             {children}
           </main>
         </div>
