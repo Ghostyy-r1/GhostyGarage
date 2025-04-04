@@ -95,6 +95,7 @@ interface AppSidebarProps {
 
 export function AppSidebar({ children }: AppSidebarProps) {
   const [location] = useLocation();
+  const [isAuthenticated] = useState(false); // TODO: Replace with actual auth state
 
   // Primary navigation items
   const primaryNavItems = [
@@ -116,7 +117,44 @@ export function AppSidebar({ children }: AppSidebarProps) {
     <SidebarProvider>
       <div className="flex min-h-screen relative">
         <Sidebar>
-          <SidebarHeader className="pt-16">
+          {/* Top Navigation Bar */}
+          <div className="fixed top-12 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-purple-500/20">
+            <div className="flex items-center justify-between px-4 h-16">
+              <div className="flex items-center space-x-4">
+                <SidebarTrigger>
+                  <Menu className="h-5 w-5 text-gray-400" />
+                </SidebarTrigger>
+                <Link href="/" className="flex items-center">
+                  <span className="text-white font-bold text-xl">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">
+                      Ghosty's Garage
+                    </span>
+                  </span>
+                </Link>
+              </div>
+              
+              <div className="flex items-center space-x-4">
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  className="text-gray-300 hover:text-purple-400"
+                >
+                  <FaDiscord className="h-5 w-5" />
+                </Button>
+                
+                <Button 
+                  size="sm"
+                  className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white animate-pulse"
+                >
+                  {isAuthenticated ? 'Dashboard' : 'Sign In'}
+                </Button>
+                
+                <CartButton />
+              </div>
+            </div>
+          </div>
+          
+          <SidebarHeader className="pt-28">
             {/* User profile section */}
             <div className="px-2 py-4">
               <div className="flex items-center gap-3 px-2">
