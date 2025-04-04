@@ -31,21 +31,28 @@ function App() {
     <QueryClientProvider client={queryClient}>
       {useSidebar ? (
         <>
-          <ErrorBoundary>
-            <AppSidebar>
-            <Router />
-          </AppSidebar>
-          </ErrorBoundary>
-          <div className="fixed top-0 left-0 right-0">
+          <div className="fixed top-0 left-0 right-0 z-50">
             <ErrorBoundary>
               <AnnouncementBanner />
             </ErrorBoundary>
           </div>
+          <ErrorBoundary>
+            <AppSidebar>
+              <Router />
+            </AppSidebar>
+          </ErrorBoundary>
         </>
       ) : (
         <>
-          <Navbar />
-          <div className="pt-16"> {/* Add padding for fixed navbar */}
+          <div className="fixed top-0 left-0 right-0 z-50">
+            <ErrorBoundary>
+              <AnnouncementBanner />
+            </ErrorBoundary>
+          </div>
+          <div className="relative">
+            <Navbar />
+          </div>
+          <div className="pt-32">
             <Router />
           </div>
         </>
