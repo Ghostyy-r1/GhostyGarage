@@ -74,7 +74,7 @@ export function HeroSection() {
         />
       ))}
 
-      {/* Background gradient elements */}
+      {/* Background gradient elements with animated bubbles */}
       <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
         <motion.div 
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, -50]) }}
@@ -84,6 +84,32 @@ export function HeroSection() {
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, 50]) }}
           className="absolute -bottom-[40%] -right-[10%] w-[60%] h-[80%] rounded-full bg-gradient-to-r from-purple-900/30 to-indigo-800/30 blur-3xl"
         />
+        {Array.from({ length: 15 }).map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ 
+              opacity: 0,
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight
+            }}
+            animate={{ 
+              opacity: [0.1, 0.3, 0.1],
+              y: ["-10%", "110%"],
+              x: ["-10%", "110%"]
+            }}
+            transition={{
+              duration: Math.random() * 10 + 20,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "linear"
+            }}
+            className={`absolute w-${Math.floor(Math.random() * 16 + 8)} h-${Math.floor(Math.random() * 16 + 8)} rounded-full bg-gradient-to-br from-purple-500/10 to-indigo-500/10 blur-xl pointer-events-none`}
+            style={{
+              width: Math.random() * 100 + 50,
+              height: Math.random() * 100 + 50
+            }}
+          />
+        ))}
       </div>
 
       {/* Grid overlay */}
