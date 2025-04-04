@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HeroSection } from "@/components/HeroSection";
 
 // Lazy load components for better performance
-const AboutGarageSectionTabs = lazy(() => import("@/components/AboutGarageSectionTabs"));
+const AboutGarageSectionTabs = lazy(() => import("@/components/AboutGarageSectionTabs").then(module => ({ default: module.AboutGarageSectionTabs })));
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection").then(module => ({ default: module.FeaturesSection })));
 const CommunityHighlights = lazy(() => import("@/components/CommunityHighlights").then(module => ({ default: module.CommunityHighlights })));
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection").then(module => ({ default: module.TestimonialsSection })));
