@@ -63,15 +63,15 @@ export default function Home() {
         </Suspense>
         
         <Suspense fallback={<LoadingFallback />}>
-          <CommunityHighlights />
+          <ProductShowcase />
         </Suspense>
-        
+
         <Suspense fallback={<LoadingFallback />}>
           <TestimonialsSection />
         </Suspense>
         
         <Suspense fallback={<LoadingFallback />}>
-          <ProductShowcase />
+          <CommunityHighlights />
         </Suspense>
         
         <Suspense fallback={<LoadingFallback />}>
