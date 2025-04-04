@@ -111,18 +111,14 @@ export function HeroSection() {
             </AnimatedReveal>
 
             <AnimatedReveal variant="fade" direction="up" delay={0.3}>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
-              >
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
                 <span className="text-white">The Ultimate</span>
                 <br />
                 <div className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500 inline-block relative">
                   Motorcycle Community
+                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-[min(90%,300px)] h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full shadow-glow"></span>
                 </div>
-              </motion.h1>
+              </h1>
             </AnimatedReveal>
 
             <AnimatedReveal variant="fade" direction="up" delay={0.4}>
@@ -141,8 +137,8 @@ export function HeroSection() {
                     Join Community
                     <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-all duration-700" />
                   </span>
-                  <div className="absolute -inset-[3px] bg-gradient-to-r from-purple-500 to-indigo-500 rounded-lg opacity-0 group-hover:opacity-100 blur-sm transition-all duration-700 animate-glow"></div>
-                  <div className="absolute -inset-[2px] bg-gradient-to-r from-purple-500/50 to-indigo-500/50 rounded-lg opacity-70 group-hover:opacity-100 transition-all duration-700"></div>
+                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-purple-400/50 transition-all duration-700"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-0 group-hover:opacity-30 transition-all duration-700"></div>
                 </Button>
                 <Button 
                   size="lg" 
