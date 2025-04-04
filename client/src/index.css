@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Prevent dark mode flash */
+:root {
+  color-scheme: dark;
+}
+
+/* Add this script to set theme immediately */
+@script {
+  (function() {
+    const theme = localStorage.getItem('theme') || 'dark';
+    const root = document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+  })();
+}
+
 /* Custom styles for the resizable chat window */
 .react-resizable {
   position: relative;
