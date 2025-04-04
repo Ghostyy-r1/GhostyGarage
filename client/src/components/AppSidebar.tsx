@@ -3,6 +3,25 @@ import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
 import React, { useState } from 'react';
 import { 
+  Home,
+  Users,
+  ShoppingCart,
+  Calendar,
+  FileText,
+  Search,
+  Settings,
+  LogOut,
+  Globe,
+  ChevronRight,
+  Check,
+  Wrench,
+  Tool,
+  Video,
+  Image,
+  MessageSquare,
+  HelpCircle
+} from "lucide-react";
+import { 
   Sidebar, 
   SidebarContent, 
   SidebarHeader, 
