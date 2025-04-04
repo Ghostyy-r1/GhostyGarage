@@ -7,7 +7,7 @@ import { ThreeDCard } from '@/components/ui/3d-card';
 
 export function AboutGarageSectionTabs() {
   return (
-    <section id="about" className="py-16 bg-gradient-to-b from-black to-gray-900 relative">
+    <section id="about" className="py-24 bg-gray-900 relative border-t border-purple-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="text-center mb-12"
@@ -23,7 +23,7 @@ export function AboutGarageSectionTabs() {
         </motion.div>
 
         <Tabs defaultValue="what" className="w-full">
-          <TabsList className="grid grid-cols-3 lg:grid-cols-6 bg-gray-900/50 border border-purple-600/20 rounded-lg p-1 gap-1 mb-8">
+          <TabsList className="grid grid-cols-3 lg:grid-cols-6 bg-gray-800 border-2 border-purple-600/30 rounded-xl p-2 gap-2 mb-12 shadow-xl shadow-purple-500/5">
             {[
               { id: 'what', label: 'What We Are', icon: Heart },
               { id: 'values', label: 'Values', icon: Star },
