@@ -91,7 +91,7 @@ export function HeroSection() {
             const randomStartX = Math.random() * 100;
             const cycleDelay = i * (20 / 12);
             const cycleDuration = 20 + (Math.random() * 10);
-            
+
             return (
               <motion.div
                 key={`blob-${i}`}
@@ -138,32 +138,49 @@ export function HeroSection() {
           })}
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
-        {Array.from({ length: 15 }).map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ 
-              opacity: 0,
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight
-            }}
-            animate={{ 
-              opacity: [0.1, 0.3, 0.1],
-              y: ["-10%", "110%"],
-              x: ["-10%", "110%"]
-            }}
-            transition={{
-              duration: Math.random() * 10 + 20,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-              ease: "linear"
-            }}
-            className={`absolute w-${Math.floor(Math.random() * 16 + 8)} h-${Math.floor(Math.random() * 16 + 8)} rounded-full bg-gradient-to-br from-purple-500/10 to-indigo-500/10 blur-xl pointer-events-none`}
-            style={{
-              width: Math.random() * 100 + 50,
-              height: Math.random() * 100 + 50
-            }}
-          />
-        ))}
+        {/* Additional animated blobs */}
+        {Array.from({ length: 8 }).map((_, i) => {
+          const randomShape = Array.from({ length: 8 }, () => Math.floor(Math.random() * 100)).join('% ') + '%';
+          return (
+            <motion.div
+              key={`blob-animated-${i}`}
+              initial={{ 
+                opacity: 0,
+                scale: 0.5,
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight
+              }}
+              animate={{ 
+                opacity: [0.1, 0.3, 0.1],
+                scale: [0.8, 1.4, 0.8],
+                x: [
+                  Math.random() * window.innerWidth * 0.2,
+                  Math.random() * window.innerWidth * 0.8,
+                  Math.random() * window.innerWidth * 0.2
+                ],
+                y: [
+                  Math.random() * window.innerHeight * 0.2,
+                  Math.random() * window.innerHeight * 0.8,
+                  Math.random() * window.innerHeight * 0.2
+                ]
+              }}
+              transition={{
+                duration: Math.random() * 20 + 15,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute blur-3xl pointer-events-none"
+              style={{
+                width: Math.random() * 300 + 200,
+                height: Math.random() * 300 + 200,
+                background: `radial-gradient(circle at 50% 50%, rgba(147, 51, 234, ${0.1 + (Math.random() * 0.2)}) 0%, rgba(79, 70, 229, ${0.05 + (Math.random() * 0.1)}) 100%)`,
+                borderRadius: randomShape,
+                mixBlendMode: 'plus-lighter',
+                filter: 'contrast(1.2) brightness(1.3)',
+              }}
+            />
+          );
+        })}
       </div>
 
       {/* Grid overlay */}
