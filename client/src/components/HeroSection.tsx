@@ -79,35 +79,41 @@ export function HeroSection() {
         <svg width="0" height="0">
           <defs>
             <filter id="goo">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+              <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
+              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -9" result="goo" />
               <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
             </filter>
           </defs>
         </svg>
         <div className="absolute inset-0" style={{ filter: 'url(#goo)' }}>
-          {Array.from({ length: 8 }).map((_, i) => {
-            const baseSize = Math.random() * 100 + 150;
-            const randomDelay = Math.random() * 10;
+          {Array.from({ length: 12 }).map((_, i) => {
+            const baseSize = Math.random() * 120 + 180;
+            const randomDelay = Math.random() * 15;
+            const duration = Math.random() * 50 + 80;
+            const points = Array.from({ length: 8 }, () => ({
+              x: Math.random() * 90 + 5,
+              y: Math.random() * 90 + 5
+            }));
+            
             return (
               <motion.div
                 key={`blob-${i}`}
                 initial={{
-                  x: `${Math.random() * 100}%`,
-                  y: `${Math.random() * 100}%`,
+                  x: `${points[0].x}%`,
+                  y: `${points[0].y}%`,
                   scale: 0.8,
                   opacity: 0
                 }}
                 animate={{
-                  scale: [0.8, 1.2, 1.1, 1.4, 0.9, 1.3, 0.8],
-                  opacity: [0.4, 0.6, 0.5, 0.7, 0.5, 0.6, 0.4],
-                  x: Array.from({ length: 7 }, () => `${Math.random() * 80 + 10}%`),
-                  y: Array.from({ length: 7 }, () => `${Math.random() * 80 + 10}%`),
+                  scale: [0.8, 1.1, 0.9, 1.2, 0.85, 1.15, 0.8],
+                  opacity: [0.3, 0.5, 0.4, 0.6, 0.4, 0.5, 0.3],
+                  x: points.map(p => `${p.x}%`),
+                  y: points.map(p => `${p.y}%`),
                 }}
                 transition={{
-                  duration: Math.random() * 40 + 60,
+                  duration,
                   repeat: Infinity,
-                  ease: "easeInOut",
+                  ease: [0.45, 0.05, 0.55, 0.95],
                   delay: randomDelay,
                   times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 1]
                 }}
@@ -115,11 +121,12 @@ export function HeroSection() {
                 style={{
                   width: baseSize,
                   height: baseSize,
-                  background: `radial-gradient(circle at 50% 50%, 
-                    rgb(${Math.random() * 50 + 120}, ${Math.random() * 20 + 20}, ${Math.random() * 150 + 150}) 0%,
-                    rgb(${Math.random() * 30 + 60}, ${Math.random() * 10 + 10}, ${Math.random() * 100 + 100}) 100%)`,
+                  background: `radial-gradient(circle at ${Math.random() * 100}% ${Math.random() * 100}%, 
+                    rgb(${Math.random() * 40 + 130}, ${Math.random() * 15 + 25}, ${Math.random() * 160 + 140}) 0%,
+                    rgb(${Math.random() * 25 + 65}, ${Math.random() * 8 + 12}, ${Math.random() * 110 + 90}) 100%)`,
                   borderRadius: '50%',
                   mixBlendMode: 'screen',
+                  filter: 'brightness(0.85)',
                   zIndex: Math.floor(Math.random() * 10)
                 }}
               />
