@@ -86,47 +86,52 @@ export function HeroSection() {
           </defs>
         </svg>
         <div className="absolute inset-0" style={{ filter: 'url(#goo)' }}>
-          {Array.from({ length: 6 }).map((_, i) => {
-            const baseSize = Math.random() * 200 + 250; // Larger base size
-            const randomDelay = Math.random() * 5; // Less random delay variation
-            const duration = Math.random() * 20 + 100; // Longer, more consistent duration
-            const startY = 90 + (Math.random() * 10); // Start near bottom
-            const endY = 10 + (Math.random() * 10); // End near top
-            const startX = 20 + (Math.random() * 60); // Keep within middle 60% horizontally
+          {Array.from({ length: 8 }).map((_, i) => {
+            const initialSize = 100 + (Math.random() * 50);
+            const maxSize = initialSize * 2;
+            const startX = 15 + (Math.random() * 70); // Random start position within 15-85% of width
+            const cycleDelay = i * (12 / 8); // Evenly space out the delays
+            const cycleDuration = 15 + (Math.random() * 5); // Base cycle duration with slight variation
             
             return (
               <motion.div
                 key={`blob-${i}`}
                 initial={{
                   x: `${startX}%`,
-                  y: `${startY}%`,
-                  scale: 0.9,
-                  opacity: 0
+                  y: '100%',
+                  scale: 0.5,
+                  opacity: 0.1
                 }}
                 animate={{
-                  scale: [0.9, 1.1, 0.95, 1.05, 0.9],
-                  opacity: [0.2, 0.3, 0.25, 0.3, 0.2],
-                  x: [`${startX}%`, `${startX + (Math.random() * 20 - 10)}%`, `${startX + (Math.random() * 20 - 10)}%`, `${startX}%`],
-                  y: [`${startY}%`, `${endY + 30}%`, `${endY}%`, `${startY}%`],
+                  scale: [0.5, 1.2, 1.5, 1.2, 0.5],
+                  opacity: [0.1, 0.3, 0.4, 0.3, 0.1],
+                  x: [
+                    `${startX}%`,
+                    `${startX + (Math.random() * 10 - 5)}%`,
+                    `${startX + (Math.random() * 15 - 7.5)}%`,
+                    `${startX + (Math.random() * 10 - 5)}%`,
+                    `${startX}%`
+                  ],
+                  y: ['100%', '60%', '20%', '60%', '100%']
                 }}
                 transition={{
-                  duration,
+                  duration: cycleDuration,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  delay: randomDelay,
+                  delay: cycleDelay,
+                  times: [0, 0.25, 0.5, 0.75, 1]
                 }}
                 className="absolute pointer-events-none origin-center"
                 style={{
-                  width: baseSize,
-                  height: baseSize,
+                  width: initialSize,
+                  height: initialSize,
                   background: `radial-gradient(circle at 50% 50%, 
-                    rgba(147, 51, 234, 0.15) 0%,
-                    rgba(88, 28, 135, 0.08) 100%)`,
+                    rgba(147, 51, 234, ${0.15 + (Math.random() * 0.1)}) 0%,
+                    rgba(88, 28, 135, ${0.08 + (Math.random() * 0.05)}) 100%)`,
                   borderRadius: '50%',
                   mixBlendMode: 'screen',
-                  filter: 'brightness(0.8)',
+                  filter: 'brightness(0.85)',
                   zIndex: i,
-                  transform: `rotate(${Math.random() * 360}deg)`,
                   backdropFilter: 'blur(8px)'
                 }}
               />
