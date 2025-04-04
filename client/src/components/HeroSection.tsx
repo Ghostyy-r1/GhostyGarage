@@ -152,8 +152,18 @@ export function HeroSection() {
                 >
                   <span className="relative z-10 flex items-center justify-center w-full">
                     Explore Products
-                    <ChevronRight className="ml-2 h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 animate-bounce-x" />
+                    <ChevronRight className="ml-2 h-4 w-4 transition-all duration-300" />
                   </span>
+                  <div className="absolute inset-0 animate-pulse-glow bg-purple-500/20 rounded-lg filter blur-sm"></div>
+                  <style jsx>{`
+                    @keyframes pulse-glow {
+                      0%, 100% { opacity: 0.3; }
+                      50% { opacity: 0.6; }
+                    }
+                    .animate-pulse-glow {
+                      animation: pulse-glow 2s ease-in-out infinite;
+                    }
+                  `}</style>
                   <div className="absolute inset-0 border-2 border-purple-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:shadow-glow"></div>
                 </Button>
               </div>
