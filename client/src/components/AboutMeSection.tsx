@@ -63,126 +63,142 @@ export function AboutMeSection() {
                     <Badge variant="outline" className="bg-gray-800/50">Developer</Badge>
                   </div>
 
-                  <div className="bg-gray-800/30 rounded-lg p-4 space-y-4">
-                    <div className="flex items-center gap-2 text-green-400">
-                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                      <span className="text-sm">Online</span>
-                    </div>
-
-                    <div>
-                      <h4 className="text-sm font-medium text-purple-400 mb-2">About Me</h4>
-                      <p className="text-sm text-gray-300">Automotive Service Technician with a passion for motorcycles and ADHD-powered creativity. Living life one ride at a time. 🏍️</p>
-                    </div>
-
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-gray-300">
-                        <MapPin className="w-4 h-4 text-purple-400" />
-                        <span className="text-sm">Canada</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-gray-300">
-                        <Calendar className="w-4 h-4 text-purple-400" />
-                        <span className="text-sm">Joined January 2024</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-gray-300">
-                        {/*Removed Tool icon here*/}
-                        <Code className="w-4 h-4 text-purple-400" />
-                        <span className="text-sm">10+ years experience</span>
-                      </div>
-                    </div>
+                  <div className="flex items-center gap-2 text-green-400 bg-gray-800/30 rounded-lg p-3">
+                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                    <span className="text-sm">Online</span>
                   </div>
 
-                  <div className="bg-gray-800/30 rounded-lg p-4 space-y-3">
-                    <h4 className="text-sm font-medium text-purple-400">Current Status</h4>
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <Music className="w-4 h-4 text-purple-400" />
-                        <span className="text-sm text-gray-300">Listening to Lo-fi Beats</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Code className="w-4 h-4 text-purple-400" />
-                        <span className="text-sm text-gray-300">Working on Ghosty's Garage</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Coffee className="w-4 h-4 text-purple-400" />
-                        <span className="text-sm text-gray-300">Fueled by Coffee</span>
-                      </div>
-                    </div>
-                  </div>
+                  <Tabs defaultValue="about" className="w-full">
+                    <TabsList className="w-full bg-gray-800/50">
+                      <TabsTrigger value="about" className="flex-1">About</TabsTrigger>
+                      <TabsTrigger value="status" className="flex-1">Status</TabsTrigger>
+                      <TabsTrigger value="interests" className="flex-1">Interests</TabsTrigger>
+                      <TabsTrigger value="achievements" className="flex-1">Stats</TabsTrigger>
+                    </TabsList>
 
-                  <Separator className="bg-gray-800" />
-
-                  <div className="flex justify-between">
-                    <div className="text-center">
-                      <p className="text-lg font-semibold text-white">500+</p>
-                      <p className="text-sm text-gray-400">Repairs</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-lg font-semibold text-white">50+</p>
-                      <p className="text-sm text-gray-400">Guides</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-lg font-semibold text-white">1k+</p>
-                      <p className="text-sm text-gray-400">Community</p>
-                    </div>
-                  </div>
-
-                  <div className="bg-gray-800/30 rounded-lg p-4 space-y-3">
-                      <h4 className="text-sm font-medium text-purple-400">Interests & Hobbies</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {[
-                          "Motorcycles 🏍️",
-                          "Gaming 🎮",
-                          "Photography 📸",
-                          "Music 🎵",
-                          "Tech 💻",
-                          "Coffee ☕",
-                          "Paranormal 👻"
-                        ].map((interest) => (
-                          <Badge
-                            key={interest}
-                            variant="outline"
-                            className="bg-purple-600/10 text-purple-400 border-purple-500/20"
-                          >
-                            {interest}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="bg-gray-800/30 rounded-lg p-4 space-y-3">
-                      <h4 className="text-sm font-medium text-purple-400">Progress & Achievements</h4>
-                      <div className="space-y-2">
+                    <TabsContent value="about" className="mt-4">
+                      <div className="bg-gray-800/30 rounded-lg p-4 space-y-4">
                         <div>
-                          <div className="flex justify-between text-sm mb-1">
-                            <span className="text-gray-300">Repairs Completed</span>
-                            <span className="text-purple-400">92%</span>
-                          </div>
-                          <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                            <div className="h-full bg-purple-600 rounded-full" style={{ width: '92%' }}></div>
-                          </div>
+                          <h4 className="text-sm font-medium text-purple-400 mb-2">About Me</h4>
+                          <p className="text-sm text-gray-300">Automotive Service Technician with a passion for motorcycles and ADHD-powered creativity. Living life one ride at a time. 🏍️</p>
                         </div>
-                        <div>
-                          <div className="flex justify-between text-sm mb-1">
-                            <span className="text-gray-300">Customer Satisfaction</span>
-                            <span className="text-purple-400">95%</span>
+
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2 text-gray-300">
+                            <MapPin className="w-4 h-4 text-purple-400" />
+                            <span className="text-sm">Canada</span>
                           </div>
-                          <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                            <div className="h-full bg-purple-600 rounded-full" style={{ width: '95%' }}></div>
+                          <div className="flex items-center gap-2 text-gray-300">
+                            <Calendar className="w-4 h-4 text-purple-400" />
+                            <span className="text-sm">Joined January 2024</span>
                           </div>
-                        </div>
-                        <div>
-                          <div className="flex justify-between text-sm mb-1">
-                            <span className="text-gray-300">Guide Completion</span>
-                            <span className="text-purple-400">88%</span>
-                          </div>
-                          <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                            <div className="h-full bg-purple-600 rounded-full" style={{ width: '88%' }}></div>
+                          <div className="flex items-center gap-2 text-gray-300">
+                            <Code className="w-4 h-4 text-purple-400" />
+                            <span className="text-sm">10+ years experience</span>
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </TabsContent>
 
-                    <div className="flex gap-3 justify-center">
+                    <TabsContent value="status" className="mt-4">
+                      <div className="bg-gray-800/30 rounded-lg p-4 space-y-3">
+                        <h4 className="text-sm font-medium text-purple-400">Current Status</h4>
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2">
+                            <Music className="w-4 h-4 text-purple-400" />
+                            <span className="text-sm text-gray-300">Listening to Lo-fi Beats</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Code className="w-4 h-4 text-purple-400" />
+                            <span className="text-sm text-gray-300">Working on Ghosty's Garage</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Coffee className="w-4 h-4 text-purple-400" />
+                            <span className="text-sm text-gray-300">Fueled by Coffee</span>
+                          </div>
+                        </div>
+                      </div>
+                    </TabsContent>
+
+                    <TabsContent value="interests" className="mt-4">
+                      <div className="bg-gray-800/30 rounded-lg p-4 space-y-3">
+                        <h4 className="text-sm font-medium text-purple-400">Interests & Hobbies</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {[
+                            "Motorcycles 🏍️",
+                            "Gaming 🎮",
+                            "Photography 📸",
+                            "Music 🎵",
+                            "Tech 💻",
+                            "Coffee ☕",
+                            "Paranormal 👻"
+                          ].map((interest) => (
+                            <Badge
+                              key={interest}
+                              variant="outline"
+                              className="bg-purple-600/10 text-purple-400 border-purple-500/20"
+                            >
+                              {interest}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </TabsContent>
+
+                    <TabsContent value="achievements" className="mt-4">
+                      <div className="space-y-4">
+                        <div className="flex justify-between text-center bg-gray-800/30 rounded-lg p-4">
+                          <div>
+                            <p className="text-lg font-semibold text-white">500+</p>
+                            <p className="text-sm text-gray-400">Repairs</p>
+                          </div>
+                          <div>
+                            <p className="text-lg font-semibold text-white">50+</p>
+                            <p className="text-sm text-gray-400">Guides</p>
+                          </div>
+                          <div>
+                            <p className="text-lg font-semibold text-white">1k+</p>
+                            <p className="text-sm text-gray-400">Community</p>
+                          </div>
+                        </div>
+
+                        <div className="bg-gray-800/30 rounded-lg p-4 space-y-3">
+                          <h4 className="text-sm font-medium text-purple-400">Progress</h4>
+                          <div className="space-y-2">
+                            <div>
+                              <div className="flex justify-between text-sm mb-1">
+                                <span className="text-gray-300">Repairs Completed</span>
+                                <span className="text-purple-400">92%</span>
+                              </div>
+                              <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div className="h-full bg-purple-600 rounded-full" style={{ width: '92%' }}></div>
+                              </div>
+                            </div>
+                            <div>
+                              <div className="flex justify-between text-sm mb-1">
+                                <span className="text-gray-300">Customer Satisfaction</span>
+                                <span className="text-purple-400">95%</span>
+                              </div>
+                              <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div className="h-full bg-purple-600 rounded-full" style={{ width: '95%' }}></div>
+                              </div>
+                            </div>
+                            <div>
+                              <div className="flex justify-between text-sm mb-1">
+                                <span className="text-gray-300">Guide Completion</span>
+                                <span className="text-purple-400">88%</span>
+                              </div>
+                              <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                <div className="h-full bg-purple-600 rounded-full" style={{ width: '88%' }}></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+
+                  <div className="flex gap-3 justify-center">
                     {[
                       { icon: "M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z", href: "https://youtube.com/@ghostysgarage" },
                       { icon: "M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z", href: "https://twitter.com/ghostysgarage" },
@@ -364,7 +380,7 @@ export function AboutMeSection() {
 
                         <div className="space-y-6">
                           <div className="relative pl-6 border-l border-purple-600/30">
-                            <div className="absolute w-3 h-3 bg-purple-600 rounded-full -left-[6.5px] top-1"></div>
+                            <div className="absolute w-3 h-3 bg-purple-600 rounded-full -left-[6.5px] top-1</div>
                             <div className="mb-1">
                               <span className="text-purple-400">2024 - Present</span>
                               <h5 className="text-white font-medium">Founder & Lead Developer - Ghosty's Garage</h5>
