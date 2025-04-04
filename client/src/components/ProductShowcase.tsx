@@ -746,13 +746,20 @@ export function ProductShowcase() {
       </div>
       
       {/* Custom CSS for hiding scrollbars but keeping functionality */}
-      <style jsx global>{`
+      <style jsx="true" global="true">{`
         .hide-scrollbar {
           -ms-overflow-style: none;
           scrollbar-width: none;
         }
         .hide-scrollbar::-webkit-scrollbar {
           display: none;
+        }
+      `}</style>
+      <style jsx="true" global="true">{`
+        .product-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 2rem;
         }
       `}</style>
     </section>
