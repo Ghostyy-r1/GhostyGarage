@@ -67,6 +67,14 @@ export default function Home() {
         </Suspense>
 
         <Suspense fallback={<LoadingFallback />}>
+          <MembershipTiers />
+        </Suspense>
+
+        <Suspense fallback={<LoadingFallback />}>
+          <CTASection />
+        </Suspense>
+
+        <Suspense fallback={<LoadingFallback />}>
           <TestimonialsSection />
         </Suspense>
         
