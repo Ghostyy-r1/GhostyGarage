@@ -1,176 +1,151 @@
-
-import { Heart, Star, History, Lightbulb, Target, Settings, Wrench } from 'lucide-react';
+import { Heart, Star, History, Lightbulb, Target, Settings, Wrench, Users, Shield, Coffee } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { AnimatedReveal } from '@/components/ui/animated-reveal';
+import { Button } from '@/components/ui/button';
+
+const FeatureCard = ({ icon: Icon, title, description, link, delay }: any) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.6, delay }}
+    whileHover={{ y: -5 }}
+    className="relative group"
+  >
+    <Card className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+      <CardContent className="p-6 space-y-4">
+        <div className="bg-purple-600/20 rounded-lg p-3 w-fit group-hover:bg-purple-600/30 transition-colors">
+          <Icon className="w-6 h-6 text-purple-400" />
+        </div>
+        <h3 className="text-xl font-semibold text-white">{title}</h3>
+        <p className="text-gray-400">{description}</p>
+        <Button 
+          variant="ghost" 
+          className="group/btn mt-4 text-purple-400 hover:text-purple-300"
+        >
+          {link}
+          <motion.span 
+            className="ml-2 inline-block"
+            initial={{ x: 0 }}
+            whileHover={{ x: 5 }}
+          >
+            →
+          </motion.span>
+        </Button>
+      </CardContent>
+    </Card>
+  </motion.div>
+);
 
 export function AboutGarageSectionTabs() {
-  const timelineEvents = [
+  const features = [
     {
-      year: '2020',
-      title: 'Ghosty\'s Garage Founded',
-      description: 'Started as a small community of passionate riders'
+      icon: Users,
+      title: "Community Support",
+      description: "Join a vibrant community of riders who share your passion for motorcycles.",
+      link: "Join Community",
+      delay: 0.1
     },
     {
-      year: '2021',
-      title: 'Community Growth',
-      description: 'Expanded to over 10,000 members worldwide'
+      icon: Wrench,
+      title: "Expert Guidance",
+      description: "Access professional mechanics and experienced riders for maintenance advice.",
+      link: "Get Help",
+      delay: 0.2
     },
     {
-      year: '2022',
-      title: 'Digital Platform Launch',
-      description: 'Introduced our comprehensive maintenance platform'
+      icon: Shield,
+      title: "Safety First",
+      description: "Learn best practices and safety tips from certified instructors.",
+      link: "Learn More",
+      delay: 0.3
     },
     {
-      year: '2023',
-      title: 'Premium Services',
-      description: 'Launched exclusive membership benefits'
+      icon: Coffee,
+      title: "Social Events",
+      description: "Regular meetups, rides, and social gatherings for members.",
+      link: "View Events",
+      delay: 0.4
     }
   ];
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <Tabs defaultValue="vision" className="w-full">
-        <TabsList className="h-auto p-4 bg-gray-900/50 backdrop-blur-md rounded-xl border border-purple-600/20 mb-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
-          {[
-            { value: 'vision', icon: Heart, label: 'Our Vision' },
-            { value: 'values', icon: Star, label: 'Values' },
-            { value: 'history', icon: History, label: 'History' },
-            { value: 'innovation', icon: Lightbulb, label: 'Innovation' },
-            { value: 'goals', icon: Target, label: 'Goals' },
-            { value: 'services', icon: Settings, label: 'Services' }
-          ].map(({ value, icon: Icon, label }) => (
-            <TabsTrigger 
-              key={value} 
-              value={value} 
-              className="data-[state=active]:bg-purple-600/20 text-lg py-3 flex-col gap-2 h-auto"
-            >
-              <Icon className="w-5 h-5 mb-1" />
-              {label}
-            </TabsTrigger>
+    <section className="py-20 bg-gradient-to-b from-black to-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <AnimatedReveal variant="fade" direction="up">
+            <span className="inline-block bg-purple-600/20 px-4 py-1.5 rounded-full text-sm font-medium text-purple-400 mb-4">
+              ABOUT GHOSTY'S GARAGE
+            </span>
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Your Ultimate Motorcycle Community Hub
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              We're more than just a community - we're your trusted partner in the motorcycle journey
+            </p>
+          </AnimatedReveal>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {features.map((feature, index) => (
+            <FeatureCard key={index} {...feature} />
           ))}
-        </TabsList>
+        </div>
 
-        {/* Vision Tab */}
-        <TabsContent value="vision">
-          <AnimatedReveal variant="fade" direction="up">
-            <Card className="bg-gray-900/50 backdrop-blur-md border-purple-600/20">
-              <CardContent className="p-8">
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                    <Heart className="w-12 h-12 text-purple-400" />
-                    <h3 className="text-3xl font-bold text-white">Our Vision</h3>
-                    <p className="text-gray-300 text-lg leading-relaxed">
-                      We envision a world where every motorcycle enthusiast has access to premium maintenance resources, 
-                      a supportive community, and the tools they need to keep their bikes in perfect condition.
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    {[
-                      { title: 'Community', value: '10K+' },
-                      { title: 'Countries', value: '50+' },
-                      { title: 'Resources', value: '1000+' },
-                      { title: 'Success Rate', value: '99%' }
-                    ].map((stat, index) => (
-                      <AnimatedReveal 
-                        key={stat.title} 
-                        variant="fade" 
-                        direction="up" 
-                        delay={0.1 * index}
-                      >
-                        <div className="bg-purple-600/10 rounded-lg p-4 border border-purple-500/20">
-                          <div className="text-2xl font-bold text-purple-400">{stat.value}</div>
-                          <div className="text-gray-400">{stat.title}</div>
-                        </div>
-                      </AnimatedReveal>
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </AnimatedReveal>
-        </TabsContent>
+        <Tabs defaultValue="vision" className="w-full">
+          <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-transparent">
+            {[
+              { value: 'vision', icon: Heart, label: 'Our Vision' },
+              { value: 'values', icon: Star, label: 'Values' },
+              { value: 'history', icon: History, label: 'History' },
+              { value: 'innovation', icon: Lightbulb, label: 'Innovation' }
+            ].map(({ value, icon: Icon, label }) => (
+              <TabsTrigger
+                key={value}
+                value={value}
+                className="relative overflow-hidden bg-gray-800/50 border border-purple-500/20 hover:bg-purple-600/20 data-[state=active]:bg-purple-600/30"
+              >
+                <Icon className="w-5 h-5 mb-2" />
+                <span>{label}</span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
 
-        {/* History Tab */}
-        <TabsContent value="history">
-          <AnimatedReveal variant="fade" direction="up">
-            <Card className="bg-gray-900/50 backdrop-blur-md border-purple-600/20">
-              <CardContent className="p-8">
-                <div className="space-y-8">
-                  <div className="flex items-center gap-4 mb-8">
-                    <History className="w-12 h-12 text-purple-400" />
-                    <h3 className="text-3xl font-bold text-white">Our Journey</h3>
-                  </div>
-                  <div className="relative">
-                    <div className="absolute left-4 top-0 h-full w-0.5 bg-purple-600/20" />
-                    {timelineEvents.map((event, index) => (
-                      <AnimatedReveal
-                        key={event.year}
-                        variant="fade"
-                        direction="up"
-                        delay={0.1 * index}
-                        className="relative pl-12 pb-8 last:pb-0"
-                      >
-                        <div className="absolute left-0 w-8 h-8 rounded-full bg-purple-600/20 border-2 border-purple-400 flex items-center justify-center">
-                          <div className="w-3 h-3 rounded-full bg-purple-400" />
-                        </div>
-                        <div className="bg-purple-600/10 rounded-lg p-6 border border-purple-500/20">
-                          <div className="text-xl font-bold text-purple-400 mb-2">{event.year}</div>
-                          <div className="text-white font-semibold mb-2">{event.title}</div>
-                          <p className="text-gray-300">{event.description}</p>
-                        </div>
-                      </AnimatedReveal>
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </AnimatedReveal>
-        </TabsContent>
+          <div className="mt-8">
+            <TabsContent value="vision" className="space-y-4">
+              <Card className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-purple-500/20">
+                <CardContent className="p-8">
+                  <AnimatedReveal variant="fade" direction="up">
+                    <h3 className="text-2xl font-bold text-white mb-4">Building Tomorrow's Riding Experience</h3>
+                    <p className="text-gray-400">Our vision is to create the most comprehensive and supportive motorcycle community platform, where riders of all levels can connect, learn, and grow together.</p>
+                  </AnimatedReveal>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-        {/* Other tab contents with similar premium styling */}
-        <TabsContent value="values">
-          <AnimatedReveal variant="fade" direction="up">
-            <Card className="bg-gray-900/50 backdrop-blur-md border-purple-600/20">
-              <CardContent className="p-8">
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                    <Star className="w-12 h-12 text-purple-400" />
-                    <h3 className="text-3xl font-bold text-white">Core Values</h3>
-                    <p className="text-gray-300 text-lg leading-relaxed">
-                      Our values shape everything we do, from how we interact with community members 
-                      to how we approach motorcycle maintenance and education.
-                    </p>
-                  </div>
-                  <div className="grid gap-4">
-                    {[
-                      'Excellence in Service',
-                      'Community First',
-                      'Innovation',
-                      'Safety Always'
-                    ].map((value, index) => (
-                      <AnimatedReveal 
-                        key={value} 
-                        variant="fade" 
-                        direction="up" 
-                        delay={0.1 * index}
-                      >
-                        <div className="bg-purple-600/10 rounded-lg p-4 border border-purple-500/20">
-                          <div className="text-white font-semibold">{value}</div>
-                        </div>
-                      </AnimatedReveal>
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </AnimatedReveal>
-        </TabsContent>
+            {/* Add similar content for other tabs */}
+          </div>
+        </Tabs>
 
-        {/* Add similar premium styling for other tabs */}
-      </Tabs>
-    </div>
+        <div className="text-center mt-12">
+          <Button 
+            variant="ghost" 
+            className="text-purple-400 hover:text-purple-300 group"
+          >
+            Learn More About Us
+            <motion.span 
+              className="ml-2 inline-block"
+              initial={{ x: 0 }}
+              whileHover={{ x: 5 }}
+            >
+              →
+            </motion.span>
+          </Button>
+        </div>
+      </div>
+    </section>
   );
 }
 
