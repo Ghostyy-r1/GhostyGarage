@@ -38,7 +38,7 @@ const Testimonial = ({
     whileHover={{ y: -10, transition: { duration: 0.3 } }}
     className="h-full"
   >
-    <Card className="h-full bg-gradient-to-br from-gray-800 to-[#1c1c1c] p-6 rounded-xl shadow-[0_10px_40px_-15px_rgba(138,43,226,0.2)] border border-purple-900/30 relative overflow-hidden">
+    <Card className="h-full bg-gradient-to-br from-gray-800/80 via-gray-900 to-black p-6 rounded-xl shadow-[0_10px_40px_-15px_rgba(138,43,226,0.3)] border border-purple-500/20 backdrop-blur-sm relative overflow-hidden transition-all duration-300 hover:shadow-[0_20px_50px_-15px_rgba(138,43,226,0.4)] hover:border-purple-500/30">
       <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-purple-600/20 to-transparent rounded-bl-[100px] -z-0" />
       
       <CardContent className="p-0 relative z-10 h-full flex flex-col">

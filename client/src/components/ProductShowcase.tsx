@@ -110,7 +110,7 @@ const ProductCard = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Card className="h-full overflow-hidden group border-gray-800 bg-gradient-to-b from-gray-900 to-gray-950 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 flex flex-col">
+      <Card className="h-full overflow-hidden group border-gray-800/50 bg-gradient-to-b from-gray-900/90 via-gray-900 to-black backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/30 transition-all duration-300 flex flex-col">
         <div className="relative overflow-hidden pt-[80%]">
           <motion.div
             animate={{

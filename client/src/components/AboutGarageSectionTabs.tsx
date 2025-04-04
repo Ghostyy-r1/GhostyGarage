@@ -72,9 +72,10 @@ export function AboutGarageSectionTabs() {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-black to-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+    <section className="py-24 bg-gradient-to-b from-black via-gray-900 to-black relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="text-center mb-20">
           <AnimatedReveal variant="fade" direction="up">
             <span className="inline-block bg-purple-600/20 px-4 py-1.5 rounded-full text-sm font-medium text-purple-400 mb-4">
               ABOUT GHOSTY'S GARAGE

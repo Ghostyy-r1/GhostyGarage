@@ -90,8 +90,9 @@ export function FeaturesSection() {
   ];
 
   return (
-    <section className="py-16 bg-[#1E1E1E] features-section">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-gradient-to-b from-gray-900 to-black relative features-section">
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div 
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
