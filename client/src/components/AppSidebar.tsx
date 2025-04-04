@@ -181,7 +181,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                 />
               </div>
             </div>
-            <SidebarSeparator className="mb-2" />
+            <SidebarSeparator className="my-4 bg-purple-500/20" />
           </SidebarHeader>
 
           <SidebarContent className="px-2">
@@ -192,6 +192,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                   <h3 className="px-2 text-xs font-bold uppercase tracking-widest text-purple-400/90 bg-gradient-to-r from-purple-500/10 to-transparent py-2 rounded-lg">
                     Navigation
                   </h3>
+                  <div className="h-px bg-gradient-to-r from-purple-500/20 to-transparent mt-2"></div>
                 </div>
 
                 <SidebarMenu className="space-y-1">
