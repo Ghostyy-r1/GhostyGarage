@@ -1,4 +1,3 @@
-
 import { motion, AnimatePresence } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
@@ -36,7 +35,7 @@ export function AboutGarageSectionTabs() {
               <TabsTrigger 
                 key={tab.id} 
                 value={tab.id}
-                className="group data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-400 relative py-2 transition-all duration-300"
+                className="group data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-400 relative py-2 transition-all duration-300 hover:bg-purple-600/20"
               >
                 <div className="flex flex-col items-center gap-1">
                   <tab.icon className="w-5 h-5 group-hover:text-purple-400 transition-colors" />
@@ -61,7 +60,7 @@ export function AboutGarageSectionTabs() {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Card className="bg-gray-900/50 backdrop-blur-md border-purple-600/20">
+                  <Card className="bg-gray-900/50 backdrop-blur-lg border-purple-600/20 hover:bg-gray-900/60 hover:border-purple-500/30 transition-all duration-300 shadow-lg hover:shadow-purple-500/10">
                     <CardContent className="p-6">
                       <h3 className="text-2xl font-bold text-white mb-4">Welcome to the Garage</h3>
                       <p className="text-gray-300 mb-6">
@@ -114,10 +113,10 @@ export function AboutGarageSectionTabs() {
                     ].map((value, index) => (
                       <ThreeDCard
                         key={index}
-                        className="bg-gray-900/50 backdrop-blur-md border-purple-600/20 p-6"
+                        className="bg-gray-900/50 backdrop-blur-lg border-purple-600/20 p-6 hover:bg-gray-900/60 hover:border-purple-500/30 transition-all duration-500 shadow-xl hover:shadow-purple-500/20 group"
                         glareEnabled={true}
-                        rotationIntensity={15}
-                        glareColor="rgba(168, 85, 247, 0.4)"
+                        rotationIntensity={20}
+                        glareColor="rgba(168, 85, 247, 0.5)"
                       >
                         <div className="flex flex-col items-center text-center">
                           <value.icon className="w-10 h-10 text-purple-400 mb-4" />
@@ -158,10 +157,10 @@ export function AboutGarageSectionTabs() {
                     ].map((belief, index) => (
                       <ThreeDCard
                         key={index}
-                        className="bg-gray-900/50 backdrop-blur-md border-purple-600/20 p-6"
+                        className="bg-gray-900/50 backdrop-blur-lg border-purple-600/20 p-6 hover:bg-gray-900/60 hover:border-purple-500/30 transition-all duration-500 shadow-xl hover:shadow-purple-500/20 group"
                         glareEnabled={true}
-                        rotationIntensity={10}
-                        glareColor="rgba(168, 85, 247, 0.3)"
+                        rotationIntensity={20}
+                        glareColor="rgba(168, 85, 247, 0.5)"
                       >
                         <h4 className="text-xl font-bold text-white mb-2">{belief.title}</h4>
                         <p className="text-gray-300">{belief.description}</p>
@@ -178,7 +177,7 @@ export function AboutGarageSectionTabs() {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Card className="bg-gray-900/50 backdrop-blur-md border-purple-600/20">
+                  <Card className="bg-gray-900/50 backdrop-blur-lg border-purple-600/20 hover:bg-gray-900/60 hover:border-purple-500/30 transition-all duration-300 shadow-lg hover:shadow-purple-500/10">
                     <CardContent className="p-6">
                       <div className="space-y-8">
                         {[
@@ -204,8 +203,9 @@ export function AboutGarageSectionTabs() {
                           }
                         ].map((event, index) => (
                           <div key={index} className="relative pl-8 border-l-2 border-purple-600/30">
-                            <div className="absolute w-4 h-4 bg-purple-600 rounded-full -left-[9px] top-0">
+                            <div className="absolute w-4 h-4 bg-purple-600 rounded-full -left-[9px] top-0 shadow-lg shadow-purple-500/50">
                               <div className="absolute w-8 h-8 bg-purple-600/20 rounded-full -left-2 -top-2 animate-pulse" />
+                              <div className="absolute w-12 h-12 bg-purple-600/10 rounded-full -left-4 -top-4 animate-ping" />
                             </div>
                             <div className="mb-1">
                               <span className="text-purple-400 font-semibold">{event.year}</span>
@@ -227,7 +227,7 @@ export function AboutGarageSectionTabs() {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Card className="bg-gray-900/50 backdrop-blur-md border-purple-600/20">
+                  <Card className="bg-gray-900/50 backdrop-blur-lg border-purple-600/20 hover:bg-gray-900/60 hover:border-purple-500/30 transition-all duration-300 shadow-lg hover:shadow-purple-500/10">
                     <CardContent className="p-6">
                       <h3 className="text-2xl font-bold text-white mb-4">The Story Behind Ghosty's Garage</h3>
                       <p className="text-gray-300 mb-6">
@@ -272,7 +272,7 @@ export function AboutGarageSectionTabs() {
                     ].map((future, index) => (
                       <ThreeDCard
                         key={index}
-                        className="bg-gray-900/50 backdrop-blur-md border-purple-600/20 p-6"
+                        className="bg-gray-900/50 backdrop-blur-lg border-purple-600/20 p-6 hover:bg-gray-900/60 hover:border-purple-500/30 transition-all duration-500 shadow-xl hover:shadow-purple-500/20 group"
                         glareEnabled={true}
                         rotationIntensity={20}
                         glareColor="rgba(168, 85, 247, 0.5)"
