@@ -29,66 +29,8 @@ import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CartButton } from "@/components/CartButton";
+import { Header } from "./Navbar"; // Added import for the new Header component
 
-// Header Component (now inside the Sidebar context)
-function Header() {
-  return (
-    <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between border-b border-gray-800 bg-background bg-gradient-to-r from-gray-900 to-black px-4 shadow-lg mt-auto"
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      {/* Left section with hamburger menu */}
-      <div className="flex items-center">
-        <SidebarTrigger>
-          <Menu className="h-5 w-5 text-gray-300 hover:text-white" />
-        </SidebarTrigger>
-        <div className="mx-3 h-5 w-px bg-gray-700"></div>
-        <Link href="/">
-          <div className="flex items-center gap-2 cursor-pointer">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-md">
-              <span className="text-md font-bold">G</span>
-            </div>
-            <span className="text-xl font-bold">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">Ghosty's</span>
-              <span className="text-white"> Garage</span>
-            </span>
-          </div>
-        </Link>
-      </div>
-
-      {/* Center section - empty for balance */}
-      <div className="hidden md:block">
-        {/* Empty space for balance */}
-      </div>
-
-      {/* Right section with action buttons */}
-      <div className="flex items-center gap-3">
-        <Button 
-          variant="ghost" 
-          size="sm"
-          className="flex items-center gap-2 bg-purple-900/20 hover:bg-purple-900/30 text-purple-400 border border-purple-800/50 transition-all duration-300"
-        >
-          <FaDiscord className="h-4 w-4" />
-          <span className="hidden sm:inline">Discord</span>
-        </Button>
-        <Button 
-          size="sm"
-          className="relative bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-md shadow-purple-900/20 group overflow-hidden animate-pulse border-4 border-purple-400/50 hover:border-purple-400/80" //Added thicker glowing border
-        >
-          <span className="relative z-10">Sign In</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-400 opacity-0 group-hover:opacity-30 animate-pulse transition-opacity duration-300"></div>
-          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-30 group-hover:opacity-50 animate-pulse transition-all duration-500"></div>
-          <div className="absolute -inset-px bg-gradient-to-r from-purple-500/50 to-indigo-500/50 rounded-lg animate-pulse" />
-        </Button>
-        <div className="flex-shrink-0">
-          <CartButton className="border-2 border-purple-500/50 hover:border-purple-500/80 transition-colors duration-300 shadow-lg shadow-purple-500/20" />
-        </div>
-      </div>
-    </motion.header>
-  );
-}
 
 interface SidebarNavItemProps {
   href: string;
@@ -287,7 +229,8 @@ export function AppSidebar({ children }: AppSidebarProps) {
         </Sidebar>
 
         <div className="flex flex-1 flex-col">
-          <main className="relative flex-1 overflow-y-auto pt-16">
+          <Header /> {/* Added the new Header component */}
+          <main className="relative flex-1 overflow-y-auto pt-24"> {/* Increased padding to account for header */}
             {children}
           </main>
         </div>

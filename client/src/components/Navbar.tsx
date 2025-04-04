@@ -7,7 +7,7 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 import { CartButton } from "./CartButton";
 import { AnnouncementBanner } from "./AnnouncementBanner";
 
-export function Navbar() {
+export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
