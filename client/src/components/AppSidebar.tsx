@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { Search } from "lucide-react";
 import { 
   Sidebar, 
   SidebarContent, 
@@ -25,7 +24,7 @@ import {
   MapPin,
   Settings,
   LogOut,
-  Search,
+  Search
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FaDiscord } from "react-icons/fa";

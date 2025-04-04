@@ -8,20 +8,29 @@ import About from "@/pages/About"; // Added About page import
 import { AppSidebar } from "@/components/AppSidebar";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { GhostyChatButton } from "@/components/GhostyChatButton";
-import { Navbar } from "@/components/Navbar";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 import FAQ from "@/components/FAQ"; // Added FAQ component import
 
 
-function Router() {
+function App() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/about" component={About} /> {/* Added About page route */}
-      <Route component={NotFound} />
-    </Switch>
+    <QueryClientProvider client={queryClient}>
+      <ErrorBoundary>
+        <AppSidebar>
+          <Switch>
+            <Route path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route component={NotFound} />
+          </Switch>
+        </AppSidebar>
+        <GhostyChatButton />
+        <Toaster />
+      </ErrorBoundary>
+    </QueryClientProvider>
   );
 }
+
+export default App;
 
 function App() {
   // Using the sidebar navigation as requested
