@@ -1,1 +1,1 @@
-import { Heart, Star, History, Lightbulb, Target, Wrench } from 'lucide-react';
+import { Heart, Star, History, Lightbulb, Target, Settings } from 'lucide-react';

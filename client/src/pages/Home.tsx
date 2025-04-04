@@ -1,17 +1,18 @@
 import { lazy, Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HeroSection } from "@/components/HeroSection";
 
 // Lazy load components for better performance
-const AboutGarageSectionTabs = lazy(() => import("@/components/AboutGarageSectionTabs").then(module => ({ default: module.AboutGarageSectionTabs })));
-const FeaturesSection = lazy(() => import("@/components/FeaturesSection").then(module => ({ default: module.FeaturesSection })));
-const CommunityHighlights = lazy(() => import("@/components/CommunityHighlights").then(module => ({ default: module.CommunityHighlights })));
-const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection").then(module => ({ default: module.TestimonialsSection })));
-const ProductShowcase = lazy(() => import("@/components/ProductShowcase").then(module => ({ default: module.ProductShowcase })));
-const CTASection = lazy(() => import("@/components/CTASection").then(module => ({ default: module.CTASection })));
-const ContactSection = lazy(() => import("@/components/ContactSection").then(module => ({ default: module.ContactSection })));
-const Footer = lazy(() => import("@/components/Footer").then(module => ({ default: module.Footer })));
+const AboutGarageSectionTabs = lazy(() => import("@/components/AboutGarageSectionTabs"));
+const FeaturesSection = lazy(() => import("@/components/FeaturesSection"));
+const CommunityHighlights = lazy(() => import("@/components/CommunityHighlights"));
+const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
+const ProductShowcase = lazy(() => import("@/components/ProductShowcase"));
+const CTASection = lazy(() => import("@/components/CTASection"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
+const Footer = lazy(() => import("@/components/Footer"));
 
 // Loading component with animation
 function LoadingFallback() {
@@ -47,10 +48,12 @@ export default function Home() {
         
         {/* About Section */}
       <section id="about" className="relative z-10 bg-background min-h-screen flex items-center">
-        <div className="w-full">
-          <Suspense fallback={<LoadingFallback />}>
-            <AboutGarageSectionTabs />
-          </Suspense>
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <Suspense fallback={<LoadingFallback />}>
+              <AboutGarageSectionTabs />
+            </Suspense>
+          </ErrorBoundary>
         </div>
       </section>
 
