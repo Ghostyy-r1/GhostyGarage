@@ -84,35 +84,50 @@ export function HeroSection() {
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, 50]) }}
           className="absolute -bottom-[40%] -right-[10%] w-[60%] h-[80%] rounded-full bg-gradient-to-r from-purple-900/30 to-indigo-800/30 blur-3xl"
         />
-        {Array.from({ length: 6 }).map((_, i) => (
+        {Array.from({ length: 8 }).map((_, i) => (
           <motion.div
             key={`blob-${i}`}
+            initial={{
+              x: `${Math.random() * 100}%`,
+              y: `${Math.random() * 100}%`,
+            }}
             animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
+              scale: [1, 1.3, 1.1, 1.4, 1],
+              opacity: [0.4, 0.7, 0.5, 0.8, 0.4],
               x: [
-                `${Math.random() * 100 - 50}%`,
-                `${Math.random() * 100 - 50}%`,
-                `${Math.random() * 100 - 50}%`
+                `${Math.random() * 100}%`,
+                `${Math.random() * 100}%`,
+                `${Math.random() * 100}%`,
+                `${Math.random() * 100}%`,
+                `${Math.random() * 100}%`
               ],
               y: [
-                `${Math.random() * 100 - 50}%`,
-                `${Math.random() * 100 - 50}%`,
-                `${Math.random() * 100 - 50}%`
+                `${Math.random() * 100}%`,
+                `${Math.random() * 100}%`,
+                `${Math.random() * 100}%`,
+                `${Math.random() * 100}%`,
+                `${Math.random() * 100}%`
               ],
-              borderRadius: ['60% 40% 30% 70%', '30% 60% 70% 40%', '60% 40% 30% 70%']
+              borderRadius: [
+                '60% 40% 30% 70% / 60% 30% 70% 40%',
+                '30% 60% 70% 40% / 50% 60% 30% 60%',
+                '40% 60% 50% 70% / 40% 50% 60% 50%',
+                '50% 60% 40% 30% / 30% 40% 70% 60%',
+                '60% 40% 30% 70% / 60% 30% 70% 40%'
+              ]
             }}
             transition={{
-              duration: Math.random() * 10 + 15,
+              duration: Math.random() * 15 + 20,
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className={`absolute bg-gradient-to-br from-purple-600/20 to-indigo-600/20 blur-3xl pointer-events-none`}
+            className="absolute pointer-events-none"
             style={{
-              width: `${Math.random() * 30 + 20}%`,
-              height: `${Math.random() * 30 + 20}%`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              width: `${Math.random() * 35 + 25}%`,
+              height: `${Math.random() * 35 + 25}%`,
+              background: `radial-gradient(circle at ${Math.random() * 100}% ${Math.random() * 100}%, rgba(168, 85, 247, 0.4), rgba(99, 102, 241, 0.4))`,
+              filter: 'blur(50px)',
+              mixBlendMode: 'lighten'
             }}
           />
         ))}
