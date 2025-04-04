@@ -70,7 +70,7 @@ function Header() {
             placeholder="Search for products, guides, or resources..."
             className="w-full bg-gray-900/50 border border-gray-700 rounded-lg px-4 py-2 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
           />
-          <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
+          {/* Search component removed until implemented */}
         </div>
       </div>
 
@@ -109,7 +109,7 @@ interface SidebarNavItemProps {
 
 const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps) => {
   const isActive = currentPath === href;
-  
+
   return (
     <SidebarMenuItem>
       <Link href={href} className="w-full">
@@ -125,7 +125,7 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
           <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-r-md transition-all duration-300 ${
             isActive ? 'opacity-100' : 'opacity-0'
           } group-hover/item:opacity-60`} />
-          
+
           {/* Icon container */}
           <div className="mr-3">
             <div 
@@ -138,7 +138,7 @@ const SidebarNavItem = ({ href, icon, label, currentPath }: SidebarNavItemProps)
               {icon}
             </div>
           </div>
-          
+
           {/* Label container */}
           <div className="overflow-visible whitespace-nowrap">
             <span 
@@ -202,7 +202,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
               </div>
             </div>
           </SidebarHeader>
-          
+
           <SidebarContent className="px-2">
             {/* Main navigation */}
             <div className="mb-2 px-2">
@@ -210,7 +210,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                 Navigation
               </h3>
             </div>
-            
+
             <SidebarMenu>
               {primaryNavItems.map((item, index) => (
                 <motion.div
@@ -228,16 +228,16 @@ export function AppSidebar({ children }: AppSidebarProps) {
                 </motion.div>
               ))}
             </SidebarMenu>
-            
+
             <SidebarSeparator className="my-3" />
-            
+
             {/* Personal section */}
             <div className="mb-2 px-2">
               <h3 className="mb-1 px-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
                 Personal
               </h3>
             </div>
-            
+
             <SidebarMenu>
               {secondaryNavItems.map((item, index) => (
                 <motion.div
@@ -256,7 +256,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
               ))}
             </SidebarMenu>
           </SidebarContent>
-          
+
           <SidebarFooter className="mt-auto">
             <SidebarSeparator className="mb-2" />
             <SidebarMenu>
@@ -285,7 +285,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
             </SidebarMenu>
           </SidebarFooter>
         </Sidebar>
-        
+
         <div className="flex flex-1 flex-col">
           <main className="relative flex-1 overflow-y-auto pt-16">
             {children}
