@@ -16,17 +16,20 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary>
-        <div className="relative">
+        <div className="relative min-h-screen">
           <div className="fixed top-0 left-0 right-0 z-50">
             <AnnouncementBanner />
+            <Navbar />
           </div>
-          <AppSidebar>
-            <Switch>
-              <Route path="/" component={Home} />
-              <Route path="/about" component={About} />
-              <Route component={NotFound} />
-            </Switch>
-          </AppSidebar>
+          <div className="pt-24">
+            <AppSidebar>
+              <Switch>
+                <Route path="/" component={Home} />
+                <Route path="/about" component={About} />
+                <Route component={NotFound} />
+              </Switch>
+            </AppSidebar>
+          </div>
         </div>
         <GhostyChatButton />
         <Toaster />
