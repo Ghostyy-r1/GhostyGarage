@@ -86,33 +86,32 @@ export function HeroSection() {
           </defs>
         </svg>
         <div className="absolute inset-0" style={{ filter: 'url(#goo)' }}>
-          {Array.from({ length: 8 }).map((_, i) => {
-            const initialSize = 100 + (Math.random() * 50);
-            const maxSize = initialSize * 2;
-            const startX = 15 + (Math.random() * 70); // Random start position within 15-85% of width
-            const cycleDelay = i * (12 / 8); // Evenly space out the delays
-            const cycleDuration = 15 + (Math.random() * 5); // Base cycle duration with slight variation
+          {Array.from({ length: 12 }).map((_, i) => {
+            const initialSize = 80 + (Math.random() * 40);
+            const randomStartX = Math.random() * 100;
+            const cycleDelay = i * (20 / 12);
+            const cycleDuration = 20 + (Math.random() * 10);
             
             return (
               <motion.div
                 key={`blob-${i}`}
                 initial={{
-                  x: `${startX}%`,
-                  y: '100%',
-                  scale: 0.5,
+                  x: `${randomStartX}%`,
+                  y: '120%',
+                  scale: 0.3,
                   opacity: 0.1
                 }}
                 animate={{
-                  scale: [0.5, 1.2, 1.5, 1.2, 0.5],
-                  opacity: [0.1, 0.3, 0.4, 0.3, 0.1],
+                  scale: [0.3, 1.4, 1.8, 1.2, 0.3],
+                  opacity: [0.2, 0.5, 0.6, 0.4, 0.2],
                   x: [
-                    `${startX}%`,
-                    `${startX + (Math.random() * 10 - 5)}%`,
-                    `${startX + (Math.random() * 15 - 7.5)}%`,
-                    `${startX + (Math.random() * 10 - 5)}%`,
-                    `${startX}%`
+                    `${randomStartX}%`,
+                    `${(randomStartX + 30) % 100}%`,
+                    `${(randomStartX + 60) % 100}%`,
+                    `${(randomStartX + 90) % 100}%`,
+                    `${randomStartX}%`
                   ],
-                  y: ['100%', '60%', '20%', '60%', '100%']
+                  y: ['120%', '70%', '20%', '70%', '120%']
                 }}
                 transition={{
                   duration: cycleDuration,
@@ -126,13 +125,13 @@ export function HeroSection() {
                   width: initialSize,
                   height: initialSize,
                   background: `radial-gradient(circle at 50% 50%, 
-                    rgba(147, 51, 234, ${0.15 + (Math.random() * 0.1)}) 0%,
-                    rgba(88, 28, 135, ${0.08 + (Math.random() * 0.05)}) 100%)`,
+                    rgba(147, 51, 234, ${0.3 + (Math.random() * 0.2)}) 0%,
+                    rgba(88, 28, 135, ${0.2 + (Math.random() * 0.1)}) 100%)`,
                   borderRadius: '50%',
-                  mixBlendMode: 'screen',
-                  filter: 'brightness(0.85)',
+                  mixBlendMode: 'plus-lighter',
+                  filter: 'brightness(1.2) contrast(1.2)',
                   zIndex: i,
-                  backdropFilter: 'blur(8px)'
+                  backdropFilter: 'blur(12px)'
                 }}
               />
             );
