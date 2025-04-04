@@ -7,14 +7,12 @@
   color-scheme: dark;
 }
 
-/* Add this script to set theme immediately */
-@script {
-  (function() {
-    const theme = localStorage.getItem('theme') || 'dark';
-    const root = document.documentElement;
-    root.classList.remove('light', 'dark');
-    root.classList.add(theme);
-  })();
+:root[class='dark'] {
+  color-scheme: dark;
+}
+
+:root[class='light'] {
+  color-scheme: light;
 }
 
 /* Custom styles for the resizable chat window */
