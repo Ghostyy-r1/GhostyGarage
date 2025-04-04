@@ -154,19 +154,11 @@ export function HeroSection() {
                     Explore Products
                     <ChevronRight className="ml-2 h-4 w-4 transition-all duration-300" />
                   </span>
-                  <div className="absolute -inset-1 animate-pulse-outline bg-gradient-to-r from-purple-500 to-indigo-500 rounded-lg opacity-70"></div>
-                  <div className="absolute inset-0 animate-pulse-glow bg-purple-500/20 rounded-lg filter blur-sm"></div>
+                  <div className="absolute -inset-[2px] border-2 border-purple-500/50 rounded-lg animate-pulse-outline"></div>
                   <style jsx>{`
-                    @keyframes pulse-glow {
-                      0%, 100% { opacity: 0.3; transform: scale(1); }
-                      50% { opacity: 0.6; transform: scale(1.02); }
-                    }
                     @keyframes pulse-outline {
                       0%, 100% { opacity: 0.3; transform: scale(1); }
-                      50% { opacity: 0.7; transform: scale(1.05); }
-                    }
-                    .animate-pulse-glow {
-                      animation: pulse-glow 2s ease-in-out infinite;
+                      50% { opacity: 1; transform: scale(1.02); }
                     }
                     .animate-pulse-outline {
                       animation: pulse-outline 2s ease-in-out infinite;
