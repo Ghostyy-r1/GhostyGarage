@@ -116,7 +116,7 @@ export function HeroSection() {
                 <br />
                 <div className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500 inline-block relative">
                   Motorcycle Community
-                  <span className="absolute -bottom-1 left-0 w-[90%] h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-[70%] h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full shadow-glow"></span>
                 </div>
               </h1>
             </AnimatedReveal>
@@ -131,14 +131,15 @@ export function HeroSection() {
               <div className="flex flex-wrap gap-4">
                 <Button 
                   size="lg" 
-                  className="relative group bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg shadow-purple-500/20 h-12 text-base font-medium overflow-hidden"
+                  className="relative group bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg shadow-purple-500/20 h-12 text-base font-medium overflow-hidden animate-pulse"
                 >
                   <span className="relative z-10 flex items-center">
                     Join Community
-                    <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-all duration-500 animate-bounce-x" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-400 opacity-0 group-hover:opacity-30 animate-pulse transition-opacity duration-300"></div>
                   <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-30 group-hover:opacity-50 animate-pulse transition-all duration-500"></div>
+                  <div className="absolute -inset-px bg-gradient-to-r from-purple-500/50 to-indigo-500/50 rounded-lg animate-pulse"></div>
                 </Button>
                 <Button 
                   size="lg" 
@@ -153,9 +154,9 @@ export function HeroSection() {
                 >
                   <span className="relative z-10 flex items-center">
                     Explore Products
-                    <ChevronRight className="ml-2 h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+                    <ChevronRight className="ml-2 h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 animate-bounce-x" />
                   </span>
-                  <div className="absolute inset-0 border-2 border-purple-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 border-2 border-purple-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:shadow-glow"></div>
                 </Button>
               </div>
             </AnimatedReveal>

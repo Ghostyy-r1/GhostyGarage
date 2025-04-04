@@ -87,14 +87,15 @@ function Header() {
         </Button>
         <Button 
           size="sm"
-          className="relative bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-md shadow-purple-900/20 group overflow-hidden"
+          className="relative bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-md shadow-purple-900/20 group overflow-hidden animate-pulse"
         >
           <span className="relative z-10">Sign In</span>
           <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-indigo-400 opacity-0 group-hover:opacity-30 animate-pulse transition-opacity duration-300"></div>
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-30 group-hover:opacity-50 animate-pulse transition-all duration-500"></div>
+          <div className="absolute -inset-px bg-gradient-to-r from-purple-500/50 to-indigo-500/50 rounded-lg animate-pulse" />
         </Button>
         <div className="flex-shrink-0">
-          <CartButton className="border-2 border-purple-500/30 hover:border-purple-500/50 transition-colors duration-300" />
+          <CartButton className="border-2 border-purple-500/50 hover:border-purple-500/80 transition-colors duration-300 shadow-lg shadow-purple-500/20" />
         </div>
       </div>
     </motion.header>
