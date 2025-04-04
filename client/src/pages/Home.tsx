@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HeroSection } from "@/components/HeroSection";
 
 // Lazy load components for better performance
-const AboutMeSection = lazy(() => import("@/components/AboutMeSection").then(module => ({ default: module.AboutMeSection })));
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection").then(module => ({ default: module.FeaturesSection })));
 const CommunityHighlights = lazy(() => import("@/components/CommunityHighlights").then(module => ({ default: module.CommunityHighlights })));
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection").then(module => ({ default: module.TestimonialsSection })));
@@ -46,10 +45,6 @@ export default function Home() {
         <HeroSection />
         
         {/* Lazy loaded sections with loading indicators */}
-        <Suspense fallback={<LoadingFallback />}>
-          <AboutMeSection />
-        </Suspense>
-
         <Suspense fallback={<LoadingFallback />}>
           <FeaturesSection />
         </Suspense>
