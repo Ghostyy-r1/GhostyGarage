@@ -87,18 +87,23 @@ export function HeroSection() {
         </svg>
         <div className="absolute inset-0" style={{ filter: 'url(#goo)' }}>
           {Array.from({ length: 17 }).map((_, i) => {
-            const initialSize = 200 + (Math.random() * 100);
+            const initialSize = i > 11 ? 120 + (Math.random() * 60) : 80 + (Math.random() * 40);
             const randomStartX = Math.random() * 100;
-            const randomStartY = Math.random() * 120;
-            const cycleDelay = i * (25 / 17);
-            const cycleDuration = 25 + (Math.random() * 15);
-            const wiggleAmount = 30 + Math.random() * 20;
-            const customPath = [
+            const randomStartY = i > 11 ? Math.random() * 80 + 10 : 120; // Distribute new blobs across the height
+            const cycleDelay = i * (20 / 17);
+            const cycleDuration = i > 11 ? 25 + (Math.random() * 15) : 20 + (Math.random() * 10);
+            const customPath = i > 11 ? [
               [randomStartX, randomStartY],
-              [(randomStartX + wiggleAmount) % 100, randomStartY - wiggleAmount],
-              [(randomStartX + wiggleAmount * 2) % 100, randomStartY + wiggleAmount],
-              [(randomStartX + wiggleAmount * 3) % 100, randomStartY - wiggleAmount * 0.5],
+              [(randomStartX + 40) % 100, randomStartY - 30],
+              [(randomStartX + 80) % 100, randomStartY + 30],
+              [(randomStartX + 120) % 100, randomStartY - 20],
               [randomStartX, randomStartY]
+            ] : [
+              [randomStartX, 120],
+              [(randomStartX + 30) % 100, 70],
+              [(randomStartX + 60) % 100, 20],
+              [(randomStartX + 90) % 100, 70],
+              [randomStartX, 120]
             ];
             
             return (
@@ -127,13 +132,12 @@ export function HeroSection() {
                 style={{
                   width: initialSize,
                   height: initialSize,
-                  background: `radial-gradient(circle at ${Math.random() * 100}% ${Math.random() * 100}%, 
-                    rgba(168, 85, 247, ${0.4 + (Math.random() * 0.3)}) 0%,
-                    rgba(147, 51, 234, ${0.3 + (Math.random() * 0.2)}) 50%,
-                    rgba(88, 28, 135, ${0.2 + (Math.random() * 0.2)}) 100%)`,
-                  borderRadius: `${30 + Math.random() * 40}% ${70 + Math.random() * 30}% ${40 + Math.random() * 60}% ${50 + Math.random() * 50}%`,
+                  background: `radial-gradient(circle at 50% 50%, 
+                    rgba(147, 51, 234, ${0.3 + (Math.random() * 0.2)}) 0%,
+                    rgba(88, 28, 135, ${0.2 + (Math.random() * 0.1)}) 100%)`,
+                  borderRadius: '50%',
                   mixBlendMode: 'plus-lighter',
-                  filter: 'brightness(1.4) contrast(1.3) blur(8px)',
+                  filter: 'brightness(1.2) contrast(1.2)',
                   zIndex: i,
                   backdropFilter: 'blur(12px)'
                 }}
