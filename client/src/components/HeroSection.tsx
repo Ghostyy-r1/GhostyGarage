@@ -46,7 +46,7 @@ export function HeroSection() {
   return (
     <div 
       ref={containerRef}
-      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-gray-900 via-[#0c0920] to-transparent px-4 sm:px-6 lg:px-8"
+      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-purple-900/40 via-[#0c0920] to-black px-4 sm:px-6 lg:px-8"
       style={{ position: 'relative' }}
     >
       {/* Animated particles */}
@@ -86,13 +86,15 @@ export function HeroSection() {
           </defs>
         </svg>
         <div className="absolute inset-0" style={{ filter: 'url(#goo)' }}>
-          {Array.from({ length: 12 }).map((_, i) => {
-            const baseSize = Math.random() * 120 + 180;
-            const randomDelay = Math.random() * 15;
-            const duration = Math.random() * 50 + 80;
-            const points = Array.from({ length: 8 }, () => ({
-              x: Math.random() * 90 + 5,
-              y: Math.random() * 90 + 5
+          {Array.from({ length: 15 }).map((_, i) => {
+            const baseSize = Math.random() * 150 + 200;
+            const randomDelay = Math.random() * 20;
+            const duration = Math.random() * 60 + 90;
+            const startX = Math.random() * 100;
+            const startY = Math.random() * 100;
+            const points = Array.from({ length: 6 }, () => ({
+              x: Math.max(0, Math.min(100, startX + (Math.random() - 0.5) * 60)),
+              y: Math.max(0, Math.min(100, startY + (Math.random() - 0.5) * 60))
             }));
             
             return (
@@ -122,12 +124,13 @@ export function HeroSection() {
                   width: baseSize,
                   height: baseSize,
                   background: `radial-gradient(circle at ${Math.random() * 100}% ${Math.random() * 100}%, 
-                    rgb(${Math.random() * 40 + 130}, ${Math.random() * 15 + 25}, ${Math.random() * 160 + 140}) 0%,
-                    rgb(${Math.random() * 25 + 65}, ${Math.random() * 8 + 12}, ${Math.random() * 110 + 90}) 100%)`,
-                  borderRadius: '50%',
+                    rgb(${Math.random() * 50 + 120}, ${Math.random() * 20 + 20}, ${Math.random() * 180 + 120}) 0%,
+                    rgb(${Math.random() * 30 + 60}, ${Math.random() * 10 + 10}, ${Math.random() * 130 + 70}) 100%)`,
+                  borderRadius: '60% 40% 55% 45% / 55% 45% 60% 40%',
                   mixBlendMode: 'screen',
-                  filter: 'brightness(0.85)',
-                  zIndex: Math.floor(Math.random() * 10)
+                  filter: 'brightness(0.75)',
+                  zIndex: Math.floor(Math.random() * 10),
+                  transform: `rotate(${Math.random() * 360}deg)`
                 }}
               />
             );
@@ -181,7 +184,7 @@ export function HeroSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="space-y-8">
             <AnimatedReveal variant="fade" direction="up" delay={0.2}>
-              <div className="inline-block bg-gradient-to-r from-purple-600/20 to-indigo-600/20 backdrop-blur-md border border-purple-500/30 px-4 py-1.5 rounded-full">
+              <div className="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-1.5 rounded-full">
                 <span className="text-sm font-medium text-white">Welcome to Ghosty's Garage</span>
               </div>
             </AnimatedReveal>
