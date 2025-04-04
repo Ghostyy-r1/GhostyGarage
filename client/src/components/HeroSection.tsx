@@ -114,10 +114,9 @@ export function HeroSection() {
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
                 <span className="text-white">The Ultimate</span>
                 <br />
-                <div className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500 inline-block relative">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500 inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-1 after:bg-gradient-to-r after:from-purple-500 after:to-indigo-500 after:rounded-full after:shadow-glow">
                   Motorcycle Community
-                  <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full shadow-glow"></div>
-                </div>
+                </span>
               </h1>
             </AnimatedReveal>
 
