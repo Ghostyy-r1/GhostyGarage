@@ -1,10 +1,14 @@
 
+import * as React from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { Calendar as CalendarIcon, Share2 } from "lucide-react";
 
 export function EventsCalendar() {
+  const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(new Date());
+  
   const events = [
     {
       title: "Group Ride: Mountain Pass Run",
@@ -55,10 +59,38 @@ export function EventsCalendar() {
                   <div className="p-3 bg-purple-500/10 rounded-xl">
                     <CalendarIcon className="w-6 h-6 text-purple-400" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-white">{event.title}</h3>
-                    <p className="text-purple-400 mt-1">{event.date}</p>
-                    <p className="text-gray-400 mt-2">{event.description}</p>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h3 className="text-xl font-semibold text-white">{event.title}</h3>
+                        <p className="text-purple-400 mt-1">{event.date}</p>
+                        <p className="text-gray-400 mt-2">{event.description}</p>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="ml-2 hover:bg-purple-500/20"
+                        onClick={() => {
+                          const eventDate = new Date(event.date);
+                          const endDate = new Date(eventDate);
+                          endDate.setHours(endDate.getHours() + 2); // Default 2 hour duration
+                          
+                          const googleCalendarUrl = new URL('https://calendar.google.com/calendar/render');
+                          googleCalendarUrl.searchParams.append('action', 'TEMPLATE');
+                          googleCalendarUrl.searchParams.append('text', event.title);
+                          googleCalendarUrl.searchParams.append('details', event.description);
+                          googleCalendarUrl.searchParams.append('dates', 
+                            `${eventDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z` +
+                            '/' +
+                            `${endDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z`
+                          );
+                          
+                          window.open(googleCalendarUrl.toString(), '_blank');
+                        }}
+                      >
+                        <Share2 className="h-4 w-4 text-purple-400" />
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </Card>
