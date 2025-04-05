@@ -70,15 +70,31 @@ export function DiscordWidget() {
 
           <div className="relative">
             <div className="absolute -inset-1.5 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-xl blur opacity-30 group-hover:opacity-50 animate-pulse transition-all duration-500" />
-            <iframe 
-              src="https://discord.com/widget?id=1295517643243130920&theme=dark" 
-              width="350" 
-              height="500" 
-              allowTransparency={true} 
-              frameBorder="0" 
-              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-              className="relative rounded-xl shadow-2xl shadow-purple-500/20 border border-purple-500/20 bg-black/50 backdrop-blur-sm transform hover:scale-[1.01] transition-transform duration-300"
-            />
+            <div className="relative flex flex-col">
+              <div className="bg-gradient-to-r from-purple-900 to-indigo-900 p-4 rounded-t-xl border-b border-purple-500/20 flex items-center gap-4">
+                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-400/30">
+                  <img 
+                    src="https://cdn.discordapp.com/icons/1295517643243130920/a_d71e267c7ee5742e4266ee56b24844fa.gif" 
+                    alt="Server Icon"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-1">Ghosty's Garage</h3>
+                  <p className="text-purple-300 text-sm">Join our growing community!</p>
+                </div>
+              </div>
+              
+              <iframe 
+                src="https://discord.com/widget?id=1295517643243130920&theme=dark&username=Member" 
+                width="350" 
+                height="500" 
+                allowTransparency="true"
+                frameBorder="0" 
+                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                className="relative rounded-b-xl shadow-2xl shadow-purple-500/20 border border-purple-500/20 bg-black/50 backdrop-blur-sm transform hover:scale-[1.01] transition-transform duration-300"
+              />
+            </div>
           </div>
 
           <div className="flex-1 max-w-sm">
