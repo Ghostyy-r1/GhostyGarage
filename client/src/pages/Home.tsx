@@ -12,6 +12,7 @@ const CommunityHighlights = lazy(() => import("@/components/CommunityHighlights"
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection").then(m => ({ default: m.TestimonialsSection })));
 const ProductShowcase = lazy(() => import("@/components/ProductShowcase").then(m => ({ default: m.ProductShowcase })));
 const CTASection = lazy(() => import("@/components/CTASection").then(m => ({ default: m.CTASection })));
+const DiscordWidget = lazy(() => import("@/components/DiscordWidget").then(m => ({ default: m.DiscordWidget })));
 const ContactSection = lazy(() => import("@/components/ContactSection").then(m => ({ default: m.ContactSection })));
 const MembershipTiers = lazy(() => import("@/components/MembershipTiers").then(m => ({ default: m.MembershipTiers })));
 const Footer = lazy(() => import("@/components/Footer").then(m => ({ default: m.Footer })));
@@ -73,6 +74,10 @@ export default function Home() {
         
         <Suspense fallback={<LoadingFallback />}>
           <TestimonialsSection />
+        </Suspense>
+        
+        <Suspense fallback={<LoadingFallback />}>
+          <DiscordWidget />
         </Suspense>
         
         <Suspense fallback={<LoadingFallback />}>
