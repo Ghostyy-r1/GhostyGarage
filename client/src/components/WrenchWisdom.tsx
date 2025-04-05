@@ -1,13 +1,13 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Tool, Shield, Calendar, ExternalLink } from 'lucide-react';
+import { Wrench, Shield, Calendar, ExternalLink } from 'lucide-react';
 import { Card } from './ui/card';
 
 const tips = [
   {
     type: 'Tech Tip',
-    Icon: Tool,
+    Icon: Wrench,
     content: 'Always torque your bolts to spec - overtightening can be just as dangerous as undertightening.',
   },
   {
@@ -36,7 +36,7 @@ export function WrenchWisdom() {
   const CurrentIcon = tips[currentTip].Icon;
 
   return (
-    <section className="py-12 bg-gray-900/50 relative">
+    <section className="py-12 bg-gray-900/50 relative" style={{ position: 'relative' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-white">🔧 Wrench Wisdom</h2>
