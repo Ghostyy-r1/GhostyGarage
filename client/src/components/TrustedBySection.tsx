@@ -41,10 +41,11 @@ export function TrustedBySection() {
   );
 
   return (
-    <section className="py-24 bg-black relative overflow-hidden">
-      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
+    <section className="py-32 bg-gradient-to-b from-black via-purple-950/10 to-black relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px] backdrop-blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="text-center mb-16">
+        <div className="text-center mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -57,7 +58,7 @@ export function TrustedBySection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl font-bold text-white mb-4"
+            className="text-4xl font-bold text-white mb-6 tracking-tight"
           >
             Partnered With <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">Industry Leaders</span>
           </motion.h2>
@@ -88,7 +89,7 @@ export function TrustedBySection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="p-6 bg-black/50 backdrop-blur-sm rounded-xl border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 h-32 flex items-center justify-center"
+                    className="p-8 bg-black/40 backdrop-blur-md rounded-xl border border-purple-500/20 hover:border-purple-500/50 hover:bg-black/60 transition-all duration-500 h-36 flex items-center justify-center shadow-lg hover:shadow-purple-500/10 group"
                   >
                     <img 
                       src={partner.logo}
