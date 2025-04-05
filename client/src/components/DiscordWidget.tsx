@@ -157,84 +157,74 @@ export function DiscordWidget() {
                 </div>
               </div>
 
-              <div className="w-full max-w-md space-y-6">
-                <div className="bg-black/40 backdrop-blur-sm rounded-xl border border-purple-500/20 p-6 overflow-hidden">
-                  <div className="h-32 w-full relative mb-6">
+              <div className="w-full max-w-md">
+                <div className="bg-black/40 backdrop-blur-sm rounded-xl border border-purple-500/20 overflow-hidden">
+                  <div className="h-40 w-full relative">
                     <img 
-                      src="https://cdn.discordapp.com/banners/1295517643243130920/a_d71e267c7ee5742e4266ee56b24844fa.gif" 
+                      src={serverInfo.banner || "https://cdn.discordapp.com/banners/1295517643243130920/a_d71e267c7ee5742e4266ee56b24844fa.gif"}
                       alt="Server Banner"
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-2xl font-bold text-white mb-1">Welcome to Ghosty's Garage</h3>
-                      <p className="text-purple-200 text-sm">A community of motorcycle enthusiasts</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center gap-4">
+                      {serverInfo.icon && (
+                        <img 
+                          src={serverInfo.icon}
+                          alt="Server Icon" 
+                          className="w-16 h-16 rounded-full border-2 border-purple-500/30"
+                        />
+                      )}
+                      <div>
+                        <h3 className="text-2xl font-bold text-white">{serverInfo.name}</h3>
+                        <p className="text-purple-200 text-sm">{serverInfo.description || "A community of motorcycle enthusiasts"}</p>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div className="bg-purple-900/20 rounded-lg p-4 border border-purple-500/20">
-                      <div className="flex items-center gap-2 mb-1">
-                        <FaUsers className="w-4 h-4 text-purple-400" />
-                        <span className="text-purple-300 text-sm">Total Members</span>
+                  <div className="p-6 space-y-6">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-purple-900/20 rounded-lg p-4 border border-purple-500/20">
+                        <div className="flex items-center gap-2 mb-2">
+                          <FaUsers className="w-5 h-5 text-purple-400" />
+                          <span className="text-purple-300 font-medium">Members</span>
+                        </div>
+                        <div className="text-3xl font-bold text-white">{serverInfo.memberCount}</div>
                       </div>
-                      <div className="text-2xl font-bold text-white">{serverInfo.memberCount}</div>
-                    </div>
-                    <div className="bg-purple-900/20 rounded-lg p-4 border border-purple-500/20">
-                      <div className="flex items-center gap-2 mb-1">
-                        <FaCircle className="w-3 h-3 text-green-500" />
-                        <span className="text-green-300 text-sm">Online Now</span>
+                      <div className="bg-purple-900/20 rounded-lg p-4 border border-purple-500/20">
+                        <div className="flex items-center gap-2 mb-2">
+                          <FaCircle className="w-2 h-2 text-green-500" />
+                          <span className="text-green-300 font-medium">Online</span>
+                        </div>
+                        <div className="text-3xl font-bold text-white">{serverInfo.presenceCount}</div>
                       </div>
-                      <div className="text-2xl font-bold text-white">{serverInfo.presenceCount}</div>
                     </div>
-                  </div>
 
-                  <div className="space-y-4 mb-6">
                     <div>
                       <h4 className="text-sm font-medium text-purple-400 uppercase tracking-wider mb-3">Featured Channels</h4>
                       <div className="space-y-2">
-                        <div className="flex items-center gap-2 p-2.5 rounded-lg bg-purple-900/10 border border-purple-500/10 hover:bg-purple-900/20 transition-colors duration-200">
-                          <FaHashtag className="w-4 h-4 text-purple-400" />
-                          <span className="text-gray-300 font-medium">introductions</span>
-                        </div>
-                        <div className="flex items-center gap-2 p-2.5 rounded-lg bg-purple-900/10 border border-purple-500/10 hover:bg-purple-900/20 transition-colors duration-200">
-                          <FaHashtag className="w-4 h-4 text-purple-400" />
-                          <span className="text-gray-300 font-medium">announcements</span>
-                        </div>
-                        <div className="flex items-center gap-2 p-2.5 rounded-lg bg-purple-900/10 border border-purple-500/10 hover:bg-purple-900/20 transition-colors duration-200">
-                          <FaHashtag className="w-4 h-4 text-purple-400" />
-                          <span className="text-gray-300 font-medium">general-chat</span>
-                        </div>
-                        <div className="flex items-center gap-2 p-2.5 rounded-lg bg-purple-900/10 border border-purple-500/10 hover:bg-purple-900/20 transition-colors duration-200">
-                          <FaHashtag className="w-4 h-4 text-purple-400" />
-                          <span className="text-gray-300 font-medium">bike-showcase</span>
-                        </div>
-                        <div className="flex items-center gap-2 p-2.5 rounded-lg bg-purple-900/10 border border-purple-500/10 hover:bg-purple-900/20 transition-colors duration-200">
-                          <FaHashtag className="w-4 h-4 text-purple-400" />
-                          <span className="text-gray-300 font-medium">tech-support</span>
-                        </div>
+                        {serverInfo.channels.map(channel => (
+                          <div 
+                            key={channel.id}
+                            className="flex items-center gap-2 p-2.5 rounded-lg bg-purple-900/10 border border-purple-500/10 hover:bg-purple-900/20 transition-colors duration-200"
+                          >
+                            <FaHashtag className="w-4 h-4 text-purple-400" />
+                            <span className="text-gray-300 font-medium">{channel.name}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  </div>
 
-                  <div className="bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-lg p-4 border border-purple-500/20">
-                    <h4 className="text-white font-medium mb-2">Server Features</h4>
-                    <ul className="space-y-2 text-sm">
-                      <li className="flex items-center gap-2 text-purple-200">
-                        <FaCircle className="w-2 h-2 text-purple-400" />
-                        <span>Custom Roles & Colors</span>
-                      </li>
-                      <li className="flex items-center gap-2 text-purple-200">
-                        <FaCircle className="w-2 h-2 text-purple-400" />
-                        <span>Active Voice Channels</span>
-                      </li>
-                      <li className="flex items-center gap-2 text-purple-200">
-                        <FaCircle className="w-2 h-2 text-purple-400" />
-                        <span>Exclusive Bot Commands</span>
-                      </li>
-                    </ul>
+                    <a 
+                      href={serverInfo.inviteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-4 rounded-lg text-center transition-all duration-200"
+                    >
+                      Join Our Community
+                    </a>
                   </div>
                 </div>
+              </div>
 
                 <div className="bg-black/40 backdrop-blur-sm rounded-xl border border-purple-500/20 p-6">
                   <h3 className="text-xl font-bold text-white mb-4">Community Features</h3>
