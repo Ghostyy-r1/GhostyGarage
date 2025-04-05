@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import Vibrant from 'node-vibrant/lib/browser';
+import * as Vibrant from 'node-vibrant';
 
 const VIDEO_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID"; // Replace with your video ID
 
