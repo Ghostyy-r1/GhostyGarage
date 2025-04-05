@@ -6,6 +6,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { AboutGarageSectionTabs } from "@/components/AboutGarageSectionTabs";
 import { ResourcesSection } from "@/components/ResourcesSection";
 import { WrenchWisdom } from '@/components/WrenchWisdom'; // Added import
+import { VideoSection } from '@/components/VideoSection'; // Added import
 
 // Lazy load components for better performance
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection").then(m => ({ default: m.FeaturesSection })));
@@ -50,6 +51,9 @@ export default function Home() {
       <main>
         {/* Hero section is not lazy loaded because it's above the fold */}
         <HeroSection />
+
+        {/* Video Section */}
+        <VideoSection />
 
         {/* Wrench Wisdom Section */}
         <WrenchWisdom />
