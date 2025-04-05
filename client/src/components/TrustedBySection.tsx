@@ -8,35 +8,23 @@ import Autoplay from "embla-carousel-autoplay";
 const partners = [
   {
     name: "Cardo Systems",
-    logo: "https://cardosystems.com/wp-content/themes/cardo-systems/assets/images/logo-white.png"
+    logo: "https://cardosystems.com/cdn/shop/files/cardo-favicon_96x96.png?v=1706179855"
   },
   {
     name: "AGV Helmets",
-    logo: "https://www.agv.com/dw/image/v2/BDJH_PRD/on/demandware.static/-/Sites-master-catalog/default/dw24f6781f/images/logo/logo-agv-white.png"
-  },
-  {
-    name: "Discord",
-    logo: "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg"
-  },
-  {
-    name: "Instagram",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg"
-  },
-  {
-    name: "Bluesky",
-    logo: "https://blueskyweb.xyz/images/social/bluesky-white.svg"
+    logo: "https://www.agv.com/on/demandware.static/Sites-agv-us-Site/-/default/dw8026381d/images/logo.svg"
   },
   {
     name: "Dainese",
-    logo: "https://www.dainese.com/media/logo/websites/1/dainese-logo-white.svg"
+    logo: "https://www.dainese.com/on/demandware.static/Sites-dainese-us-Site/-/default/dw51796611/images/logo.svg"
   },
   {
     name: "RevZilla",
-    logo: "https://www.revzilla.com/assets/revzilla_logo_white-3f8171431b3e759f2e3c336fd53920c4.svg"
+    logo: "https://www.revzilla.com/images/sites/revzilla/support/header/logo-c416dd1a00f74c1039a20b951088ad92.svg?vsn=d"
   },
   {
     name: "Cycle Gear",
-    logo: "https://www.cyclegear.com/_ui/responsive/theme-cyclegear/images/logo-white.svg"
+    logo: "https://www.cyclegear.com/favicon.ico"
   }
 ];
 
