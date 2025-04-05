@@ -7,17 +7,17 @@ import { Card } from './ui/card';
 const tips = [
   {
     type: 'Tech Tip',
-    icon: Tool,
+    Icon: Tool,
     content: 'Always torque your bolts to spec - overtightening can be just as dangerous as undertightening.',
   },
   {
     type: 'Safety Reminder',
-    icon: Shield,
+    Icon: Shield,
     content: 'Never work under a motorcycle supported only by its side stand. Always use a proper lift or stand.',
   },
   {
     type: 'Myth Busted',
-    icon: Calendar,
+    Icon: Calendar,
     content: 'Premium gas doesn\'t always mean better performance. Use the octane rating recommended for your bike.',
   }
 ];
@@ -33,8 +33,10 @@ export function WrenchWisdom() {
     return () => clearInterval(timer);
   }, []);
 
+  const CurrentIcon = tips[currentTip].Icon;
+
   return (
-    <section className="py-12 bg-gray-900/50">
+    <section className="py-12 bg-gray-900/50 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-white">🔧 Wrench Wisdom</h2>
@@ -50,11 +52,9 @@ export function WrenchWisdom() {
         >
           <Card className="bg-black/40 backdrop-blur-sm border border-purple-500/20 p-6">
             <div className="flex items-start gap-4">
-              {tips[currentTip].icon && (
-                <div className="p-3 bg-purple-500/10 rounded-lg">
-                  <tips[currentTip].icon className="w-6 h-6 text-purple-400" />
-                </div>
-              )}
+              <div className="p-3 bg-purple-500/10 rounded-lg">
+                <CurrentIcon className="w-6 h-6 text-purple-400" />
+              </div>
               <div className="flex-1">
                 <h3 className="text-sm font-medium text-purple-400 uppercase tracking-wider mb-2">
                   {tips[currentTip].type}
