@@ -1,8 +1,9 @@
 
-import { useState, useEffect } from 'react';
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { motion } from 'framer-motion';
 import { Wrench, Shield, CalendarDays, ExternalLink } from 'lucide-react';
 import { Card } from './ui/card';
+import Autoplay from "embla-carousel-autoplay";
 
 const tips = [
   {
@@ -23,18 +24,6 @@ const tips = [
 ];
 
 export function WrenchWisdom() {
-  const [currentTip, setCurrentTip] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTip((prev) => (prev + 1) % tips.length);
-    }, 10000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const CurrentIcon = tips[currentTip].Icon;
-
   return (
     <section className="py-16 bg-black/50 backdrop-blur-sm relative">
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
@@ -56,15 +45,13 @@ export function WrenchWisdom() {
           opts={{
             align: "center",
             loop: true,
-            duration: 40,
-            dragFree: true,
           }}
-          className="w-full max-w-4xl mx-auto"
           plugins={[
             Autoplay({
               delay: 5000,
             }),
           ]}
+          className="w-full max-w-4xl mx-auto"
         >
           <CarouselContent>
             {tips.map((tip, index) => (
@@ -73,34 +60,37 @@ export function WrenchWisdom() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="h-full"
                 >
-          <Card className="bg-black/40 backdrop-blur-sm border border-purple-500/20 p-8 hover:border-purple-500/40 transition-all duration-300">
-            <div className="flex items-start gap-6">
-              <div className="p-4 bg-purple-500/10 rounded-xl">
-                <CurrentIcon className="w-8 h-8 text-purple-400" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-sm font-medium text-purple-400 uppercase tracking-wider mb-3">
-                  {tips[currentTip].type}
-                </h3>
-                <p className="text-gray-200 text-xl leading-relaxed">
-                  {tips[currentTip].content}
-                </p>
-              </div>
-            </div>
+                  <Card className="bg-black/40 backdrop-blur-sm border border-purple-500/20 p-8 hover:border-purple-500/40 transition-all duration-300">
+                    <div className="flex items-start gap-6">
+                      <div className="p-4 bg-purple-500/10 rounded-xl">
+                        <tip.Icon className="w-8 h-8 text-purple-400" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-sm font-medium text-purple-400 uppercase tracking-wider mb-3">
+                          {tip.type}
+                        </h3>
+                        <p className="text-gray-200 text-xl leading-relaxed">
+                          {tip.content}
+                        </p>
+                      </div>
+                    </div>
 
-            <div className="mt-6 pt-6 border-t border-purple-500/10">
-              <a 
-                href="#discord"
-                className="inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 transition-colors"
-              >
-                <ExternalLink className="w-4 h-4" />
-                Join our Discord for more tips
-              </a>
-            </div>
-          </Card>
-        </motion.div>
+                    <div className="mt-6 pt-6 border-t border-purple-500/10">
+                      <a 
+                        href="#discord"
+                        className="inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        Join our Discord for more tips
+                      </a>
+                    </div>
+                  </Card>
+                </motion.div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
       </div>
     </section>
   );

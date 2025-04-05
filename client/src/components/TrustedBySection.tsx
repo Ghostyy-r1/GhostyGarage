@@ -67,16 +67,15 @@ export function TrustedBySection() {
             opts={{
               align: "start",
               loop: true,
-              dragFree: true,
             }}
             plugins={[
               Autoplay({
                 delay: 3000,
               }),
             ]}
-            className="w-full max-w-6xl mx-auto"
+            className="w-full max-w-6xl mx-auto relative"
           >
-            <CarouselContent className="-ml-4">
+            <CarouselContent>
               {partners.map((partner, index) => (
                 <CarouselItem key={index} className="pl-4 md:basis-1/3 lg:basis-1/4">
                   <motion.div
@@ -89,14 +88,14 @@ export function TrustedBySection() {
                       src={partner.logo}
                       alt={partner.name}
                       className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-50 hover:opacity-100"
-                      style={{ maxHeight: "80px" }}
+                      style={{ maxHeight: "60px" }}
                     />
                   </motion.div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-6 bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/30" />
-            <CarouselNext className="-right-6 bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/30" />
+            <CarouselPrevious className="absolute -left-6 bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/30" />
+            <CarouselNext className="absolute -right-6 bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/30" />
           </Carousel>
         </div>
       </div>
