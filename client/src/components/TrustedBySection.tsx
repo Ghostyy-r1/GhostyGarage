@@ -24,14 +24,21 @@ const partners = [
   },
   {
     name: "Cycle Gear",
-    logo: "https://www.cyclegear.com/favicon.ico"
+    logo: "https://www.cyclegear.com/favicon.ico",
+    roundedLogo: true
   }
 ];
 
 export function TrustedBySection() {
-  const [emblaRef] = useEmblaCarousel({ loop: true }, [
-    Autoplay({ delay: 2000, stopOnInteraction: true })
-  ]);
+  const [emblaRef] = useEmblaCarousel(
+    { 
+      loop: true,
+      dragFree: true,
+      containScroll: "trimSnaps",
+      align: "center"
+    },
+    [Autoplay({ delay: 2000, stopOnInteraction: false })]
+  );
 
   return (
     <section className="py-24 bg-black relative overflow-hidden">
@@ -86,7 +93,7 @@ export function TrustedBySection() {
                     <img 
                       src={partner.logo}
                       alt={partner.name}
-                      className="w-full h-full object-contain transition-all duration-300"
+                      className={`w-full h-full object-contain transition-all duration-300 ${partner.roundedLogo ? 'rounded-lg' : ''}`}
                       style={{ 
                         maxHeight: "60px",
                         filter: "grayscale(100%) brightness(150%) contrast(80%)",
