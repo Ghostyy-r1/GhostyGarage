@@ -86,8 +86,20 @@ export function TrustedBySection() {
                     <img 
                       src={partner.logo}
                       alt={partner.name}
-                      className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-50 hover:opacity-100"
-                      style={{ maxHeight: "60px" }}
+                      className="w-full h-full object-contain transition-all duration-300"
+                      style={{ 
+                        maxHeight: "60px",
+                        filter: "grayscale(100%) brightness(150%) contrast(80%)",
+                        WebkitFilter: "grayscale(100%) brightness(150%) contrast(80%)",
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.filter = "none";
+                        e.currentTarget.style.WebkitFilter = "none";
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.filter = "grayscale(100%) brightness(150%) contrast(80%)";
+                        e.currentTarget.style.WebkitFilter = "grayscale(100%) brightness(150%) contrast(80%)";
+                      }}
                     />
                   </motion.div>
                 </CarouselItem>
