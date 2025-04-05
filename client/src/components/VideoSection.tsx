@@ -1,28 +1,59 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import * as Vibrant from 'node-vibrant';
 
 export function VideoSection() {
   const videoRef = useRef<HTMLIFrameElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [gradientColors, setGradientColors] = useState(['rgba(139, 92, 246, 0.5)', 'rgba(79, 70, 229, 0.5)']);
-  
-  useEffect(() => {
-    // This is a simplified simulation of color extraction
-    // In a real implementation, you'd need to use a color extraction library
-    const colors = ['rgba(139, 92, 246, 0.5)', 'rgba(79, 70, 229, 0.5)', 'rgba(167, 139, 250, 0.5)'];
-    let currentIndex = 0;
-    
-    const interval = setInterval(() => {
-      const nextIndex = (currentIndex + 1) % colors.length;
-      setGradientColors([colors[currentIndex], colors[nextIndex]]);
-      currentIndex = nextIndex;
-    }, 3000);
 
-    return () => clearInterval(interval);
+  const extractColorsFromVideo = async (videoElement: HTMLVideoElement) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const context = canvas.getContext('2d');
+    if (!context) return;
+
+    canvas.width = videoElement.videoWidth;
+    canvas.height = videoElement.videoHeight;
+    context.drawImage(videoElement, 0, 0);
+
+    try {
+      const palette = await Vibrant.from(canvas.toDataURL()).getPalette();
+      const colors = [
+        palette.Vibrant?.getRgb(),
+        palette.LightVibrant?.getRgb(),
+        palette.DarkVibrant?.getRgb(),
+      ].filter(Boolean) as number[][];
+
+      setGradientColors(colors.map(rgb => `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.5)`));
+    } catch (error) {
+      console.error('Error extracting colors:', error);
+    }
+  };
+
+  useEffect(() => {
+    const videoElement = document.createElement('video');
+    videoElement.crossOrigin = 'anonymous';
+    videoElement.src = 'YOUR_VIDEO_URL'; // Replace with your video URL
+
+    videoElement.addEventListener('loadeddata', () => {
+      const interval = setInterval(() => {
+        extractColorsFromVideo(videoElement);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    });
+
+    return () => {
+      videoElement.remove();
+    };
   }, []);
 
   return (
     <section className="relative py-32 overflow-hidden bg-gradient-to-b from-black via-purple-950/10 to-black">
+      <canvas ref={canvasRef} className="hidden" />
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px] backdrop-blur-3xl" />
       <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent" />
       

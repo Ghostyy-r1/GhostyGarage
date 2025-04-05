@@ -62,6 +62,7 @@
     "memorystore": "^1.6.7",
     "mongodb": "^6.15.0",
     "mongoose": "^8.13.2",
+    "node-vibrant": "^4.0.3",
     "openai": "^4.91.1",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
