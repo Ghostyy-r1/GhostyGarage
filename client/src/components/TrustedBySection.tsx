@@ -29,7 +29,7 @@ const partners = [
 ];
 
 export function TrustedBySection() {
-  const [emblaRef] = useEmblaCarousel(
+  const [emblaRef] = useEmblaCarousel({
     {
       loop: true,
       dragFree: true,
