@@ -45,12 +45,8 @@ export function WrenchWisdom() {
           opts={{
             align: "center",
             loop: true,
+            dragFree: true,
           }}
-          plugins={[
-            Autoplay({
-              delay: 5000,
-            }),
-          ]}
           className="w-full max-w-4xl mx-auto"
         >
           <CarouselContent>

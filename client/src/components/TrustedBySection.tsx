@@ -67,12 +67,8 @@ export function TrustedBySection() {
             opts={{
               align: "start",
               loop: true,
+              dragFree: true,
             }}
-            plugins={[
-              Autoplay({
-                delay: 3000,
-              }),
-            ]}
             className="w-full max-w-6xl mx-auto relative"
           >
             <CarouselContent>
