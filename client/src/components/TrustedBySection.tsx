@@ -47,9 +47,9 @@ export function TrustedBySection() {
   );
 
   return (
-    <section className="py-32 bg-gradient-to-b from-black via-purple-950/10 to-black relative overflow-hidden">
+    <section className="py-32 bg-gradient-to-b from-black via-purple-900/20 to-black relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px] backdrop-blur-3xl" />
-      <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-radial from-purple-600/10 via-purple-900/5 to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-20">
           <motion.div
