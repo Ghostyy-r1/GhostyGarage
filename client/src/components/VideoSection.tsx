@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import Vibrant from 'node-vibrant';
+import * as Vibrant from 'node-vibrant';
 
 const VIDEO_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID"; // Replace with your video ID
 
@@ -28,10 +28,16 @@ export function VideoSection() {
 
   useEffect(() => {
     // Extract colors from video thumbnail
-    const videoId = VIDEO_URL.split('/').pop();
-    if (videoId) {
-      const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-      extractColorsFromImage(thumbnailUrl);
+    try {
+      const urlParams = new URLSearchParams(new URL(VIDEO_URL).search);
+      const videoId = urlParams.get('v') || VIDEO_URL.split('/').pop();
+      if (videoId) {
+        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        extractColorsFromImage(thumbnailUrl).catch(console.error);
+      }
+    } catch (error) {
+      console.error('Error parsing video URL:', error);
+      setGradientColors(['rgba(139, 92, 246, 0.5)', 'rgba(79, 70, 229, 0.5)']);
     }
   }, []);
 

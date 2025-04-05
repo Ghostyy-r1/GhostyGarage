@@ -34,14 +34,25 @@ export function TrustedBySection() {
     loop: true,
     dragFree: true,
     containScroll: "trimSnaps",
-    align: "center"
-  }, [
-    Autoplay({
+    align: "center",
+    skipSnaps: false
+  });
+
+  useEffect(() => {
+    const autoplay = Autoplay({
       delay: 2000,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
-    })
-  ]);
+    });
+
+    if (emblaRef) {
+      autoplay.play();
+    }
+
+    return () => {
+      autoplay.stop();
+    };
+  }, [emblaRef]);
 
   return (
     <section className="py-32 bg-gradient-to-b from-black via-purple-950/10 to-black relative overflow-hidden">
