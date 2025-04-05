@@ -10,24 +10,14 @@ export function VideoSection() {
 
   // Function to generate random colors
   const generateRandomColors = () => {
-    const colors = [
-      [139, 92, 246], // Purple
-      [79, 70, 229],  // Indigo
-      [239, 68, 68],  // Red
-      [34, 197, 94],  // Green
-      [234, 179, 8],  // Yellow
-      [14, 165, 233], // Blue
+    const purpleGradient = [
+      [139, 92, 246], // Purple light
+      [91, 33, 182]   // Purple dark
     ];
     
-    const color1 = colors[Math.floor(Math.random() * colors.length)];
-    let color2 = colors[Math.floor(Math.random() * colors.length)];
-    while (color1 === color2) {
-      color2 = colors[Math.floor(Math.random() * colors.length)];
-    }
-
     return [
-      `rgba(${color1[0]}, ${color1[1]}, ${color1[2]}, ${isHovered ? 0.8 : 0.5})`,
-      `rgba(${color2[0]}, ${color2[1]}, ${color2[2]}, ${isHovered ? 0.8 : 0.5})`
+      `rgba(${purpleGradient[0][0]}, ${purpleGradient[0][1]}, ${purpleGradient[0][2]}, ${isHovered ? 0.8 : 0.5})`,
+      `rgba(${purpleGradient[1][0]}, ${purpleGradient[1][1]}, ${purpleGradient[1][2]}, ${isHovered ? 0.8 : 0.5})`
     ];
   };
 
