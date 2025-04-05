@@ -1,8 +1,39 @@
 
 import { motion } from "framer-motion";
-import { FaDiscord, FaUsers, FaComments } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { FaDiscord, FaUsers, FaComments, FaHashtag } from "react-icons/fa";
+
+interface DiscordServerInfo {
+  name: string;
+  icon: string | null;
+  banner: string | null;
+  description: string;
+  memberCount: number;
+  presenceCount: number;
+  channels: Array<{
+    id: string;
+    name: string;
+  }>;
+  inviteUrl: string;
+}
 
 export function DiscordWidget() {
+  const [serverInfo, setServerInfo] = useState<DiscordServerInfo | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/discord/server-info')
+      .then(res => res.json())
+      .then(data => {
+        setServerInfo(data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to fetch Discord server info:', err);
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-950/20 to-black" />
@@ -52,66 +83,67 @@ export function DiscordWidget() {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          <div className="flex-1 max-w-sm">
-            <div className="space-y-6">
-              <div className="bg-purple-900/20 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 transform hover:scale-105 transition-transform duration-300">
-                <FaUsers className="w-8 h-8 text-purple-400 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Active Community</h3>
-                <p className="text-gray-400">Connect with riders who share your passion and expertise.</p>
-              </div>
-              
-              <div className="bg-purple-900/20 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 transform hover:scale-105 transition-transform duration-300">
-                <FaComments className="w-8 h-8 text-purple-400 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Real-time Support</h3>
-                <p className="text-gray-400">Get instant help and advice from experienced riders.</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-xl blur opacity-30 group-hover:opacity-50 animate-pulse transition-all duration-500" />
-            <div className="relative flex flex-col">
-              <div className="bg-gradient-to-r from-purple-900 to-indigo-900 p-4 rounded-t-xl border-b border-purple-500/20 flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-purple-400/30">
+          {!isLoading && serverInfo && (
+            <div className="w-full max-w-md bg-black/40 backdrop-blur-sm rounded-xl border border-purple-500/20 overflow-hidden">
+              {serverInfo.banner && (
+                <div className="h-32 w-full relative overflow-hidden">
                   <img 
-                    src="https://cdn.discordapp.com/icons/1295517643243130920/a_d71e267c7ee5742e4266ee56b24844fa.gif" 
-                    alt="Server Icon"
+                    src={serverInfo.banner} 
+                    alt="Server Banner"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-1">Ghosty's Garage</h3>
-                  <p className="text-purple-300 text-sm">Join our growing community!</p>
+              )}
+              
+              <div className="p-6">
+                <div className="flex items-center gap-4 mb-6">
+                  {serverInfo.icon && (
+                    <img 
+                      src={serverInfo.icon} 
+                      alt="Server Icon"
+                      className="w-16 h-16 rounded-full border-2 border-purple-500/30"
+                    />
+                  )}
+                  <div>
+                    <h3 className="text-xl font-bold text-white">{serverInfo.name}</h3>
+                    <p className="text-purple-400">{serverInfo.description}</p>
+                  </div>
                 </div>
-              </div>
-              
-              <iframe 
-                src="https://discord.com/widget?id=1295517643243130920&theme=dark&username=Member" 
-                width="350" 
-                height="500" 
-                allowTransparency="true"
-                frameBorder="0" 
-                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-                className="relative rounded-b-xl shadow-2xl shadow-purple-500/20 border border-purple-500/20 bg-black/50 backdrop-blur-sm transform hover:scale-[1.01] transition-transform duration-300"
-              />
-            </div>
-          </div>
 
-          <div className="flex-1 max-w-sm">
-            <div className="space-y-6">
-              <div className="bg-purple-900/20 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 transform hover:scale-105 transition-transform duration-300">
-                <FaDiscord className="w-8 h-8 text-purple-400 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Exclusive Content</h3>
-                <p className="text-gray-400">Access member-only resources and special events.</p>
-              </div>
-              
-              <div className="bg-purple-900/20 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 transform hover:scale-105 transition-transform duration-300">
-                <FaUsers className="w-8 h-8 text-purple-400 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Growing Network</h3>
-                <p className="text-gray-400">Be part of an expanding community of motorcycle enthusiasts.</p>
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="bg-purple-900/20 rounded-lg p-4">
+                    <FaUsers className="w-5 h-5 text-purple-400 mb-2" />
+                    <div className="text-2xl font-bold text-white">{serverInfo.memberCount}</div>
+                    <div className="text-sm text-purple-400">Members</div>
+                  </div>
+                  <div className="bg-purple-900/20 rounded-lg p-4">
+                    <FaUsers className="w-5 h-5 text-green-400 mb-2" />
+                    <div className="text-2xl font-bold text-white">{serverInfo.presenceCount}</div>
+                    <div className="text-sm text-purple-400">Online</div>
+                  </div>
+                </div>
+
+                <div className="space-y-2 mb-6">
+                  <h4 className="text-sm font-medium text-purple-400 uppercase">Channels</h4>
+                  {serverInfo.channels.map(channel => (
+                    <div key={channel.id} className="flex items-center gap-2 text-gray-300">
+                      <FaHashtag className="w-4 h-4 text-purple-400" />
+                      {channel.name}
+                    </div>
+                  ))}
+                </div>
+
+                <a 
+                  href={serverInfo.inviteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-4 rounded-lg text-center transition-colors duration-200"
+                >
+                  Join Server
+                </a>
               </div>
             </div>
-          </div>
+          )}
         </motion.div>
       </div>
     </section>

@@ -1,3 +1,50 @@
+
+import axios from 'axios';
+
+// Discord API endpoints
+const DISCORD_API_BASE = 'https://discord.com/api/v10';
+const DISCORD_CDN_BASE = 'https://cdn.discordapp.com';
+
+export async function getDiscordServerInfo(req: Request) {
+  const serverId = '1295517643243130920';
+  const botToken = process.env.DISCORD_BOT_TOKEN;
+
+  try {
+    const [serverInfo, channels] = await Promise.all([
+      axios.get(`${DISCORD_API_BASE}/guilds/${serverId}`, {
+        headers: { Authorization: `Bot ${botToken}` }
+      }),
+      axios.get(`${DISCORD_API_BASE}/guilds/${serverId}/channels`, {
+        headers: { Authorization: `Bot ${botToken}` }
+      })
+    ]);
+
+    const onlineMembers = await axios.get(`${DISCORD_API_BASE}/guilds/${serverId}/preview`, {
+      headers: { Authorization: `Bot ${botToken}` }
+    });
+
+    return new Response(JSON.stringify({
+      name: serverInfo.data.name,
+      icon: serverInfo.data.icon ? 
+        `${DISCORD_CDN_BASE}/icons/${serverId}/${serverInfo.data.icon}.${serverInfo.data.icon.startsWith('a_') ? 'gif' : 'png'}` : null,
+      banner: serverInfo.data.banner ?
+        `${DISCORD_CDN_BASE}/banners/${serverId}/${serverInfo.data.banner}.${serverInfo.data.banner.startsWith('a_') ? 'gif' : 'png'}` : null,
+      description: serverInfo.data.description,
+      memberCount: serverInfo.data.approximate_member_count,
+      presenceCount: serverInfo.data.approximate_presence_count,
+      channels: channels.data.filter((c: any) => c.type === 0).slice(0, 3),
+      inviteUrl: 'https://discord.gg/h6QUNDjs'
+    }), {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: 'Failed to fetch Discord server info' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+}
+
 import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
