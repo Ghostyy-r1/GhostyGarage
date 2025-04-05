@@ -52,14 +52,29 @@ export function WrenchWisdom() {
           <p className="text-gray-400 mt-2">Expert tips from the garage</p>
         </div>
 
-        <motion.div
-          key={currentTip}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-2xl mx-auto"
+        <Carousel 
+          opts={{
+            align: "center",
+            loop: true,
+            duration: 40,
+            dragFree: true,
+          }}
+          className="w-full max-w-4xl mx-auto"
+          plugins={[
+            Autoplay({
+              delay: 5000,
+            }),
+          ]}
         >
+          <CarouselContent>
+            {tips.map((tip, index) => (
+              <CarouselItem key={index}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="h-full"
+                >
           <Card className="bg-black/40 backdrop-blur-sm border border-purple-500/20 p-8 hover:border-purple-500/40 transition-all duration-300">
             <div className="flex items-start gap-6">
               <div className="p-4 bg-purple-500/10 rounded-xl">

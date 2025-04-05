@@ -1,39 +1,32 @@
 
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { motion } from "framer-motion";
+import Autoplay from "embla-carousel-autoplay";
 
 const partners = [
   {
     name: "Cardo Systems",
-    logo: "https://placehold.co/200x100/1a1a1a/808080/png?text=Cardo+Systems",
-  },
-  {
-    name: "MotoLoot",
-    logo: "https://placehold.co/200x100/1a1a1a/808080/png?text=MotoLoot",
-  },
-  {
-    name: "AGV Helmets",
-    logo: "https://placehold.co/200x100/1a1a1a/808080/png?text=AGV",
-  },
-  {
-    name: "Discord",
-    logo: "https://placehold.co/200x100/1a1a1a/808080/png?text=Discord",
-  },
-  {
-    name: "Instagram",
-    logo: "https://placehold.co/200x100/1a1a1a/808080/png?text=Instagram",
-  },
-  {
-    name: "BlueSky",
-    logo: "https://placehold.co/200x100/1a1a1a/808080/png?text=BlueSky",
+    logo: "https://cardosystems.com/wp-content/uploads/2019/11/cardo-systems-logo.png",
   },
   {
     name: "RevZilla",
-    logo: "https://placehold.co/200x100/1a1a1a/808080/png?text=RevZilla",
+    logo: "https://www.revzilla.com/assets/revzilla_logo-3e9clearer-3f8171431b3e759f2e3c336fd53920c4.svg",
+  },
+  {
+    name: "AGV Helmets",
+    logo: "https://www.agv.com/dw/image/v2/BDJH_PRD/on/demandware.static/-/Sites-master-catalog/default/dwb4bab21b/images/logo/logo-agv.png",
+  },
+  {
+    name: "Discord",
+    logo: "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg",
   },
   {
     name: "Cycle Gear",
-    logo: "https://placehold.co/200x100/1a1a1a/808080/png?text=Cycle+Gear",
+    logo: "https://www.cyclegear.com/_ui/responsive/theme-cyclegear/images/logo.svg",
+  },
+  {
+    name: "Dainese",
+    logo: "https://www.dainese.com/on/demandware.static/Sites-dainese-row-Site/-/default/dw1cd60dee/images/logo.svg",
   }
 ];
 
@@ -65,7 +58,7 @@ export function TrustedBySection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-gray-400 max-w-2xl mx-auto"
           >
-            We work with the most trusted brands in the motorcycle industry to bring you the best experience
+            We work with the most trusted brands in the motorcycle industry
           </motion.p>
         </div>
 
@@ -74,7 +67,13 @@ export function TrustedBySection() {
             opts={{
               align: "start",
               loop: true,
+              dragFree: true,
             }}
+            plugins={[
+              Autoplay({
+                delay: 3000,
+              }),
+            ]}
             className="w-full max-w-6xl mx-auto"
           >
             <CarouselContent className="-ml-4">
@@ -84,12 +83,13 @@ export function TrustedBySection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="p-6 bg-black/50 backdrop-blur-sm rounded-xl border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300"
+                    className="p-6 bg-black/50 backdrop-blur-sm rounded-xl border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 h-32 flex items-center justify-center"
                   >
                     <img 
-                      src={partner.logo} 
+                      src={partner.logo}
                       alt={partner.name}
-                      className="w-full h-auto filter grayscale hover:grayscale-0 transition-all duration-300"
+                      className="w-full h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-50 hover:opacity-100"
+                      style={{ maxHeight: "80px" }}
                     />
                   </motion.div>
                 </CarouselItem>
