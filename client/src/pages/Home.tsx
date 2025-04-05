@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HeroSection } from "@/components/HeroSection";
 import { AboutGarageSectionTabs } from "@/components/AboutGarageSectionTabs";
 import { ResourcesSection } from "@/components/ResourcesSection";
+import { WrenchWisdom } from '@/components/WrenchWisdom'; // Added import
 
 // Lazy load components for better performance
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection").then(m => ({ default: m.FeaturesSection })));
@@ -48,10 +49,13 @@ export default function Home() {
       <main>
         {/* Hero section is not lazy loaded because it's above the fold */}
         <HeroSection />
-        
+
+        {/* Wrench Wisdom Section */}
+        <WrenchWisdom />
+
         {/* Resources Section */}
         <ResourcesSection />
-        
+
         {/* About Section */}
       <section id="about" className="relative z-10 bg-background min-h-screen flex items-center">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,23 +71,23 @@ export default function Home() {
         <Suspense fallback={<LoadingFallback />}>
           <FeaturesSection />
         </Suspense>
-        
+
         <Suspense fallback={<LoadingFallback />}>
           <CommunityHighlights />
         </Suspense>
-        
+
         <Suspense fallback={<LoadingFallback />}>
           <TestimonialsSection />
         </Suspense>
-        
+
         <Suspense fallback={<LoadingFallback />}>
           <DiscordWidget />
         </Suspense>
-        
+
         <Suspense fallback={<LoadingFallback />}>
           <ProductShowcase />
         </Suspense>
-        
+
         <Suspense fallback={<LoadingFallback />}>
           <MembershipTiers />
         </Suspense>
@@ -91,12 +95,12 @@ export default function Home() {
         <Suspense fallback={<LoadingFallback />}>
           <CTASection />
         </Suspense>
-        
+
         <Suspense fallback={<LoadingFallback />}>
           <ContactSection />
         </Suspense>
       </main>
-      
+
       <Suspense fallback={<div className="h-40 bg-gray-900" />}>
         <Footer />
       </Suspense>
