@@ -6,39 +6,43 @@ import Autoplay from "embla-carousel-autoplay";
 const partners = [
   {
     name: "Cardo Systems",
-    logo: "https://www.cardosystems.com/wp-content/uploads/2020/02/cardo-systems-logo-white.png",
-  },
-  {
-    name: "RevZilla",
-    logo: "https://images.revzilla.com/core/revzilla-footer-logo.svg",
+    logo: "https://cardosystems.com/wp-content/themes/cardo-systems/assets/images/logo-white.png"
   },
   {
     name: "AGV Helmets",
-    logo: "https://www.agv.com/assets/AGV_Logo_White.png",
+    logo: "https://www.agv.com/dw/image/v2/BDJH_PRD/on/demandware.static/-/Sites-master-catalog/default/dw24f6781f/images/logo/logo-agv-white.png"
   },
   {
     name: "Discord",
-    logo: "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a3ccf3115b8c06b55_icon_clyde_blurple_RGB.svg",
+    logo: "https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg"
   },
   {
     name: "Instagram",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg"
   },
   {
     name: "Bluesky",
-    logo: "https://blueskyweb.xyz/images/favicon.svg",
+    logo: "https://blueskyweb.xyz/images/social/bluesky-white.svg"
   },
   {
     name: "Dainese",
-    logo: "https://www.dainese.com/media/logo/websites/1/dainese-logo-white_1.svg",
+    logo: "https://www.dainese.com/media/logo/websites/1/dainese-logo-white.svg"
   },
   {
-    name: "Motoloot",
-    logo: "https://cdn.shopify.com/s/files/1/0566/8867/7131/files/Motoloot_white_500x.png",
+    name: "RevZilla",
+    logo: "https://www.revzilla.com/assets/revzilla_logo_white-3f8171431b3e759f2e3c336fd53920c4.svg"
+  },
+  {
+    name: "Cycle Gear",
+    logo: "https://www.cyclegear.com/_ui/responsive/theme-cyclegear/images/logo-white.svg"
   }
 ];
 
 export function TrustedBySection() {
+  const plugin = React.useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  );
+
   return (
     <section className="py-24 bg-black relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
@@ -72,6 +76,7 @@ export function TrustedBySection() {
 
         <div className="relative px-12">
           <Carousel
+            plugins={[plugin.current]}
             opts={{
               align: "start",
               loop: true,
