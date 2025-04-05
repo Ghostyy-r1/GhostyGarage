@@ -7,6 +7,9 @@ import { AboutGarageSectionTabs } from "@/components/AboutGarageSectionTabs";
 import { ResourcesSection } from "@/components/ResourcesSection";
 import { WrenchWisdom } from '@/components/WrenchWisdom'; // Added import
 import { VideoSection } from '@/components/VideoSection'; // Added import
+import { GhostyUpdates } from "@/components/GhostyUpdates";
+import { CountdownTimer } from "@/components/CountdownTimer";
+import { EventsCalendar } from "@/components/EventsCalendar";
 
 // Lazy load components for better performance
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection").then(m => ({ default: m.FeaturesSection })));
@@ -52,6 +55,9 @@ export default function Home() {
         {/* Hero section is not lazy loaded because it's above the fold */}
         <HeroSection />
 
+        {/* Ghosty Updates Section */}
+        <GhostyUpdates />
+
         {/* Video Section */}
         <VideoSection />
 
@@ -71,6 +77,12 @@ export default function Home() {
           </ErrorBoundary>
         </div>
       </section>
+
+        {/* Countdown Timer Section */}
+        <CountdownTimer />
+
+        {/* Events Calendar Section */}
+        <EventsCalendar />
 
         {/* Other sections */}
         <Suspense fallback={<LoadingFallback />}>
