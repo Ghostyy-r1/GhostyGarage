@@ -1,8 +1,26 @@
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 export function VideoSection() {
+  const videoRef = useRef<HTMLIFrameElement>(null);
+  const [gradientColors, setGradientColors] = useState(['rgba(139, 92, 246, 0.5)', 'rgba(79, 70, 229, 0.5)']);
+  
+  useEffect(() => {
+    // This is a simplified simulation of color extraction
+    // In a real implementation, you'd need to use a color extraction library
+    const colors = ['rgba(139, 92, 246, 0.5)', 'rgba(79, 70, 229, 0.5)', 'rgba(167, 139, 250, 0.5)'];
+    let currentIndex = 0;
+    
+    const interval = setInterval(() => {
+      const nextIndex = (currentIndex + 1) % colors.length;
+      setGradientColors([colors[currentIndex], colors[nextIndex]]);
+      currentIndex = nextIndex;
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative py-32 overflow-hidden bg-gradient-to-b from-black via-purple-950/10 to-black">
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px] backdrop-blur-3xl" />
@@ -32,15 +50,30 @@ export function VideoSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="relative aspect-video max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl shadow-purple-500/10"
+          className="relative aspect-video max-w-4xl mx-auto rounded-xl overflow-hidden"
+          style={{
+            padding: '1px',
+            background: `linear-gradient(45deg, ${gradientColors[0]}, ${gradientColors[1]})`,
+          }}
         >
-          <iframe
-            src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-            title="Welcome to Ghosty's Garage"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="absolute inset-0 w-full h-full"
-          />
+          <div className="relative w-full h-full bg-black rounded-xl overflow-hidden group">
+            <div 
+              className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl blur-xl group-hover:blur-2xl transition duration-1000 group-hover:opacity-75 opacity-50 animate-gradient-xy"
+              style={{
+                background: `linear-gradient(45deg, ${gradientColors[0]}, ${gradientColors[1]})`,
+                filter: 'blur(20px)',
+                transform: 'translate3d(0, 0, 0)',
+              }}
+            />
+            <iframe
+              ref={videoRef}
+              src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+              title="Welcome to Ghosty's Garage"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full rounded-xl z-10"
+            />
+          </div>
         </motion.div>
       </div>
     </section>
