@@ -9,6 +9,7 @@ import { WrenchWisdom } from '@/components/WrenchWisdom'; // Added import
 
 // Lazy load components for better performance
 const FeaturesSection = lazy(() => import("@/components/FeaturesSection").then(m => ({ default: m.FeaturesSection })));
+const TrustedBySection = lazy(() => import("@/components/TrustedBySection").then(m => ({ default: m.TrustedBySection })));
 const CommunityHighlights = lazy(() => import("@/components/CommunityHighlights").then(m => ({ default: m.CommunityHighlights })));
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection").then(m => ({ default: m.TestimonialsSection })));
 const ProductShowcase = lazy(() => import("@/components/ProductShowcase").then(m => ({ default: m.ProductShowcase })));
@@ -70,6 +71,10 @@ export default function Home() {
         {/* Other sections */}
         <Suspense fallback={<LoadingFallback />}>
           <FeaturesSection />
+        </Suspense>
+
+        <Suspense fallback={<LoadingFallback />}>
+          <TrustedBySection />
         </Suspense>
 
         <Suspense fallback={<LoadingFallback />}>
