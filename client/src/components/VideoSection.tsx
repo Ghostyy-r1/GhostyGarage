@@ -5,10 +5,40 @@ const VIDEO_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID"; // Replace with
 
 export function VideoSection() {
   const videoRef = React.useRef<HTMLIFrameElement>(null);
-  const [gradientColors] = React.useState(['rgba(139, 92, 246, 0.5)', 'rgba(79, 70, 229, 0.5)']);
+  const [gradientColors, setGradientColors] = React.useState(['rgba(139, 92, 246, 0.5)', 'rgba(79, 70, 229, 0.5)']);
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  // Function to generate random colors
+  const generateRandomColors = () => {
+    const colors = [
+      [139, 92, 246], // Purple
+      [79, 70, 229],  // Indigo
+      [239, 68, 68],  // Red
+      [34, 197, 94],  // Green
+      [234, 179, 8],  // Yellow
+      [14, 165, 233], // Blue
+    ];
+    
+    const color1 = colors[Math.floor(Math.random() * colors.length)];
+    let color2 = colors[Math.floor(Math.random() * colors.length)];
+    while (color1 === color2) {
+      color2 = colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    return [
+      `rgba(${color1[0]}, ${color1[1]}, ${color1[2]}, ${isHovered ? 0.8 : 0.5})`,
+      `rgba(${color2[0]}, ${color2[1]}, ${color2[2]}, ${isHovered ? 0.8 : 0.5})`
+    ];
+  };
 
   useEffect(() => {
-  }, []);
+    // Change colors periodically
+    const interval = setInterval(() => {
+      setGradientColors(generateRandomColors());
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isHovered]);
 
   return (
     <section className="relative py-32 overflow-hidden bg-gradient-to-b from-black via-purple-950/10 to-black">
@@ -40,9 +70,13 @@ export function VideoSection() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="relative aspect-video max-w-4xl mx-auto rounded-xl overflow-hidden"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
           style={{
-            padding: '1px',
+            padding: '2px',
             background: `linear-gradient(45deg, ${gradientColors[0]}, ${gradientColors[1]})`,
+            transition: 'all 0.5s ease',
+            boxShadow: isHovered ? `0 0 30px ${gradientColors[0]}` : 'none',
           }}
         >
           <div className="relative w-full h-full bg-black rounded-xl overflow-hidden group">
