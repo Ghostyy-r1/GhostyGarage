@@ -30,15 +30,18 @@ const partners = [
 ];
 
 export function TrustedBySection() {
-  const [emblaRef] = useEmblaCarousel(
-    { 
-      loop: true,
-      dragFree: true,
-      containScroll: "trimSnaps",
-      align: "center"
-    },
-    [Autoplay({ delay: 2000, stopOnInteraction: false })]
-  );
+  const [emblaRef] = useEmblaCarousel({
+    loop: true,
+    dragFree: true,
+    containScroll: "trimSnaps",
+    align: "center"
+  }, [
+    Autoplay({
+      delay: 2000,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    })
+  ]);
 
   return (
     <section className="py-32 bg-gradient-to-b from-black via-purple-950/10 to-black relative overflow-hidden">
