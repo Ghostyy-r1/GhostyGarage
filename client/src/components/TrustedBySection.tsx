@@ -1,6 +1,8 @@
 
+import React from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { motion } from "framer-motion";
+import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from "embla-carousel-autoplay";
 
 const partners = [
@@ -39,9 +41,9 @@ const partners = [
 ];
 
 export function TrustedBySection() {
-  const plugin = React.useRef(
+  const [emblaRef] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 2000, stopOnInteraction: true })
-  );
+  ]);
 
   return (
     <section className="py-24 bg-black relative overflow-hidden">
@@ -76,7 +78,7 @@ export function TrustedBySection() {
 
         <div className="relative px-12">
           <Carousel
-            plugins={[plugin.current]}
+            ref={emblaRef}
             opts={{
               align: "start",
               loop: true,
