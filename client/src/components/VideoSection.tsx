@@ -1,44 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import * as Vibrant from 'node-vibrant';
 
 const VIDEO_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID"; // Replace with your video ID
 
 export function VideoSection() {
-  const videoRef = useRef<HTMLIFrameElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [gradientColors, setGradientColors] = useState<string[]>(['rgba(139, 92, 246, 0.5)', 'rgba(79, 70, 229, 0.5)']);
-
-  const extractColorsFromImage = async (imageUrl: string) => {
-    try {
-      const palette = await Vibrant.from(imageUrl).getPalette();
-      const colors = [
-        palette.Vibrant?.getRgb(),
-        palette.LightVibrant?.getRgb(),
-        palette.DarkVibrant?.getRgb(),
-      ].filter(Boolean) as number[][];
-
-      if (colors.length > 0) {
-        setGradientColors(colors.map(rgb => `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.5)`));
-      }
-    } catch (error) {
-      console.error('Error extracting colors:', error);
-    }
-  };
+  const videoRef = React.useRef<HTMLIFrameElement>(null);
+  const [gradientColors] = React.useState(['rgba(139, 92, 246, 0.5)', 'rgba(79, 70, 229, 0.5)']);
 
   useEffect(() => {
-    // Extract colors from video thumbnail
-    try {
-      const urlParams = new URLSearchParams(new URL(VIDEO_URL).search);
-      const videoId = urlParams.get('v') || VIDEO_URL.split('/').pop();
-      if (videoId) {
-        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-        extractColorsFromImage(thumbnailUrl).catch(console.error);
-      }
-    } catch (error) {
-      console.error('Error parsing video URL:', error);
-      setGradientColors(['rgba(139, 92, 246, 0.5)', 'rgba(79, 70, 229, 0.5)']);
-    }
   }, []);
 
   return (
