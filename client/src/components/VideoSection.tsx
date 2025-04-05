@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import * as Vibrant from 'node-vibrant';
+import Vibrant from 'node-vibrant/lib/browser';
 
 const VIDEO_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID"; // Replace with your video ID
 
 export function VideoSection() {
   const videoRef = useRef<HTMLIFrameElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [gradientColors, setGradientColors] = useState(['rgba(139, 92, 246, 0.5)', 'rgba(79, 70, 229, 0.5)']);
+  const [gradientColors, setGradientColors] = useState<string[]>(['rgba(139, 92, 246, 0.5)', 'rgba(79, 70, 229, 0.5)']);
 
   const extractColorsFromImage = async (imageUrl: string) => {
     try {
