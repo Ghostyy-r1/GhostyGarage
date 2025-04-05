@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { FaDiscord, FaUsers, FaComments, FaHashtag } from "react-icons/fa";
@@ -42,7 +41,7 @@ export function DiscordWidget() {
         <div className="absolute top-1/2 -translate-y-1/2 left-0 w-48 h-48 bg-purple-500/30 rounded-full blur-3xl" />
         <div className="absolute top-1/2 -translate-y-1/2 right-0 w-48 h-48 bg-indigo-500/30 rounded-full blur-3xl" />
       </div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-12">
           <motion.div 
@@ -54,7 +53,7 @@ export function DiscordWidget() {
             <FaDiscord className="w-8 h-8 text-purple-400" />
             <span className="text-sm font-medium text-purple-400 tracking-wider uppercase">Join Our Community</span>
           </motion.div>
-          
+
           <motion.h2 
             className="text-4xl md:text-5xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-purple-300 to-indigo-400"
             initial={{ opacity: 0, y: 20 }}
@@ -64,7 +63,7 @@ export function DiscordWidget() {
           >
             Connect with Fellow Riders
           </motion.h2>
-          
+
           <motion.p 
             className="text-xl text-gray-400 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
@@ -94,7 +93,7 @@ export function DiscordWidget() {
                   />
                 </div>
               )}
-              
+
               <div className="p-6">
                 <div className="flex items-center gap-4 mb-6">
                   {serverInfo.icon && (

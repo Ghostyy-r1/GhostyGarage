@@ -1,13 +1,24 @@
-
 import axios from 'axios';
+import type { Express, Request, Response, NextFunction } from "express";
+import { createServer, type Server } from "http";
+import { storage } from "./storage";
+import { WebSocketServer, WebSocket } from "ws";
+import { insertUserSchema, insertMotorcycleSchema, insertEventSchema, insertRouteSchema, insertMaintenanceRecordSchema, insertGearReviewSchema, insertChatRoomSchema, insertChatMessageSchema, insertUserPreferencesSchema } from "@shared/schema";
+import { log } from "./vite";
+import { z } from "zod";
+import { getGhostyResponse, type ChatMessage } from "./ai-chat";
 
 // Discord API endpoints
 const DISCORD_API_BASE = 'https://discord.com/api/v10';
 const DISCORD_CDN_BASE = 'https://cdn.discordapp.com';
 
-export async function getDiscordServerInfo(req: Request) {
+export async function getDiscordServerInfo(req: Request, res: Response) {
   const serverId = '1295517643243130920';
   const botToken = process.env.DISCORD_BOT_TOKEN;
+
+  if (!botToken) {
+    return res.status(500).json({ error: 'Discord bot token not configured' });
+  }
 
   try {
     const [serverInfo, channels] = await Promise.all([
@@ -23,7 +34,7 @@ export async function getDiscordServerInfo(req: Request) {
       headers: { Authorization: `Bot ${botToken}` }
     });
 
-    return new Response(JSON.stringify({
+    return res.json({
       name: serverInfo.data.name,
       icon: serverInfo.data.icon ? 
         `${DISCORD_CDN_BASE}/icons/${serverId}/${serverInfo.data.icon}.${serverInfo.data.icon.startsWith('a_') ? 'gif' : 'png'}` : null,
@@ -34,25 +45,12 @@ export async function getDiscordServerInfo(req: Request) {
       presenceCount: serverInfo.data.approximate_presence_count,
       channels: channels.data.filter((c: any) => c.type === 0).slice(0, 3),
       inviteUrl: 'https://discord.gg/h6QUNDjs'
-    }), {
-      headers: { 'Content-Type': 'application/json' }
     });
   } catch (error) {
-    return new Response(JSON.stringify({ error: 'Failed to fetch Discord server info' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    console.error('Discord API error:', error);
+    return res.status(500).json({ error: 'Failed to fetch Discord server info' });
   }
 }
-
-import type { Express, Request, Response, NextFunction } from "express";
-import { createServer, type Server } from "http";
-import { storage } from "./storage";
-import { WebSocketServer, WebSocket } from "ws";
-import { insertUserSchema, insertMotorcycleSchema, insertEventSchema, insertRouteSchema, insertMaintenanceRecordSchema, insertGearReviewSchema, insertChatRoomSchema, insertChatMessageSchema, insertUserPreferencesSchema } from "@shared/schema";
-import { log } from "./vite";
-import { z } from "zod";
-import { getGhostyResponse, type ChatMessage } from "./ai-chat";
 
 // Middleware to handle API errors
 function errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
@@ -83,169 +81,119 @@ function validateBody<T extends z.ZodSchema>(schema: T) {
   };
 }
 
+// Register all routes
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Create HTTP server
+  // Discord endpoints
+  app.get('/api/discord/server-info', getDiscordServerInfo);
+
+  // Create HTTP server 
   const httpServer = createServer(app);
-  
-  // Initialize WebSocket server for chat
+
+  // Initialize WebSocket server
   const wss = new WebSocketServer({ server: httpServer, path: '/ws' });
-  
-  // Store connected clients with their user info and conversation history
-  const clients = new Map<WebSocket, { 
-    userId?: number, 
+
+  // Store connected clients
+  const clients = new Map<WebSocket, {
+    userId?: number,
     username?: string,
-    aiConversation?: ChatMessage[] 
+    aiConversation?: ChatMessage[]
   }>();
-  
+
   // WebSocket connection handling
   wss.on('connection', (ws) => {
-    // Add new client to map
     clients.set(ws, { aiConversation: [] });
-    
-    log('WebSocket client connected', 'ws-server');
-    
-    // Handle incoming messages
-    ws.on('message', async (messageBuffer) => {
+
+    ws.on('message', async (data) => {
       try {
-        const messageString = messageBuffer.toString();
-        const message = JSON.parse(messageString);
-        
-        // Handle different message types
+        const message = JSON.parse(data.toString());
+
         switch (message.type) {
           case 'auth':
-            // Authenticate the WebSocket connection
             if (message.userId && message.username) {
-              clients.set(ws, { 
+              clients.set(ws, {
                 ...clients.get(ws),
-                userId: message.userId, 
-                username: message.username 
+                userId: message.userId,
+                username: message.username
               });
-              log(`WebSocket client authenticated: ${message.username}`, 'ws-server');
             }
             break;
-            
+
           case 'chat':
-            // Process and broadcast chat message
             if (message.roomId && message.content && clients.get(ws)?.userId) {
               const userId = clients.get(ws)?.userId;
-              
-              // Save message to database
               const chatMessage = await storage.createChatMessage({
                 roomId: message.roomId,
                 userId: userId!,
                 message: message.content,
               });
-              
-              // Broadcast to all connected clients in the same room
-              const broadcastMessage = {
-                type: 'chat',
-                roomId: message.roomId,
-                messageId: chatMessage.id,
-                userId: userId,
-                username: clients.get(ws)?.username,
-                content: message.content,
-                timestamp: chatMessage.sentAt,
-              };
-              
-              // Broadcast to all connected clients
+
               wss.clients.forEach((client) => {
                 if (client.readyState === WebSocket.OPEN) {
-                  client.send(JSON.stringify(broadcastMessage));
+                  client.send(JSON.stringify({
+                    type: 'chat',
+                    roomId: message.roomId,
+                    messageId: chatMessage.id,
+                    userId: userId,
+                    username: clients.get(ws)?.username,
+                    content: message.content,
+                    timestamp: chatMessage.sentAt,
+                  }));
                 }
               });
             }
             break;
-            
+
           case 'ai_chat':
-            // Process AI chat message with Ghosty
             if (message.content) {
               const client = clients.get(ws);
-              const userMessage = message.content;
-              
-              // Add user message to conversation history
-              const userMessageObj: ChatMessage = { 
-                role: 'user', 
-                content: userMessage 
-              };
-              
-              // Get current conversation history (limited to 10 messages for context)
-              const conversationHistory = client?.aiConversation || [];
-              if (conversationHistory.length > 10) {
-                conversationHistory.splice(0, conversationHistory.length - 10);
+              const conversation = client?.aiConversation || [];
+
+              if (conversation.length > 10) {
+                conversation.splice(0, conversation.length - 10);
               }
-              
-              // Add user message to history
-              conversationHistory.push(userMessageObj);
-              
-              // Update client conversation history
-              clients.set(ws, { 
-                ...client, 
-                aiConversation: conversationHistory 
-              });
-              
-              log(`AI chat request: "${userMessage.substring(0, 30)}${userMessage.length > 30 ? '...' : ''}"`, 'ws-server');
-              
+
+              conversation.push({ role: 'user', content: message.content });
+
               try {
-                // Get response from AI
-                const aiResponse = await getGhostyResponse(userMessage, conversationHistory);
-                
-                // Add AI response to conversation history
-                const aiMessageObj: ChatMessage = { 
-                  role: 'assistant', 
-                  content: aiResponse 
-                };
-                conversationHistory.push(aiMessageObj);
-                
-                // Update client conversation history
-                clients.set(ws, { 
-                  ...client, 
-                  aiConversation: conversationHistory 
+                const response = await getGhostyResponse(message.content, conversation);
+                conversation.push({ role: 'assistant', content: response });
+
+                clients.set(ws, {
+                  ...client,
+                  aiConversation: conversation
                 });
-                
-                // Send response back to client
-                const responseMessage = {
+
+                ws.send(JSON.stringify({
                   type: 'ai_chat',
-                  messageId: Date.now(),
-                  content: aiResponse,
-                  timestamp: new Date().toISOString(),
-                };
-                
-                ws.send(JSON.stringify(responseMessage));
+                  content: response,
+                  timestamp: new Date().toISOString()
+                }));
               } catch (error) {
-                log(`Error getting AI response: ${error}`, 'ws-server');
-                
-                // Send error response
-                const errorResponse = {
+                ws.send(JSON.stringify({
                   type: 'ai_chat',
-                  messageId: Date.now(),
-                  content: "Vroom vroom! Sorry about that, my engine stalled. Could you try again?",
-                  timestamp: new Date().toISOString(),
-                  error: true
-                };
-                
-                ws.send(JSON.stringify(errorResponse));
+                  content: "Sorry, I encountered an error. Please try again.",
+                  error: true,
+                  timestamp: new Date().toISOString()
+                }));
               }
             }
             break;
-            
-          default:
-            log(`Unknown message type: ${message.type}`, 'ws-server');
         }
       } catch (error) {
-        console.error('Error processing WebSocket message:', error);
+        console.error('WebSocket message error:', error);
       }
     });
-    
-    // Handle client disconnection
+
     ws.on('close', () => {
       clients.delete(ws);
-      log('WebSocket client disconnected', 'ws-server');
     });
-    
-    // Send initial connection confirmation
-    ws.send(JSON.stringify({ type: 'connected', timestamp: new Date().toISOString() }));
+
+    ws.send(JSON.stringify({
+      type: 'connected',
+      timestamp: new Date().toISOString()
+    }));
   });
-  
+
   // REST API Routes
   // Users
   app.get('/api/users/:id', async (req, res, next) => {
