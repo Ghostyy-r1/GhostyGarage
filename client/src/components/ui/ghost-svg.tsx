@@ -12,21 +12,27 @@ export function GhostSvg({ size = 40, className = '' }) {
       className={className}
     >
       <path
-        d="M12 2C7.58172 2 4 5.58172 4 10V17.5C4 19.9853 6.01472 22 8.5 22C9.82986 22 11.0075 21.3652 11.7578 20.3662C11.9012 20.1886 12.0988 20.1886 12.2422 20.3662C12.9925 21.3652 14.1701 22 15.5 22C17.9853 22 20 19.9853 20 17.5V10C20 5.58172 16.4183 2 12 2Z"
+        d="M12 2C7.58172 2 4 5.58172 4 10V17.5C4 17.5 4.5 22 8.5 22C11 22 11.5 20 12 20C12.5 20 13 22 15.5 22C19.5 22 20 17.5 20 17.5V10C20 5.58172 16.4183 2 12 2Z"
         fill="currentColor"
         filter="url(#glow)"
       />
-      <ellipse cx="9" cy="10" rx="2" ry="1.8" fill="#000000" />
-      <ellipse cx="15" cy="10" rx="2" ry="1.8" fill="#000000" />
       <path
-        d="M8 14C8.5 15 10 16 12 16C14 16 15.5 15 16 14"
+        d="M9 11C9 11.5523 8.55228 12 8 12C7.44772 12 7 11.5523 7 11C7 10.4477 7.44772 10 8 10C8.55228 10 9 10.4477 9 11Z"
+        fill="#000000"
+      />
+      <path
+        d="M17 11C17 11.5523 16.5523 12 16 12C15.4477 12 15 11.5523 15 11C15 10.4477 15.4477 10 16 10C16.5523 10 17 10.4477 17 11Z"
+        fill="#000000"
+      />
+      <path
+        d="M9.5 14.5C10.5 15.5 13.5 15.5 14.5 14.5"
         stroke="#000000"
         strokeWidth="0.5"
         strokeLinecap="round"
       />
       <defs>
         <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="2" result="blur" />
+          <feGaussianBlur stdDeviation="1.5" result="blur" />
           <feComposite in="SourceGraphic" in2="blur" operator="over" />
         </filter>
       </defs>
