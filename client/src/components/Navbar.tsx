@@ -63,11 +63,14 @@ export function Navbar() {
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
                 <Link href="/">
-                  <span className="text-white font-bold text-xl cursor-pointer">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">
-                      Ghosty's Garage
+                  <div className="flex items-center gap-2">
+                    <img src="/assets/ghostyy1.png" alt="Ghosty" className="w-8 h-8" />
+                    <span className="text-white font-bold text-xl cursor-pointer">
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">
+                        Ghosty's Garage
+                      </span>
                     </span>
-                  </span>
+                  </div>
                 </Link>
               </div>
             </div>
