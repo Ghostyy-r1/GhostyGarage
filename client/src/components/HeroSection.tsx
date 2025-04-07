@@ -19,15 +19,15 @@ export function HeroSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const ghosts = Array.from({ length: 5 }).map((_, i) => ({
+  const ghosts = Array.from({ length: 8 }).map((_, i) => ({
     id: i,
-    size: Math.random() * 30 + 30, // Random size between 30-60px
+    size: Math.random() * 40 + 40, // Random size between 40-80px
     initialPosition: {
       x: `${Math.random() * 80 + 10}%`,
       y: `${Math.random() * 80 + 10}%`
     },
-    delay: Math.random() * 5,
-    duration: 15 + Math.random() * 10
+    delay: Math.random() * 3,
+    duration: 8 + Math.random() * 6
   }));
 
   return (
@@ -47,11 +47,11 @@ export function HeroSection() {
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
-              opacity: [0.2, 0.4, 0.2],
-              y: [0, -50, 0],
-              x: [0, Math.sin(ghost.id) * 30, 0],
-              rotate: [0, Math.sin(ghost.id * 2) * 10, 0],
-              scale: [0.8, 1, 0.8]
+              opacity: [0.4, 0.7, 0.4],
+              y: [0, -70, 0],
+              x: [0, Math.sin(ghost.id) * 50, 0],
+              rotate: [0, Math.sin(ghost.id * 2) * 15, 0],
+              scale: [0.9, 1.1, 0.9]
             }}
             transition={{
               duration: ghost.duration,
@@ -62,7 +62,7 @@ export function HeroSection() {
           >
             <GhostSvg
               size={ghost.size}
-              className="text-white/30 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)] filter brightness-110"
+              className="text-white/50 drop-shadow-[0_0_15px_rgba(168,85,247,0.8)] filter brightness-125 hover:brightness-150 transition-all duration-300"
             />
           </motion.div>
         ))}
@@ -71,97 +71,8 @@ export function HeroSection() {
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-black/50 pointer-events-none" />
 
-      {/* Background gradient elements with animated blobs */}
-      <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
-        <svg width="0" height="0">
-          <defs>
-            <filter id="goo">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
-              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -9" result="goo" />
-              <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
-            </filter>
-          </defs>
-        </svg>
-        <div className="absolute inset-0" style={{ filter: 'url(#goo)' }}>
-          {Array.from({ length: 12 }).map((_, i) => {
-            const initialSize = 80 + (Math.random() * 40);
-            const randomStartX = Math.random() * 100;
-            const cycleDelay = i * (20 / 12);
-            const cycleDuration = 20 + (Math.random() * 10);
-            
-            return (
-              <motion.div
-                key={`blob-${i}`}
-                initial={{
-                  x: `${randomStartX}%`,
-                  y: '120%',
-                  scale: 0.3,
-                  opacity: 0.1
-                }}
-                animate={{
-                  scale: [0.3, 1.4, 1.8, 1.2, 0.3],
-                  opacity: [0.2, 0.5, 0.6, 0.4, 0.2],
-                  x: [
-                    `${randomStartX}%`,
-                    `${(randomStartX + 30) % 100}%`,
-                    `${(randomStartX + 60) % 100}%`,
-                    `${(randomStartX + 90) % 100}%`,
-                    `${randomStartX}%`
-                  ],
-                  y: ['120%', '70%', '20%', '70%', '120%']
-                }}
-                transition={{
-                  duration: cycleDuration,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: cycleDelay,
-                  times: [0, 0.25, 0.5, 0.75, 1]
-                }}
-                className="absolute pointer-events-none origin-center"
-                style={{
-                  width: initialSize,
-                  height: initialSize,
-                  background: `radial-gradient(circle at 50% 50%, 
-                    rgba(147, 51, 234, ${0.3 + (Math.random() * 0.2)}) 0%,
-                    rgba(88, 28, 135, ${0.2 + (Math.random() * 0.1)}) 100%)`,
-                  borderRadius: '50%',
-                  mixBlendMode: 'plus-lighter',
-                  filter: 'brightness(1.2) contrast(1.2)',
-                  zIndex: i,
-                  backdropFilter: 'blur(12px)'
-                }}
-              />
-            );
-          })}
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60" />
-        {Array.from({ length: 15 }).map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ 
-              opacity: 0,
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight
-            }}
-            animate={{ 
-              opacity: [0.1, 0.3, 0.1],
-              y: ["-10%", "110%"],
-              x: ["-10%", "110%"]
-            }}
-            transition={{
-              duration: Math.random() * 10 + 20,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-              ease: "linear"
-            }}
-            className={`absolute w-${Math.floor(Math.random() * 16 + 8)} h-${Math.floor(Math.random() * 16 + 8)} rounded-full bg-gradient-to-br from-purple-500/10 to-indigo-500/10 blur-xl pointer-events-none`}
-            style={{
-              width: Math.random() * 100 + 50,
-              height: Math.random() * 100 + 50
-            }}
-          />
-        ))}
-      </div>
+      {/* Simple gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/30 via-black to-black pointer-events-none" />
 
       {/* Grid overlay */}
       <div 
