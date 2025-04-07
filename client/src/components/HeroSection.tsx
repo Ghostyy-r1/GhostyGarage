@@ -139,7 +139,7 @@ export function HeroSection() {
     {
       id: 'ghost1-top-left',
       size: 85,
-      initialPosition: { x: '5%', y: '5%' },
+      initialPosition: { x: '3%', y: '3%' },
       ghostIndex: 0,
       delay: 2.4,
       duration: 3.7,
@@ -149,7 +149,7 @@ export function HeroSection() {
     {
       id: 'ghost2-top-right',
       size: 90,
-      initialPosition: { x: '88%', y: '8%' },
+      initialPosition: { x: '92%', y: '5%' },
       ghostIndex: 1,
       delay: 0.4,
       duration: 4.9,
@@ -159,7 +159,7 @@ export function HeroSection() {
     {
       id: 'ghost3-bottom-left',
       size: 95,
-      initialPosition: { x: '8%', y: '85%' },
+      initialPosition: { x: '4%', y: '90%' },
       ghostIndex: 2,
       delay: 1.2,
       duration: 4.2,
@@ -169,7 +169,7 @@ export function HeroSection() {
     {
       id: 'ghost1-bottom-right',
       size: 88,
-      initialPosition: { x: '85%', y: '82%' },
+      initialPosition: { x: '90%', y: '88%' },
       ghostIndex: 0,
       delay: 1.8,
       duration: 3.9,
