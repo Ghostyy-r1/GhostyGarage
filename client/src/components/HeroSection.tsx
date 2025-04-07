@@ -18,61 +18,57 @@ export function HeroSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  // Particles state
-  const [particles, setParticles] = useState<Array<{
-    id: number;
-    x: number;
-    y: number;
-    size: number;
-    speed: number;
-    color: string;
-  }>>([]);
-
-  // Generate particles on component mount
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const newParticles = Array.from({ length: 20 }).map((_, i) => ({
-        id: i,
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight * 0.8,
-        size: Math.random() * 3 + 1,
-        speed: Math.random() * 1 + 0.5,
-        color: `rgba(${Math.floor(Math.random() * 100 + 150)}, ${Math.floor(Math.random() * 50 + 50)}, ${Math.floor(Math.random() * 100 + 150)}, ${Math.random() * 0.3 + 0.1})`
-      }));
-      setParticles(newParticles);
-    }
-  }, []);
+  const ghosts = Array.from({ length: 5 }).map((_, i) => ({
+    id: i,
+    size: Math.random() * 30 + 30, // Random size between 30-60px
+    initialPosition: {
+      x: `${Math.random() * 80 + 10}%`,
+      y: `${Math.random() * 80 + 10}%`
+    },
+    delay: Math.random() * 5,
+    duration: 15 + Math.random() * 10
+  }));
 
   return (
     <div 
       ref={containerRef}
-      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-purple-900/40 via-[#0c0920] to-black px-4 sm:px-6 lg:px-8"
-      style={{ position: 'relative' }}
+      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-purple-900/20 via-black to-black px-4 sm:px-6 lg:px-8"
     >
-      {/* Animated particles */}
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute rounded-full"
-          style={{
-            width: particle.size,
-            height: particle.size,
-            backgroundColor: particle.color,
-            x: particle.x,
-            y: particle.y,
-            boxShadow: `0 0 ${particle.size * 2}px ${particle.color}`
-          }}
-          animate={{
-            y: [particle.y, particle.y + 100, particle.y],
-            opacity: [0.7, 0.4, 0.7],
-          }}
-          transition={{
-            duration: 3 + particle.speed * 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
+      {/* Ghost background container */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {ghosts.map((ghost) => (
+          <motion.div
+            key={ghost.id}
+            className="absolute"
+            style={{
+              left: ghost.initialPosition.x,
+              top: ghost.initialPosition.y,
+            }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{
+              opacity: [0.2, 0.4, 0.2],
+              y: [0, -50, 0],
+              x: [0, Math.sin(ghost.id) * 30, 0],
+              rotate: [0, Math.sin(ghost.id * 2) * 10, 0],
+              scale: [0.8, 1, 0.8]
+            }}
+            transition={{
+              duration: ghost.duration,
+              delay: ghost.delay,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <GhostSvg
+              size={ghost.size}
+              className="text-white/30 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)] filter brightness-110"
+            />
+          </motion.div>
+        ))}
+      </div>
+      
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-black/50 pointer-events-none" />
 
       {/* Background gradient elements with animated blobs */}
       <div className="absolute top-0 left-0 right-0 bottom-0 overflow-hidden">
