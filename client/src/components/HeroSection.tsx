@@ -1,11 +1,11 @@
 import { ChevronRight, Bike, Users, Calendar, MapPin, Wrench, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { GhostSvg } from '@/components/ui/ghost-svg';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useState, useRef, useEffect } from 'react';
 import { ThreeDCard } from '@/components/ui/3d-card';
 import { AnimatedReveal } from '@/components/ui/animated-reveal';
+import { GhostSvg } from '@/components/ui/ghost-svg';
 
 export function HeroSection() {
   const isMobile = useIsMobile();
@@ -20,95 +20,92 @@ export function HeroSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const ghosts = [
-    // Top row
+    // Main ghosts - bouncing center left
     {
-      id: 'ghost1-top-left',
-      size: 90,
-      initialPosition: { x: '8%', y: '12%' },
+      id: 'ghost1-main',
+      size: 120,
+      initialPosition: { x: '15%', y: '30%' },
       ghostIndex: 0,
-      delay: 0.2,
-      duration: 4.0,
-      opacity: 0.85,
-      zIndex: 10,
+      delay: 0,
+      duration: 3,
     },
+    // Top right ghost
     {
-      id: 'ghost2-top-center',
-      size: 85,
-      initialPosition: { x: '40%', y: '8%' },
-      ghostIndex: 1,
-      delay: 0.5,
-      duration: 3.8,
-      opacity: 0.8,
-      zIndex: 9,
-    },
-    {
-      id: 'ghost3-top-right',
-      size: 95,
+      id: 'ghost2-top',
+      size: 100,
       initialPosition: { x: '75%', y: '15%' },
       ghostIndex: 2,
-      delay: 0.7,
-      duration: 4.2,
-      opacity: 0.9,
-      zIndex: 8,
+      delay: 0.5,
+      duration: 4,
     },
-    // Middle row
+    // Bottom left ghost
     {
-      id: 'ghost4-mid-left',
-      size: 100,
-      initialPosition: { x: '12%', y: '42%' },
-      ghostIndex: 0,
-      delay: 1.0,
-      duration: 4.5,
-      opacity: 0.85,
-      zIndex: 12,
-    },
-    {
-      id: 'ghost5-mid-right',
+      id: 'ghost3-bottom',
       size: 110,
-      initialPosition: { x: '88%', y: '48%' },
+      initialPosition: { x: '25%', y: '75%' },
       ghostIndex: 1,
-      delay: 0.3,
-      duration: 4.3,
-      opacity: 0.9,
-      zIndex: 11,
+      delay: 1,
+      duration: 3.5,
     },
-    // Bottom row
+    // Center right ghost
     {
-      id: 'ghost6-bottom-left',
-      size: 95,
-      initialPosition: { x: '12%', y: '75%' },
-      ghostIndex: 2,
-      delay: 0.8,
-      duration: 3.9,
-      opacity: 0.8,
-      zIndex: 7,
-    },
-    {
-      id: 'ghost7-bottom-center',
-      size: 85,
-      initialPosition: { x: '45%', y: '80%' },
-      ghostIndex: 0,
-      delay: 0.4,
-      duration: 4.1,
-      opacity: 0.75,
-      zIndex: 6,
-    },
-    {
-      id: 'ghost8-bottom-right',
+      id: 'ghost1-right',
       size: 90,
-      initialPosition: { x: '88%', y: '78%' },
+      initialPosition: { x: '85%', y: '45%' },
+      ghostIndex: 2,
+      delay: 1.5,
+      duration: 4,
+    },
+    // Top left ghost
+    {
+      id: 'ghost2-topleft',
+      size: 80,
+      initialPosition: { x: '10%', y: '10%' },
+      ghostIndex: 0,
+      delay: 2,
+      duration: 3,
+    },
+    // Bottom right ghost
+    {
+      id: 'ghost3-bottomright',
+      size: 95,
+      initialPosition: { x: '80%', y: '80%' },
       ghostIndex: 1,
-      delay: 0.6,
-      duration: 4.0,
-      opacity: 0.85,
-      zIndex: 7,
+      delay: 0.7,
+      duration: 4.5,
+    },
+    // Center ghost
+    {
+      id: 'ghost1-center',
+      size: 100,
+      initialPosition: { x: '50%', y: '50%' },
+      ghostIndex: 2,
+      delay: 1.2,
+      duration: 3.8,
+    },
+    // Additional floating ghosts
+    {
+      id: 'ghost2-float1',
+      size: 70,
+      initialPosition: { x: '35%', y: '25%' },
+      ghostIndex: 0,
+      delay: 0.3,
+      duration: 4.2,
+    },
+    {
+      id: 'ghost3-float2',
+      size: 85,
+      initialPosition: { x: '65%', y: '65%' },
+      ghostIndex: 1,
+      delay: 1.8,
+      duration: 3.3,
     }
   ];
 
   return (
     <div 
       ref={containerRef}
-      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-purple-900/20 via-black to-black px-4 sm:px-6 lg:px-8 z-0"
+      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-purple-900/20 via-black to-black px-4 sm:px-6 lg:px-8"
     >
       {/* Ghost background container with padding to prevent cutoff */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 p-16">
@@ -119,15 +116,12 @@ export function HeroSection() {
             style={{
               left: ghost.initialPosition.x,
               top: ghost.initialPosition.y,
-              zIndex: ghost.zIndex || 1,
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
-              opacity: [ghost.opacity * 0.8, ghost.opacity, ghost.opacity * 0.8],
-              y: [0, -15 - Math.random() * 10, 0],
-              x: [0, Math.random() * 10 - 5, 0],
-              scale: [1, 1 + Math.random() * 0.15, 1],
-              rotate: [0, Math.random() * 6 - 3, 0],
+              opacity: [0.6, 1, 0.6],
+              y: [0, -20, 0],
+              scale: [1, 1.1, 1],
             }}
             transition={{
               duration: ghost.duration,
@@ -151,7 +145,7 @@ export function HeroSection() {
       </div>
 
       {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-black/50 pointer-events-none z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-black/50 pointer-events-none" />
 
       {/* Simple gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/30 via-black to-black pointer-events-none" />
@@ -217,11 +211,11 @@ export function HeroSection() {
       {/* Background ghost layer that appears above grid but below content */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 5 }}>
         {[
-          { x: '82%', y: '28%', size: 180, ghostIndex: 0, delay: 0.8, duration: 4 },
-          { x: '18%', y: '68%', size: 160, ghostIndex: 1, delay: 1.2, duration: 3.5 },
-          { x: '92%', y: '72%', size: 140, ghostIndex: 2, delay: 0.5, duration: 4.2 },
-          { x: '28%', y: '32%', size: 130, ghostIndex: 0, delay: 1.5, duration: 3.8 },
-          { x: '60%', y: '52%', size: 150, ghostIndex: 1, delay: 0.3, duration: 4.5 }
+          { x: '65%', y: '25%', size: 180, ghostIndex: 0, delay: 0.8, duration: 4 },
+          { x: '15%', y: '65%', size: 160, ghostIndex: 1, delay: 1.2, duration: 3.5 },
+          { x: '75%', y: '70%', size: 140, ghostIndex: 2, delay: 0.5, duration: 4.2 },
+          { x: '85%', y: '35%', size: 130, ghostIndex: 0, delay: 1.5, duration: 3.8 },
+          { x: '25%', y: '20%', size: 150, ghostIndex: 1, delay: 0.3, duration: 4.5 }
         ].map((ghost, index) => (
           <motion.div
             key={`bg-ghost-${index}`}
@@ -254,7 +248,7 @@ export function HeroSection() {
 
       <motion.div 
         style={{ y, opacity }}
-        className="container mx-auto relative z-20 py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8"
+        className="container mx-auto relative z-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="relative space-y-8">
