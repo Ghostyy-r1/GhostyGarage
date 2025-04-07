@@ -220,8 +220,8 @@ export function HeroSection() {
           { x: '65%', y: '25%', size: 180, ghostIndex: 0, delay: 0.8, duration: 4 },
           { x: '15%', y: '65%', size: 160, ghostIndex: 1, delay: 1.2, duration: 3.5 },
           { x: '75%', y: '70%', size: 140, ghostIndex: 2, delay: 0.5, duration: 4.2 },
-          { x: '85%', y: '35%', size: 130, ghostIndex: 0, delay: 1.5, duration: 3.8 },
-          { x: '25%', y: '20%', size: 150, ghostIndex: 1, delay: 0.3, duration: 4.5 }
+          { x: '92%', y: '45%', size: 130, ghostIndex: 0, delay: 1.5, duration: 3.8 },
+          { x: '25%', y: '35%', size: 150, ghostIndex: 1, delay: 0.3, duration: 4.5 }
         ].map((ghost, index) => (
           <motion.div
             key={`bg-ghost-${index}`}
