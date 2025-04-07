@@ -6,9 +6,8 @@ if (!process.env.MONGODB_URI) {
 }
 
 const client = new MongoClient(process.env.MONGODB_URI, {
-  ssl: true,
-  tls: true,
-  tlsAllowInvalidCertificates: true // Only for development
+  ssl: false,
+  tls: false
 });
 
 export const db = client.db('motorcycleapp');

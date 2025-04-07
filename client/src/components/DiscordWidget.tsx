@@ -128,7 +128,7 @@ export function DiscordWidget() {
                   <div>
                     <h4 className="text-sm font-medium text-purple-400 uppercase tracking-wider mb-3">Featured Channels</h4>
                     <div className="space-y-2">
-                      {serverInfo.channels.map(channel => (
+                      {serverInfo?.channels?.map(channel => (
                         <div 
                           key={channel.id}
                           className="flex items-center gap-2 p-2.5 rounded-lg bg-purple-900/10 border border-purple-500/10 hover:bg-purple-900/20 transition-colors duration-200"
@@ -141,7 +141,7 @@ export function DiscordWidget() {
                   </div>
 
                   <a 
-                    href={serverInfo.inviteUrl}
+                    href={serverInfo?.inviteUrl || ''} // Added null check for inviteUrl
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-4 rounded-lg text-center transition-all duration-200 group relative overflow-hidden"

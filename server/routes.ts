@@ -17,7 +17,14 @@ export async function getDiscordServerInfo(req: Request, res: Response) {
   const botToken = process.env.DISCORD_BOT_TOKEN;
 
   if (!botToken) {
-    return res.status(500).json({ error: 'Discord bot token not configured' });
+    return res.status(200).json({
+      name: "Ghosty's Garage",
+      description: "Join our motorcycle community!",
+      memberCount: 0,
+      presenceCount: 0,
+      channels: [],
+      inviteUrl: 'https://discord.gg/h6QUNDjs'
+    });
   }
 
   try {
