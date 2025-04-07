@@ -20,7 +20,7 @@ export function HeroSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const ghosts = [
-    // Main ghosts - bouncing center left
+    // Layer 1 - Front ghosts
     {
       id: 'ghost1-main',
       size: 120,
@@ -28,77 +28,128 @@ export function HeroSection() {
       ghostIndex: 0,
       delay: 0,
       duration: 3,
+      opacity: 0.9,
     },
-    // Top right ghost
     {
-      id: 'ghost2-top',
-      size: 100,
-      initialPosition: { x: '75%', y: '15%' },
-      ghostIndex: 2,
-      delay: 0.5,
-      duration: 4,
-    },
-    // Bottom left ghost
-    {
-      id: 'ghost3-bottom',
+      id: 'ghost2-centerright',
       size: 110,
-      initialPosition: { x: '25%', y: '75%' },
+      initialPosition: { x: '75%', y: '45%' },
       ghostIndex: 1,
-      delay: 1,
-      duration: 3.5,
+      delay: 0.5,
+      duration: 4.2,
+      opacity: 0.85,
     },
-    // Center right ghost
     {
-      id: 'ghost1-right',
-      size: 90,
-      initialPosition: { x: '85%', y: '45%' },
-      ghostIndex: 2,
-      delay: 1.5,
-      duration: 4,
-    },
-    // Top left ghost
-    {
-      id: 'ghost2-topleft',
-      size: 80,
-      initialPosition: { x: '10%', y: '10%' },
-      ghostIndex: 0,
-      delay: 2,
-      duration: 3,
-    },
-    // Bottom right ghost
-    {
-      id: 'ghost3-bottomright',
-      size: 95,
-      initialPosition: { x: '80%', y: '80%' },
-      ghostIndex: 1,
-      delay: 0.7,
-      duration: 4.5,
-    },
-    // Center ghost
-    {
-      id: 'ghost1-center',
+      id: 'ghost3-bottomleft',
       size: 100,
-      initialPosition: { x: '50%', y: '50%' },
+      initialPosition: { x: '20%', y: '70%' },
       ghostIndex: 2,
       delay: 1.2,
       duration: 3.8,
+      opacity: 0.9,
     },
-    // Additional floating ghosts
+    // Layer 2 - Mid-level ghosts
     {
-      id: 'ghost2-float1',
-      size: 70,
-      initialPosition: { x: '35%', y: '25%' },
-      ghostIndex: 0,
-      delay: 0.3,
-      duration: 4.2,
-    },
-    {
-      id: 'ghost3-float2',
-      size: 85,
-      initialPosition: { x: '65%', y: '65%' },
+      id: 'ghost1-topleft',
+      size: 90,
+      initialPosition: { x: '8%', y: '15%' },
       ghostIndex: 1,
+      delay: 0.7,
+      duration: 4.5,
+      opacity: 0.7,
+    },
+    {
+      id: 'ghost2-topright',
+      size: 95,
+      initialPosition: { x: '88%', y: '25%' },
+      ghostIndex: 0,
+      delay: 1.5,
+      duration: 3.6,
+      opacity: 0.75,
+    },
+    {
+      id: 'ghost3-center',
+      size: 85,
+      initialPosition: { x: '45%', y: '55%' },
+      ghostIndex: 2,
+      delay: 0.3,
+      duration: 4.8,
+      opacity: 0.8,
+    },
+    // Layer 3 - Background ghosts
+    {
+      id: 'ghost1-far-left',
+      size: 70,
+      initialPosition: { x: '5%', y: '40%' },
+      ghostIndex: 2,
       delay: 1.8,
-      duration: 3.3,
+      duration: 5,
+      opacity: 0.5,
+    },
+    {
+      id: 'ghost2-far-right',
+      size: 75,
+      initialPosition: { x: '92%', y: '60%' },
+      ghostIndex: 1,
+      delay: 0.9,
+      duration: 4.4,
+      opacity: 0.45,
+    },
+    // Random floating ghosts
+    {
+      id: 'ghost3-float1',
+      size: 65,
+      initialPosition: { x: '35%', y: '20%' },
+      ghostIndex: 0,
+      delay: 2.1,
+      duration: 3.9,
+      opacity: 0.6,
+    },
+    {
+      id: 'ghost1-float2',
+      size: 80,
+      initialPosition: { x: '60%', y: '75%' },
+      ghostIndex: 2,
+      delay: 1.3,
+      duration: 4.6,
+      opacity: 0.65,
+    },
+    {
+      id: 'ghost2-float3',
+      size: 72,
+      initialPosition: { x: '25%', y: '85%' },
+      ghostIndex: 1,
+      delay: 0.6,
+      duration: 5.2,
+      opacity: 0.55,
+    },
+    {
+      id: 'ghost3-float4',
+      size: 68,
+      initialPosition: { x: '82%', y: '88%' },
+      ghostIndex: 0,
+      delay: 1.7,
+      duration: 4.1,
+      opacity: 0.5,
+    },
+    // Corner ghosts
+    {
+      id: 'ghost1-top-corner',
+      size: 55,
+      initialPosition: { x: '2%', y: '2%' },
+      ghostIndex: 2,
+      delay: 2.4,
+      duration: 3.7,
+      opacity: 0.4,
+    },
+    {
+      id: 'ghost2-bottom-corner',
+      size: 60,
+      initialPosition: { x: '95%', y: '95%' },
+      ghostIndex: 1,
+      delay: 0.4,
+      duration: 4.9,
+      opacity: 0.45,
     }
   ];
 
@@ -119,9 +170,11 @@ export function HeroSection() {
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
-              opacity: [0.6, 1, 0.6],
-              y: [0, -20, 0],
-              scale: [1, 1.1, 1],
+              opacity: [ghost.opacity * 0.8, ghost.opacity, ghost.opacity * 0.8],
+              y: [0, -15 - Math.random() * 10, 0],
+              x: [0, Math.random() * 10 - 5, 0],
+              scale: [1, 1 + Math.random() * 0.15, 1],
+              rotate: [0, Math.random() * 6 - 3, 0],
             }}
             transition={{
               duration: ghost.duration,
