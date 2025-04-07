@@ -19,20 +19,48 @@ export function HeroSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const ghosts = Array.from({ length: 30 }).map((_, i) => ({
-    id: i,
-    size: Math.random() * 80 + 80, // Even larger size for better visibility
-    initialPosition: {
-      x: `${Math.random() * 100}%`,
-      y: `${Math.random() * 100}%`
+  const ghosts = [
+    // Ghosty1 that moves side to side
+    {
+      id: 'ghosty1',
+      size: 120,
+      initialPosition: { x: '100%', y: '30%' },
+      ghostIndex: 0,
+      delay: 0,
+      duration: 8,
+      isMoving: true
     },
-    ghostIndex: i % 4, // Now using all 4 images
-    delay: Math.random() * 3,
-    duration: 15 + Math.random() * 20,
-    direction: Math.random() > 0.5 ? 1 : -1,
-    curve: Math.random() * 300,
-    rotation: Math.random() * 360
-  }));
+    // Ghosty2 in top corner
+    {
+      id: 'ghosty2',
+      size: 100,
+      initialPosition: { x: '5%', y: '10%' },
+      ghostIndex: 1,
+      delay: 0.5,
+      duration: 4,
+      isMoving: false
+    },
+    // Ghosty3 in bottom corner
+    {
+      id: 'ghosty3',
+      size: 100,
+      initialPosition: { x: '90%', y: '80%' },
+      ghostIndex: 2,
+      delay: 1,
+      duration: 4,
+      isMoving: false
+    },
+    // Particles (stationary)
+    {
+      id: 'particles',
+      size: 200,
+      initialPosition: { x: '50%', y: '50%' },
+      ghostIndex: 3,
+      delay: 0,
+      duration: 3,
+      isMoving: false
+    }
+  ];
 
   return (
     <div 
@@ -50,19 +78,36 @@ export function HeroSection() {
               top: ghost.initialPosition.y,
             }}
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{
+            animate={ghost.isMoving ? {
               opacity: [0.7, 1, 0.7],
-              y: [0, -200 * ghost.direction, 0],
-              x: [0, ghost.curve * ghost.direction, 0],
-              rotate: [0, ghost.rotation, ghost.rotation * -1, 0],
-              scale: [1, 1.2, 0.9, 1]
+              x: ['100%', '-100%'],
+              scaleX: [1, 1, -1, -1],
+            } : ghost.ghostIndex === 3 ? {
+              opacity: [0.6, 0.9, 0.6],
+              scale: [1, 1.05, 1],
+            } : {
+              opacity: [0.7, 1, 0.7],
+              y: [0, -20, 0],
             }}
             transition={{
               duration: ghost.duration,
               ease: "easeInOut",
               delay: ghost.delay,
               repeat: Infinity,
-              ease: "easeInOut"
+              ...(ghost.isMoving && {
+                x: {
+                  duration: 12,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "linear"
+                },
+                scaleX: {
+                  duration: 12,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "linear"
+                }
+              })
             }}
           >
             <GhostSvg

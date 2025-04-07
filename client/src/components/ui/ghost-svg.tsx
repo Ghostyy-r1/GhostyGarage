@@ -25,7 +25,9 @@ export const GhostSvg = ({ className, delay = 0, size = 100, ghostIndex = 0 }: {
       style={{ 
         width: size,
         height: size,
-        filter: 'drop-shadow(0 0 15px rgba(168,85,247,0.6))',
+        filter: ghostIndex === 3 
+          ? 'drop-shadow(0 0 20px rgba(168,85,247,0.8)) brightness(1.2)'
+          : 'drop-shadow(0 0 15px rgba(168,85,247,0.6))',
         objectFit: 'contain'
       }}
       initial={{ opacity: 0.3, scale: 0.8 }}
