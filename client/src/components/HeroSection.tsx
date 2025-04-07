@@ -131,32 +131,32 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={ghost.isMoving ? {
               opacity: [0.7, 1, 0.7],
-              x: ghost.reverseDirection ? ['-10%', '110%'] : ['100%', '-100%'],
-              scaleX: ghost.reverseDirection ? [-1, -1, 1, 1] : [1, 1, -1, -1],
+              y: [0, -30, 0],
+              x: ghost.reverseDirection ? ['-10%', '30%', '-10%'] : ['10%', '50%', '10%'],
             } : ghost.ghostIndex === 3 ? {
               opacity: [0.6, 0.9, 0.6],
-              scale: [1, 1.05, 1],
+              scale: [1, 1.2, 1],
+              y: [0, -15, 0],
             } : {
               opacity: [0.7, 1, 0.7],
-              y: [0, -20, 0],
+              y: [0, -40, 0],
             }}
             transition={{
-              duration: ghost.duration,
-              ease: "easeInOut",
+              duration: ghost.duration * 0.6,
+              ease: [0.33, 1, 0.68, 1],
               delay: ghost.delay,
               repeat: Infinity,
               ...(ghost.isMoving && {
-                x: {
-                  duration: 12,
+                y: {
+                  duration: ghost.duration * 0.5,
                   repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "linear"
+                  ease: "easeInOut"
                 },
-                scaleX: {
-                  duration: 12,
+                x: {
+                  duration: ghost.duration,
                   repeat: Infinity,
                   repeatType: "reverse",
-                  ease: "linear"
+                  ease: "easeInOut"
                 }
               })
             }}
