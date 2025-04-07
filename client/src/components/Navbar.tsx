@@ -65,7 +65,7 @@ export function Navbar() {
                 <Link href="/">
                   <div className="flex items-center gap-2">
                     <img src="/assets/ghostyy1.png" alt="Ghosty" className="w-8 h-8" />
-                    <span className="text-white font-bold text-xl cursor-pointer ml-2">
+                    <span className="text-white font-bold text-xl cursor-pointer">
                       Ghosty's Garage
                     </span>
                   </div>
