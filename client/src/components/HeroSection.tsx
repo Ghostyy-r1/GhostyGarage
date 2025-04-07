@@ -20,96 +20,85 @@ export function HeroSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const ghosts = [
-    // Main Ghosty1 that moves side to side (reversed direction)
+    // Main ghosts - bouncing center left
     {
-      id: 'ghosty1-main',
+      id: 'ghost1-main',
       size: 120,
-      initialPosition: { x: '-10%', y: '30%' },
+      initialPosition: { x: '15%', y: '30%' },
       ghostIndex: 0,
       delay: 0,
-      duration: 8,
-      isMoving: true,
-      reverseDirection: true
+      duration: 3,
     },
-    // Ghosty1 smaller version moving opposite
+    // Top right ghost
     {
-      id: 'ghosty1-alt',
-      size: 80,
-      initialPosition: { x: '-10%', y: '60%' },
-      ghostIndex: 0,
-      delay: 4,
-      duration: 10,
-      isMoving: true
-    },
-    // Ghosty2 in top corner
-    {
-      id: 'ghosty2-main',
+      id: 'ghost2-top',
       size: 100,
-      initialPosition: { x: '5%', y: '10%' },
+      initialPosition: { x: '75%', y: '15%' },
       ghostIndex: 1,
       delay: 0.5,
       duration: 4,
-      isMoving: false
     },
-    // Ghosty2 additional
+    // Bottom left ghost
     {
-      id: 'ghosty2-alt',
-      size: 90,
-      initialPosition: { x: '75%', y: '15%' },
-      ghostIndex: 1,
-      delay: 2,
-      duration: 5,
-      isMoving: false
-    },
-    // Ghosty3 in bottom corner
-    {
-      id: 'ghosty3-main',
-      size: 100,
-      initialPosition: { x: '90%', y: '80%' },
+      id: 'ghost3-bottom',
+      size: 110,
+      initialPosition: { x: '25%', y: '75%' },
       ghostIndex: 2,
       delay: 1,
-      duration: 4,
-      isMoving: false
+      duration: 3.5,
     },
-    // Ghosty3 additional
+    // Center right ghost
     {
-      id: 'ghosty3-alt',
-      size: 85,
-      initialPosition: { x: '20%', y: '85%' },
-      ghostIndex: 2,
-      delay: 3,
-      duration: 6,
-      isMoving: false
-    },
-    // Main particles (centered)
-    {
-      id: 'particles-main',
-      size: 140,
-      initialPosition: { x: '50%', y: '50%' },
-      ghostIndex: 3,
-      delay: 0,
-      duration: 3,
-      isMoving: false
-    },
-    // Additional particles
-    {
-      id: 'particles-top',
-      size: 100,
-      initialPosition: { x: '30%', y: '20%' },
-      ghostIndex: 3,
+      id: 'ghost1-right',
+      size: 90,
+      initialPosition: { x: '85%', y: '45%' },
+      ghostIndex: 0,
       delay: 1.5,
       duration: 4,
-      isMoving: false
     },
-    // More particles
+    // Top left ghost
     {
-      id: 'particles-bottom',
-      size: 120,
-      initialPosition: { x: '70%', y: '70%' },
-      ghostIndex: 3,
-      delay: 2.5,
-      duration: 3.5,
-      isMoving: false
+      id: 'ghost2-topleft',
+      size: 80,
+      initialPosition: { x: '10%', y: '10%' },
+      ghostIndex: 1,
+      delay: 2,
+      duration: 3,
+    },
+    // Bottom right ghost
+    {
+      id: 'ghost3-bottomright',
+      size: 95,
+      initialPosition: { x: '80%', y: '80%' },
+      ghostIndex: 2,
+      delay: 0.7,
+      duration: 4.5,
+    },
+    // Center ghost
+    {
+      id: 'ghost1-center',
+      size: 100,
+      initialPosition: { x: '50%', y: '50%' },
+      ghostIndex: 0,
+      delay: 1.2,
+      duration: 3.8,
+    },
+    // Additional floating ghosts
+    {
+      id: 'ghost2-float1',
+      size: 70,
+      initialPosition: { x: '35%', y: '25%' },
+      ghostIndex: 1,
+      delay: 0.3,
+      duration: 4.2,
+    },
+    {
+      id: 'ghost3-float2',
+      size: 85,
+      initialPosition: { x: '65%', y: '65%' },
+      ghostIndex: 2,
+      delay: 1.8,
+      duration: 3.3,
     }
   ];
 
@@ -118,8 +107,8 @@ export function HeroSection() {
       ref={containerRef}
       className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-purple-900/20 via-black to-black px-4 sm:px-6 lg:px-8"
     >
-      {/* Ghost background container */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" style={{ position: 'absolute' }}>
+      {/* Ghost background container with padding to prevent cutoff */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 p-16">
         {ghosts.map((ghost) => (
           <motion.div
             key={ghost.id}
@@ -129,36 +118,21 @@ export function HeroSection() {
               top: ghost.initialPosition.y,
             }}
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={ghost.isMoving ? {
-              opacity: [0.7, 1, 0.7],
-              y: [0, -30, 0],
-              x: ghost.reverseDirection ? ['-10%', '30%', '-10%'] : ['10%', '50%', '10%'],
-            } : ghost.ghostIndex === 3 ? {
-              opacity: [0.6, 0.9, 0.6],
-              scale: [1, 1.2, 1],
-              y: [0, -15, 0],
-            } : {
-              opacity: [0.7, 1, 0.7],
-              y: [0, -40, 0],
+            animate={{
+              opacity: [0.6, 1, 0.6],
+              y: [0, -20, 0],
+              scale: [1, 1.1, 1],
             }}
             transition={{
-              duration: ghost.duration * 0.6,
-              ease: [0.33, 1, 0.68, 1],
+              duration: ghost.duration,
+              ease: "easeInOut",
               delay: ghost.delay,
               repeat: Infinity,
-              ...(ghost.isMoving && {
-                y: {
-                  duration: ghost.duration * 0.5,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                },
-                x: {
-                  duration: ghost.duration,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  ease: "easeInOut"
-                }
-              })
+              y: {
+                duration: ghost.duration * 0.8,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }
             }}
           >
             <GhostSvg
@@ -364,7 +338,7 @@ export function HeroSection() {
         </div>
       </motion.div>
 
-      {/* Scroll indicator - now a clickable button */}
+      {/* Scroll indicator */}
       <motion.button 
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center cursor-pointer group"
         animate={{ 
@@ -377,7 +351,6 @@ export function HeroSection() {
           ease: "easeInOut" 
         }}
         onClick={() => {
-          // Get the next section (features or whatever comes after hero)
           const aboutSection = document.getElementById('about');
           if (aboutSection) {
             aboutSection.scrollIntoView({ behavior: 'smooth' });
