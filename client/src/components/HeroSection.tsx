@@ -24,7 +24,7 @@ export function HeroSection() {
     {
       id: 'ghost1-top-left',
       size: 90,
-      initialPosition: { x: '10%', y: '15%' },
+      initialPosition: { x: '8%', y: '12%' },
       ghostIndex: 0,
       delay: 0.2,
       duration: 4.0,
@@ -34,7 +34,7 @@ export function HeroSection() {
     {
       id: 'ghost2-top-center',
       size: 85,
-      initialPosition: { x: '45%', y: '10%' },
+      initialPosition: { x: '40%', y: '8%' },
       ghostIndex: 1,
       delay: 0.5,
       duration: 3.8,
@@ -44,7 +44,7 @@ export function HeroSection() {
     {
       id: 'ghost3-top-right',
       size: 95,
-      initialPosition: { x: '80%', y: '12%' },
+      initialPosition: { x: '75%', y: '15%' },
       ghostIndex: 2,
       delay: 0.7,
       duration: 4.2,
@@ -55,7 +55,7 @@ export function HeroSection() {
     {
       id: 'ghost4-mid-left',
       size: 100,
-      initialPosition: { x: '15%', y: '45%' },
+      initialPosition: { x: '12%', y: '42%' },
       ghostIndex: 0,
       delay: 1.0,
       duration: 4.5,
@@ -65,7 +65,7 @@ export function HeroSection() {
     {
       id: 'ghost5-mid-right',
       size: 110,
-      initialPosition: { x: '85%', y: '45%' },
+      initialPosition: { x: '88%', y: '48%' },
       ghostIndex: 1,
       delay: 0.3,
       duration: 4.3,
@@ -217,11 +217,11 @@ export function HeroSection() {
       {/* Background ghost layer that appears above grid but below content */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 5 }}>
         {[
-          { x: '75%', y: '20%', size: 180, ghostIndex: 0, delay: 0.8, duration: 4 },
-          { x: '15%', y: '65%', size: 160, ghostIndex: 1, delay: 1.2, duration: 3.5 },
-          { x: '90%', y: '80%', size: 140, ghostIndex: 2, delay: 0.5, duration: 4.2 },
-          { x: '25%', y: '25%', size: 130, ghostIndex: 0, delay: 1.5, duration: 3.8 },
-          { x: '50%', y: '45%', size: 150, ghostIndex: 1, delay: 0.3, duration: 4.5 }
+          { x: '82%', y: '28%', size: 180, ghostIndex: 0, delay: 0.8, duration: 4 },
+          { x: '18%', y: '68%', size: 160, ghostIndex: 1, delay: 1.2, duration: 3.5 },
+          { x: '92%', y: '72%', size: 140, ghostIndex: 2, delay: 0.5, duration: 4.2 },
+          { x: '28%', y: '32%', size: 130, ghostIndex: 0, delay: 1.5, duration: 3.8 },
+          { x: '60%', y: '52%', size: 150, ghostIndex: 1, delay: 0.3, duration: 4.5 }
         ].map((ghost, index) => (
           <motion.div
             key={`bg-ghost-${index}`}
