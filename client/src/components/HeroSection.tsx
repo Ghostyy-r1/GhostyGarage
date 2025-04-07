@@ -217,11 +217,11 @@ export function HeroSection() {
       {/* Background ghost layer that appears above grid but below content */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 5 }}>
         {[
-          { x: '65%', y: '25%', size: 180, ghostIndex: 0, delay: 0.8, duration: 4 },
-          { x: '15%', y: '65%', size: 160, ghostIndex: 1, delay: 1.2, duration: 3.5 },
-          { x: '75%', y: '70%', size: 140, ghostIndex: 2, delay: 0.5, duration: 4.2 },
-          { x: '92%', y: '45%', size: 130, ghostIndex: 0, delay: 1.5, duration: 3.8 },
-          { x: '25%', y: '35%', size: 150, ghostIndex: 1, delay: 0.3, duration: 4.5 }
+          { x: '65%', y: '15%', size: 180, ghostIndex: 0, delay: 0.8, duration: 4 },
+          { x: '12%', y: '70%', size: 160, ghostIndex: 1, delay: 1.2, duration: 3.5 },
+          { x: '85%', y: '75%', size: 140, ghostIndex: 2, delay: 0.5, duration: 4.2 },
+          { x: '95%', y: '35%', size: 130, ghostIndex: 0, delay: 1.5, duration: 3.8 },
+          { x: '35%', y: '45%', size: 150, ghostIndex: 1, delay: 0.3, duration: 4.5 }
         ].map((ghost, index) => (
           <motion.div
             key={`bg-ghost-${index}`}
