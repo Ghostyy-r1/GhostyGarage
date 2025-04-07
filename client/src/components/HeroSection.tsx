@@ -140,7 +140,7 @@ export function HeroSection() {
     {
       id: 'ghost1-top-left',
       size: 85,
-      initialPosition: { x: '6%', y: '8%' },
+      initialPosition: { x: '4%', y: '5%' },
       ghostIndex: 0,
       delay: 2.4,
       duration: 3.7,
@@ -150,7 +150,7 @@ export function HeroSection() {
     {
       id: 'ghost2-top-right',
       size: 90,
-      initialPosition: { x: '87%', y: '12%' },
+      initialPosition: { x: '92%', y: '8%' },
       ghostIndex: 1,
       delay: 0.4,
       duration: 4.9,
@@ -160,7 +160,7 @@ export function HeroSection() {
     {
       id: 'ghost3-bottom-left',
       size: 95,
-      initialPosition: { x: '7%', y: '82%' },
+      initialPosition: { x: '3%', y: '88%' },
       ghostIndex: 2,
       delay: 1.2,
       duration: 4.2,
@@ -170,7 +170,7 @@ export function HeroSection() {
     {
       id: 'ghost1-bottom-right',
       size: 88,
-      initialPosition: { x: '84%', y: '78%' },
+      initialPosition: { x: '90%', y: '85%' },
       ghostIndex: 0,
       delay: 1.8,
       duration: 3.9,
@@ -181,7 +181,7 @@ export function HeroSection() {
     {
       id: 'ghost2-top-left-outer',
       size: 70,
-      initialPosition: { x: '15%', y: '18%' },
+      initialPosition: { x: '22%', y: '12%' },
       ghostIndex: 1,
       delay: 0.9,
       duration: 4.5,
@@ -191,7 +191,7 @@ export function HeroSection() {
     {
       id: 'ghost3-top-right-outer',
       size: 75,
-      initialPosition: { x: '78%', y: '22%' },
+      initialPosition: { x: '82%', y: '15%' },
       ghostIndex: 2,
       delay: 1.5,
       duration: 4.1,
@@ -201,7 +201,7 @@ export function HeroSection() {
     {
       id: 'ghost1-bottom-left-outer',
       size: 72,
-      initialPosition: { x: '18%', y: '75%' },
+      initialPosition: { x: '25%', y: '82%' },
       ghostIndex: 0,
       delay: 2.1,
       duration: 3.8,
@@ -211,7 +211,7 @@ export function HeroSection() {
     {
       id: 'ghost2-bottom-right-outer',
       size: 78,
-      initialPosition: { x: '75%', y: '68%' },
+      initialPosition: { x: '80%', y: '78%' },
       ghostIndex: 1,
       delay: 0.6,
       duration: 4.3,
