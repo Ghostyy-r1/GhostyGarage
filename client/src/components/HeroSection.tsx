@@ -24,29 +24,32 @@ export function HeroSection() {
     {
       id: 'ghost1-main',
       size: 130,
-      initialPosition: { x: '15%', y: '30%' },
+      initialPosition: { x: '18%', y: '25%' },
       ghostIndex: 0,
       delay: 0,
+      zIndex: 15,
       duration: 3,
       opacity: 0.9,
     },
     {
       id: 'ghost2-centerright',
       size: 110,
-      initialPosition: { x: '75%', y: '45%' },
+      initialPosition: { x: '72%', y: '42%' },
       ghostIndex: 1,
       delay: 0.5,
       duration: 4.2,
       opacity: 0.85,
+      zIndex: 12,
     },
     {
       id: 'ghost3-bottomleft',
       size: 100,
-      initialPosition: { x: '20%', y: '70%' },
+      initialPosition: { x: '25%', y: '65%' },
       ghostIndex: 2,
       delay: 1.2,
       duration: 3.8,
       opacity: 0.9,
+      zIndex: 13,
     },
     // Layer 2 - Mid-level ghosts
     {
@@ -222,6 +225,7 @@ export function HeroSection() {
             style={{
               left: ghost.initialPosition.x,
               top: ghost.initialPosition.y,
+              zIndex: ghost.zIndex || 1,
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
