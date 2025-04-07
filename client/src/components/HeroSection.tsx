@@ -20,15 +20,16 @@ export function HeroSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const ghosts = [
-    // Main Ghosty1 that moves side to side
+    // Main Ghosty1 that moves side to side (reversed direction)
     {
       id: 'ghosty1-main',
       size: 120,
-      initialPosition: { x: '100%', y: '30%' },
+      initialPosition: { x: '-10%', y: '30%' },
       ghostIndex: 0,
       delay: 0,
       duration: 8,
-      isMoving: true
+      isMoving: true,
+      reverseDirection: true
     },
     // Ghosty1 smaller version moving opposite
     {
@@ -83,7 +84,7 @@ export function HeroSection() {
     // Main particles (centered)
     {
       id: 'particles-main',
-      size: 200,
+      size: 140,
       initialPosition: { x: '50%', y: '50%' },
       ghostIndex: 3,
       delay: 0,
@@ -93,7 +94,7 @@ export function HeroSection() {
     // Additional particles
     {
       id: 'particles-top',
-      size: 150,
+      size: 100,
       initialPosition: { x: '30%', y: '20%' },
       ghostIndex: 3,
       delay: 1.5,
@@ -103,7 +104,7 @@ export function HeroSection() {
     // More particles
     {
       id: 'particles-bottom',
-      size: 160,
+      size: 120,
       initialPosition: { x: '70%', y: '70%' },
       ghostIndex: 3,
       delay: 2.5,
@@ -130,8 +131,8 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={ghost.isMoving ? {
               opacity: [0.7, 1, 0.7],
-              x: ['100%', '-100%'],
-              scaleX: [1, 1, -1, -1],
+              x: ghost.reverseDirection ? ['-10%', '110%'] : ['100%', '-100%'],
+              scaleX: ghost.reverseDirection ? [-1, -1, 1, 1] : [1, 1, -1, -1],
             } : ghost.ghostIndex === 3 ? {
               opacity: [0.6, 0.9, 0.6],
               scale: [1, 1.05, 1],
