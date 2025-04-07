@@ -20,9 +20,9 @@ export function HeroSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const ghosts = [
-    // Ghosty1 that moves side to side
+    // Main Ghosty1 that moves side to side
     {
-      id: 'ghosty1',
+      id: 'ghosty1-main',
       size: 120,
       initialPosition: { x: '100%', y: '30%' },
       ghostIndex: 0,
@@ -30,9 +30,19 @@ export function HeroSection() {
       duration: 8,
       isMoving: true
     },
+    // Ghosty1 smaller version moving opposite
+    {
+      id: 'ghosty1-alt',
+      size: 80,
+      initialPosition: { x: '-10%', y: '60%' },
+      ghostIndex: 0,
+      delay: 4,
+      duration: 10,
+      isMoving: true
+    },
     // Ghosty2 in top corner
     {
-      id: 'ghosty2',
+      id: 'ghosty2-main',
       size: 100,
       initialPosition: { x: '5%', y: '10%' },
       ghostIndex: 1,
@@ -40,9 +50,19 @@ export function HeroSection() {
       duration: 4,
       isMoving: false
     },
+    // Ghosty2 additional
+    {
+      id: 'ghosty2-alt',
+      size: 90,
+      initialPosition: { x: '75%', y: '15%' },
+      ghostIndex: 1,
+      delay: 2,
+      duration: 5,
+      isMoving: false
+    },
     // Ghosty3 in bottom corner
     {
-      id: 'ghosty3',
+      id: 'ghosty3-main',
       size: 100,
       initialPosition: { x: '90%', y: '80%' },
       ghostIndex: 2,
@@ -50,14 +70,44 @@ export function HeroSection() {
       duration: 4,
       isMoving: false
     },
-    // Particles (stationary)
+    // Ghosty3 additional
     {
-      id: 'particles',
+      id: 'ghosty3-alt',
+      size: 85,
+      initialPosition: { x: '20%', y: '85%' },
+      ghostIndex: 2,
+      delay: 3,
+      duration: 6,
+      isMoving: false
+    },
+    // Main particles (centered)
+    {
+      id: 'particles-main',
       size: 200,
       initialPosition: { x: '50%', y: '50%' },
       ghostIndex: 3,
       delay: 0,
       duration: 3,
+      isMoving: false
+    },
+    // Additional particles
+    {
+      id: 'particles-top',
+      size: 150,
+      initialPosition: { x: '30%', y: '20%' },
+      ghostIndex: 3,
+      delay: 1.5,
+      duration: 4,
+      isMoving: false
+    },
+    // More particles
+    {
+      id: 'particles-bottom',
+      size: 160,
+      initialPosition: { x: '70%', y: '70%' },
+      ghostIndex: 3,
+      delay: 2.5,
+      duration: 3.5,
       isMoving: false
     }
   ];
