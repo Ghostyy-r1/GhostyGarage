@@ -1,6 +1,7 @@
 import { ChevronRight, Bike, Users, Calendar, MapPin, Wrench, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { GhostSvg } from '@/components/ui/ghost-svg';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useState, useRef, useEffect } from 'react';
 import { ThreeDCard } from '@/components/ui/3d-card';
@@ -222,7 +223,7 @@ export function HeroSection() {
   return (
     <div 
       ref={containerRef}
-      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-purple-900/20 via-black to-black px-4 sm:px-6 lg:px-8"
+      className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-purple-900/20 via-black to-black px-4 sm:px-6 lg:px-8 z-0"
     >
       {/* Ghost background container with padding to prevent cutoff */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 p-16">
@@ -265,7 +266,7 @@ export function HeroSection() {
       </div>
 
       {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-black/50 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-black/50 pointer-events-none z-[1]" />
 
       {/* Simple gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/30 via-black to-black pointer-events-none" />
@@ -368,7 +369,7 @@ export function HeroSection() {
 
       <motion.div 
         style={{ y, opacity }}
-        className="container mx-auto relative z-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8"
+        className="container mx-auto relative z-20 py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="relative space-y-8">
