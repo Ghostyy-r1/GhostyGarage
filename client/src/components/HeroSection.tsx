@@ -19,17 +19,19 @@ export function HeroSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const ghosts = Array.from({ length: 20 }).map((_, i) => ({
+  const ghosts = Array.from({ length: 15 }).map((_, i) => ({
     id: i,
-    size: Math.random() * 40 + 40, // Random size between 40-80px
+    size: Math.random() * 60 + 60, // Larger size for better visibility
     initialPosition: {
       x: `${Math.random() * 100}%`,
       y: `${Math.random() * 100}%`
     },
-    delay: Math.random() * 3,
-    duration: 15 + Math.random() * 10, // Longer duration for more haunting feel
-    direction: Math.random() > 0.5 ? 1 : -1, // Random direction
-    curve: Math.random() * 100 // Random curve amplitude
+    ghostIndex: i % 3,
+    delay: Math.random() * 2,
+    duration: 20 + Math.random() * 15,
+    direction: Math.random() > 0.5 ? 1 : -1,
+    curve: Math.random() * 200,
+    rotation: Math.random() * 360
   }));
 
   return (
@@ -49,11 +51,11 @@ export function HeroSection() {
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
-              opacity: [0.4, 0.8, 0.4],
-              y: [0, -150 * ghost.direction, 0],
+              opacity: [0.7, 1, 0.7],
+              y: [0, -200 * ghost.direction, 0],
               x: [0, ghost.curve * ghost.direction, 0],
-              rotate: [0, ghost.direction * 15, ghost.direction * -15, 0],
-              scale: [1, 1.1, 0.9, 1]
+              rotate: [0, ghost.rotation, ghost.rotation * -1, 0],
+              scale: [1, 1.2, 0.9, 1]
             }}
             transition={{
               duration: ghost.duration,
@@ -65,7 +67,8 @@ export function HeroSection() {
           >
             <GhostSvg
               size={ghost.size}
-              className="text-white/80 drop-shadow-[0_0_30px_rgba(168,85,247,0.95)] filter brightness-125 hover:brightness-150 transition-all duration-500 backdrop-blur-sm will-change-transform"
+              ghostIndex={ghost.ghostIndex}
+              className="drop-shadow-[0_0_30px_rgba(168,85,247,0.95)] brightness-110 hover:brightness-125 transition-all duration-500 backdrop-blur-sm will-change-transform"
             />
           </motion.div>
         ))}
