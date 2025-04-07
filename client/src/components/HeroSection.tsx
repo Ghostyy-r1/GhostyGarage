@@ -19,15 +19,15 @@ export function HeroSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const ghosts = Array.from({ length: 8 }).map((_, i) => ({
+  const ghosts = Array.from({ length: 15 }).map((_, i) => ({
     id: i,
-    size: Math.random() * 40 + 40, // Random size between 40-80px
+    size: Math.random() * 50 + 50, // Random size between 50-100px
     initialPosition: {
       x: `${Math.random() * 80 + 10}%`,
       y: `${Math.random() * 80 + 10}%`
     },
-    delay: Math.random() * 3,
-    duration: 8 + Math.random() * 6
+    delay: Math.random() * 2,
+    duration: 6 + Math.random() * 4
   }));
 
   return (
@@ -47,11 +47,11 @@ export function HeroSection() {
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
-              opacity: [0.4, 0.7, 0.4],
-              y: [0, -70, 0],
-              x: [0, Math.sin(ghost.id) * 50, 0],
-              rotate: [0, Math.sin(ghost.id * 2) * 15, 0],
-              scale: [0.9, 1.1, 0.9]
+              opacity: [0.6, 0.9, 0.6],
+              y: [0, -100, 0],
+              x: [0, Math.sin(ghost.id) * 70, 0],
+              rotate: [0, Math.sin(ghost.id * 2) * 20, 0],
+              scale: [0.9, 1.2, 0.9]
             }}
             transition={{
               duration: ghost.duration,
@@ -62,7 +62,7 @@ export function HeroSection() {
           >
             <GhostSvg
               size={ghost.size}
-              className="text-white/50 drop-shadow-[0_0_15px_rgba(168,85,247,0.8)] filter brightness-125 hover:brightness-150 transition-all duration-300"
+              className="text-white/70 drop-shadow-[0_0_25px_rgba(168,85,247,0.9)] filter brightness-150 hover:brightness-200 transition-all duration-300 backdrop-blur-sm"
             />
           </motion.div>
         ))}
