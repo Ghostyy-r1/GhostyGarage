@@ -96,7 +96,7 @@ export function HeroSection() {
     {
       id: 'ghost2-float1',
       size: 70,
-      initialPosition: { x: '32%', y: '45%' },
+      initialPosition: { x: '38%', y: '38%' },
       ghostIndex: 1,
       delay: 0.9,
       duration: 4.5,
@@ -106,7 +106,7 @@ export function HeroSection() {
     {
       id: 'ghost3-float2',
       size: 75,
-      initialPosition: { x: '65%', y: '22%' },
+      initialPosition: { x: '58%', y: '28%' },
       ghostIndex: 2,
       delay: 1.5,
       duration: 4.1,
@@ -116,7 +116,7 @@ export function HeroSection() {
     {
       id: 'ghost1-float3',
       size: 72,
-      initialPosition: { x: '18%', y: '68%' },
+      initialPosition: { x: '25%', y: '75%' },
       ghostIndex: 0,
       delay: 2.1,
       duration: 3.8,
@@ -126,7 +126,7 @@ export function HeroSection() {
     {
       id: 'ghost2-float4',
       size: 78,
-      initialPosition: { x: '78%', y: '65%' },
+      initialPosition: { x: '70%', y: '72%' },
       ghostIndex: 1,
       delay: 0.6,
       duration: 4.3,
