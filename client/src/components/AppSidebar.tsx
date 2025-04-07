@@ -74,9 +74,7 @@ function Header() {
         <div className="mx-3 h-5 w-px bg-gray-700"></div>
         <Link href="/">
           <div className="flex items-center gap-2 cursor-pointer">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-md">
-              <span className="text-md font-bold">G</span>
-            </div>
+            <img src="/assets/ghostyy1.png" alt="Ghosty" className="h-8 w-8 object-contain" />
             <span className="text-xl font-bold">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">Ghosty's</span>
               <span className="text-white"> Garage</span>
