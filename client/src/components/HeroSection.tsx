@@ -19,18 +19,18 @@ export function HeroSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const ghosts = Array.from({ length: 25 }).map((_, i) => ({
+  const ghosts = Array.from({ length: 30 }).map((_, i) => ({
     id: i,
-    size: Math.random() * 60 + 60, // Larger size for better visibility
+    size: Math.random() * 80 + 80, // Even larger size for better visibility
     initialPosition: {
       x: `${Math.random() * 100}%`,
       y: `${Math.random() * 100}%`
     },
-    ghostIndex: i % 3,
-    delay: Math.random() * 2,
-    duration: 20 + Math.random() * 15,
+    ghostIndex: i % 4, // Now using all 4 images
+    delay: Math.random() * 3,
+    duration: 15 + Math.random() * 20,
     direction: Math.random() > 0.5 ? 1 : -1,
-    curve: Math.random() * 200,
+    curve: Math.random() * 300,
     rotation: Math.random() * 360
   }));
 
