@@ -6,7 +6,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { useState, useRef, useEffect } from 'react';
 import { ThreeDCard } from '@/components/ui/3d-card';
 import { AnimatedReveal } from '@/components/ui/animated-reveal';
-import { GhostSvg } from '@/components/ui/ghost-svg';
 
 export function HeroSection() {
   const isMobile = useIsMobile();
