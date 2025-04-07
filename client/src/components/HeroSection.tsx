@@ -5,6 +5,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { useState, useRef, useEffect } from 'react';
 import { ThreeDCard } from '@/components/ui/3d-card';
 import { AnimatedReveal } from '@/components/ui/animated-reveal';
+import { GhostSvg } from '@/components/ui/ghost-svg';
 
 export function HeroSection() {
   const isMobile = useIsMobile();
@@ -35,7 +36,7 @@ export function HeroSection() {
       className="relative overflow-hidden min-h-[95vh] flex items-center bg-gradient-to-b from-purple-900/20 via-black to-black px-4 sm:px-6 lg:px-8"
     >
       {/* Ghost background container */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" style={{ position: 'absolute' }}>
         {ghosts.map((ghost) => (
           <motion.div
             key={ghost.id}
