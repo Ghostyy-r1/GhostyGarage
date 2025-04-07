@@ -20,10 +20,10 @@ export function HeroSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const ghosts = [
-    // Layer 1 - Front ghosts
+    // Layer 1 - Front ghosts (Most visible)
     {
       id: 'ghost1-main',
-      size: 120,
+      size: 130,
       initialPosition: { x: '15%', y: '30%' },
       ghostIndex: 0,
       delay: 0,
@@ -132,24 +132,79 @@ export function HeroSection() {
       duration: 4.1,
       opacity: 0.5,
     },
-    // Corner ghosts
+    // Corner ghosts (More visible and varied)
     {
-      id: 'ghost1-top-corner',
-      size: 55,
+      id: 'ghost1-top-left',
+      size: 85,
       initialPosition: { x: '2%', y: '2%' },
-      ghostIndex: 2,
+      ghostIndex: 0,
       delay: 2.4,
       duration: 3.7,
-      opacity: 0.4,
+      opacity: 0.85,
     },
     {
-      id: 'ghost2-bottom-corner',
-      size: 60,
-      initialPosition: { x: '95%', y: '95%' },
+      id: 'ghost2-top-right',
+      size: 90,
+      initialPosition: { x: '95%', y: '5%' },
       ghostIndex: 1,
       delay: 0.4,
       duration: 4.9,
-      opacity: 0.45,
+      opacity: 0.8,
+    },
+    {
+      id: 'ghost3-bottom-left',
+      size: 95,
+      initialPosition: { x: '3%', y: '92%' },
+      ghostIndex: 2,
+      delay: 1.2,
+      duration: 4.2,
+      opacity: 0.9,
+    },
+    {
+      id: 'ghost1-bottom-right',
+      size: 88,
+      initialPosition: { x: '93%', y: '90%' },
+      ghostIndex: 0,
+      delay: 1.8,
+      duration: 3.9,
+      opacity: 0.85,
+    },
+    // Additional corner area ghosts
+    {
+      id: 'ghost2-top-left-outer',
+      size: 70,
+      initialPosition: { x: '8%', y: '12%' },
+      ghostIndex: 1,
+      delay: 0.9,
+      duration: 4.5,
+      opacity: 0.75,
+    },
+    {
+      id: 'ghost3-top-right-outer',
+      size: 75,
+      initialPosition: { x: '88%', y: '15%' },
+      ghostIndex: 2,
+      delay: 1.5,
+      duration: 4.1,
+      opacity: 0.8,
+    },
+    {
+      id: 'ghost1-bottom-left-outer',
+      size: 72,
+      initialPosition: { x: '12%', y: '85%' },
+      ghostIndex: 0,
+      delay: 2.1,
+      duration: 3.8,
+      opacity: 0.7,
+    },
+    {
+      id: 'ghost2-bottom-right-outer',
+      size: 78,
+      initialPosition: { x: '85%', y: '82%' },
+      ghostIndex: 1,
+      delay: 0.6,
+      duration: 4.3,
+      opacity: 0.75,
     }
   ];
 
