@@ -19,7 +19,7 @@ export function HeroSection() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const ghosts = Array.from({ length: 15 }).map((_, i) => ({
+  const ghosts = Array.from({ length: 25 }).map((_, i) => ({
     id: i,
     size: Math.random() * 60 + 60, // Larger size for better visibility
     initialPosition: {
@@ -73,7 +73,7 @@ export function HeroSection() {
           </motion.div>
         ))}
       </div>
-      
+
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-black/50 pointer-events-none" />
 
